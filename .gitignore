@@ -1,5 +1,2 @@
-node_modules/
-.next/
-.open-next/
-dist/
-*.tgz
+.DS_Store
+.vscode/
