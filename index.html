@@ -550,6 +550,85 @@ body.light .caret{background:#000}
   <div class="src"><a href="https://github.com/signup" target="_blank">GitHub 가입</a> · <a href="https://vercel.com/signup" target="_blank">Vercel 가입</a> · 계정 회수 전 코드는 GitHub에 백업</div>
 </section>
 
+<!-- 9 · BEGINNER SETUP 1 -->
+<section class="sl" data-toc="초보자 세팅 ① 계정·환경·폴더" data-notes="[초보자 세팅 1/3] 목표는 도구를 많이 설치하는 것이 아니라 전원이 같은 출발선에 서는 것. ①주최측 Max 계정 로그인 후 /model에서 Opus 5 선택, /usage 위치 확인. ②완전 초보는 Claude 데스크톱 앱, 터미널 경험자는 터미널, 기존 Cursor·VS Code 사용자는 익숙한 환경 유지. 선택지를 오래 고민하지 않게 한다. ③바탕화면에 영문 프로젝트 폴더 하나를 만들고 Claude에서 그 폴더를 연다. 다운로드 폴더나 파일이 흩어진 위치에서 작업하지 않는다. 완료 기준은 Claude가 폴더를 읽고 답변하는 것.">
+  <div class="chips"><span class="chip chip-tip">초보자 · 1/3</span></div>
+  <div class="kicker">SETUP · 같은 출발선 만들기</div>
+  <h2>로그인 → 환경 선택 → <em>폴더 열기</em></h2>
+  <div class="grow">
+    <div class="steps" style="margin-top:12px;gap:18px">
+      <div class="step frag">
+        <div class="sn" style="width:68px;height:68px;font-size:30px">01</div>
+        <div class="sb"><h4>Max 로그인 · Opus 5 선택 <span class="am" style="font-family:var(--mono);font-size:16px">5분</span></h4><p>팀 메인 노트북에서 로그인 → <code>/model</code>에서 Opus 5 → <code>/usage</code> 위치 확인</p></div>
+      </div>
+      <div class="step frag">
+        <div class="sn" style="width:68px;height:68px;font-size:30px">02</div>
+        <div class="sb"><h4>작업 환경 하나만 선택 <span class="am" style="font-family:var(--mono);font-size:16px">2분</span></h4><p><strong>완전 초보 = Claude 앱</strong> · 터미널 경험자 = 터미널 · 기존 IDE 사용자는 그대로</p></div>
+      </div>
+      <div class="step frag">
+        <div class="sn" style="width:68px;height:68px;font-size:30px">03</div>
+        <div class="sb"><h4>영문 프로젝트 폴더 생성 <span class="am" style="font-family:var(--mono);font-size:16px">3분</span></h4><p><code>Desktop/team-project/</code> 생성 → Claude에서 해당 폴더 열기 · 모든 자료와 코드는 여기만</p></div>
+      </div>
+    </div>
+    <div class="tl-rule" style="margin-top:24px"><span class="rk">완료</span><span>Claude가 <strong style="color:var(--ink)">team-project 폴더를 읽고 답변</strong>하면 다음 단계</span></div>
+  </div>
+  <div class="src">설치 개수보다 중요한 것 — 전원이 같은 폴더에서 첫 답변 받기</div>
+</section>
+
+<!-- 10 · BEGINNER SETUP 2 -->
+<section class="sl" data-toc="초보자 세팅 ② 기획서·CLAUDE.md" data-notes="[초보자 세팅 2/3] 시장조사·서비스 기획·핵심기능 3가지는 이미 끝났다. 준비한 PDF·문서를 프로젝트 폴더에 넣고 Claude에게 읽힌다. 이후 복사용 프롬프트 한 번으로 CLAUDE.md를 만든다. 외부 스킬이나 플러그인은 설치하지 않는다. CLAUDE.md는 한국어 응답, 기능 하나씩, 수정 전 순서 설명, 기존 기능 보존, 완료 후 실행·검증, 기능별 커밋, 새 기능 추가 금지를 고정한다. 완료 기준은 프로젝트 폴더에 CLAUDE.md가 생기고 Claude가 핵심기능 3가지를 정확히 요약하는 것.">
+  <div class="chips"><span class="chip chip-tip">초보자 · 2/3</span></div>
+  <div class="kicker">SETUP · 준비된 기획을 개발 규칙으로</div>
+  <h2>기획서 전달 → <em>CLAUDE.md</em></h2>
+  <div class="grow">
+    <div class="cols" style="grid-template-columns:.68fr 1.32fr;gap:30px;margin-top:8px">
+      <div>
+        <h3 class="cy" style="margin-bottom:14px">폴더에 넣기 · 3분</h3>
+        <div class="code" style="font-size:18px;line-height:1.7;padding:20px 22px"><span class="hl">team-project/</span><br>├── market-research.pdf<br>├── service-plan.pdf<br>└── core-features.md</div>
+        <div class="warn" style="margin-top:18px;font-size:18px;padding:17px 20px"><b>다시 기획하지 않는다.</b><br>준비한 기능을 구현 언어로만 변환.</div>
+      </div>
+      <div>
+        <h3 class="co" style="margin-bottom:14px">한 번 복사 · 5분</h3>
+        <div class="prompt" style="font-size:18px;line-height:1.47;padding:20px 24px">
+          <div class="prompt-t">PROMPT · 자료 첨부 후 전송</div>
+          첨부한 기획서와 핵심기능 3가지를 읽어줘.<br><br>
+          <b>CLAUDE.md를 만들고 저장해줘:</b><br>
+          한국어로 답하기 · 기능은 한 번에 하나 · 수정 전 순서 설명 · 기존 기능 임의 변경 금지 · 완료 후 직접 실행·검증 · 기능마다 git 커밋 · 새 기능 추가 금지.
+        </div>
+      </div>
+    </div>
+    <div class="tl-rule" style="margin-top:22px"><span class="rk">완료</span><span><strong style="color:var(--ink)">CLAUDE.md 파일 생성</strong> + Claude가 준비된 핵심기능 3가지를 정확히 요약</span></div>
+  </div>
+  <div class="src">추가 스킬·플러그인 설치 없음 — 작업 규칙은 CLAUDE.md 한 장</div>
+</section>
+
+<!-- 11 · BEGINNER SETUP 3 -->
+<section class="sl" data-toc="초보자 세팅 ③ GitHub·Git 안전망" data-notes="[초보자 세팅 3/3] 먼저 github.com/signup에서 가입하고 이메일 인증까지 끝낸다. 팀당 최소 한 계정이 필요하다. GitHub에서 New repository를 눌러 team-project라는 Private 저장소를 만든 뒤 저장소 주소를 복사한다. Claude에게 git 저장소 초기화, .gitignore 보안 점검, 첫 커밋, GitHub remote 연결과 push를 요청한다. 로그인·권한 승인 창이 나오면 팀 계정으로 승인한다. 완료 기준은 GitHub에 코드가 보이고 .env와 .env.local은 보이지 않으며 저장소 URL을 팀 채팅방에 공유한 상태. 초보자에게는 커밋=저장 지점, GitHub=외부 백업, Private=팀만 보는 저장소 세 개념만 설명한다.">
+  <div class="chips"><span class="chip chip-tip">초보자 · 3/3</span></div>
+  <div class="kicker">SETUP · 코드 잃어버리지 않기</div>
+  <h2>GitHub 가입 → <em>첫 백업</em></h2>
+  <div class="grow">
+    <div class="flow" style="margin-top:10px">
+      <div class="fstep frag"><div class="fnum">01 · SIGN UP</div><h4>GitHub 가입</h4><p>github.com/signup<br><strong style="color:var(--ink)">이메일 인증까지</strong></p></div>
+      <div class="farrow">→</div>
+      <div class="fstep frag"><div class="fnum">02 · PRIVATE</div><h4>저장소 생성</h4><p><code>team-project</code><br><strong style="color:var(--ink)">Private 선택</strong></p></div>
+      <div class="farrow">→</div>
+      <div class="fstep frag"><div class="fnum">03 · BACKUP</div><h4>Claude에게 요청</h4><p>Git 초기화 · 보안 확인<br>커밋 · GitHub push</p></div>
+    </div>
+    <div class="prompt" style="margin-top:24px;font-size:19px;line-height:1.52;padding:20px 24px">
+      <div class="prompt-t">PROMPT · 저장소 주소를 붙여 전송</div>
+      “이 프로젝트에 git 저장소를 만들어줘. <b>.env·.env.local·API 키·개인정보가 올라가지 않도록 .gitignore를 확인</b>하고 첫 커밋을 해줘. 그다음 이 Private 저장소에 연결해 push해줘: <span class="ph">[GitHub 저장소 주소]</span>”
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px">
+      <div class="dnode"><b>커밋</b><span class="s">코드 저장 지점</span></div>
+      <div class="dnode"><b>GitHub</b><span class="s">노트북 밖 외부 백업</span></div>
+      <div class="dnode"><b>Private</b><span class="s">팀만 보는 저장소</span></div>
+    </div>
+    <div class="tl-rule" style="margin-top:20px"><span class="rk">완료</span><span>GitHub에 코드는 보이고 <strong style="color:var(--ink)">.env는 안 보임</strong> → 저장소 URL을 팀방에 공유</span></div>
+  </div>
+  <div class="src"><a href="https://github.com/signup" target="_blank">GitHub 가입</a> · 팀당 최소 1계정 · 로그인 승인 창은 팀 계정으로 진행</div>
+</section>
+
 <!-- 9 · ENV PATHS -->
 <section class="sl" data-toc="환경 선택 — 터미널·IDE·앱" data-notes="[0:14] Claude Code를 쓰는 환경은 셋 — 전부 같은 엔진, 인터페이스만 다릅니다. ①터미널(강의 기준): 실행·git·배포까지 한 자리, 문제 해결 자료 대부분이 터미널 기준. 오늘 쓸 명령은 복사·붙여넣기 두 줄이 전부, 그 뒤로는 한국어. 심화 — 세션을 여러 개 돌리게 되면 orca(에이전트 세션·워크트리 관리 데스크톱 앱)나 cmux(에이전트 병렬 실행용 macOS 네이티브 터미널 — Mac 전용) 같은 도구로 확장 가능, 지금은 기본 터미널로 충분. ②IDE: Cursor·VS Code를 이미 써봤다면 — Claude Code 확장을 설치하면 에디터 안에서 코드를 보며 같은 엔진을 사용. ③Claude 데스크톱 앱(claude.com/download): 요즘은 Chat과 Claude Code가 한 앱에 들어와 꽤 쓸 만하고, 터미널이 낯선 입문자에게 추천. 익숙한 채팅 화면에서 폴더를 지정해 바로 작업할 수 있습니다. 이 자료의 프롬프트는 셋 어디서나 동일 작동(슬래시 명령어는 터미널 기준).&#10;'강의 시연은 터미널로 가지만, 처음 시작하는 팀원은 Claude 앱도 적극 추천합니다.'">
   <div class="chips"><span class="chip chip-tip">권고</span></div>
