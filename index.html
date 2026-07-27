@@ -608,23 +608,23 @@ body.light .caret{background:#000}
   <div class="kicker">SETUP · 코드 잃어버리지 않기</div>
   <h2>GitHub 가입 → <em>첫 백업</em></h2>
   <div class="grow">
-    <div class="flow" style="margin-top:10px">
-      <div class="fstep frag"><div class="fnum">01 · SIGN UP</div><h4>GitHub 가입</h4><p>github.com/signup<br><strong style="color:var(--ink)">이메일 인증까지</strong></p></div>
-      <div class="farrow">→</div>
-      <div class="fstep frag"><div class="fnum">02 · PRIVATE</div><h4>저장소 생성</h4><p><code>team-project</code><br><strong style="color:var(--ink)">Private 선택</strong></p></div>
-      <div class="farrow">→</div>
-      <div class="fstep frag"><div class="fnum">03 · BACKUP</div><h4>Claude에게 요청</h4><p>Git 초기화 · 보안 확인<br>커밋 · GitHub push</p></div>
+    <div class="flow" style="margin-top:4px">
+      <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">01 · SIGN UP</div><h4 style="font-size:21px;margin-bottom:4px">GitHub 가입</h4><p style="font-size:16px;line-height:1.35">github.com/signup<br><strong style="color:var(--ink)">이메일 인증까지</strong></p></div>
+      <div class="farrow" style="padding:0 10px">→</div>
+      <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">02 · PRIVATE</div><h4 style="font-size:21px;margin-bottom:4px">저장소 생성</h4><p style="font-size:16px;line-height:1.35"><code>team-project</code><br><strong style="color:var(--ink)">Private 선택</strong></p></div>
+      <div class="farrow" style="padding:0 10px">→</div>
+      <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">03 · BACKUP</div><h4 style="font-size:21px;margin-bottom:4px">Claude에게 요청</h4><p style="font-size:16px;line-height:1.35">Git 초기화 · 보안 확인<br>커밋 · GitHub push</p></div>
     </div>
-    <div class="prompt" style="margin-top:24px;font-size:19px;line-height:1.52;padding:20px 24px">
-      <div class="prompt-t">PROMPT · 저장소 주소를 붙여 전송</div>
+    <div class="prompt" style="margin-top:14px;font-size:17px;line-height:1.42;padding:14px 20px">
+      <div class="prompt-t" style="margin-bottom:5px">PROMPT · 저장소 주소를 붙여 전송</div>
       “이 프로젝트에 git 저장소를 만들어줘. <b>.env·.env.local·API 키·개인정보가 올라가지 않도록 .gitignore를 확인</b>하고 첫 커밋을 해줘. 그다음 이 Private 저장소에 연결해 push해줘: <span class="ph">[GitHub 저장소 주소]</span>”
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px">
-      <div class="dnode"><b>커밋</b><span class="s">코드 저장 지점</span></div>
-      <div class="dnode"><b>GitHub</b><span class="s">노트북 밖 외부 백업</span></div>
-      <div class="dnode"><b>Private</b><span class="s">팀만 보는 저장소</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+      <div class="dnode" style="padding:9px 14px"><b>커밋</b><span class="s">코드 저장 지점</span></div>
+      <div class="dnode" style="padding:9px 14px"><b>GitHub</b><span class="s">노트북 밖 외부 백업</span></div>
+      <div class="dnode" style="padding:9px 14px"><b>Private</b><span class="s">팀만 보는 저장소</span></div>
     </div>
-    <div class="tl-rule" style="margin-top:20px"><span class="rk">완료</span><span>GitHub에 코드는 보이고 <strong style="color:var(--ink)">.env는 안 보임</strong> → 저장소 URL을 팀방에 공유</span></div>
+    <div class="tl-rule" style="margin-top:12px;font-size:18px"><span class="rk">완료</span><span>GitHub에 코드는 보이고 <strong style="color:var(--ink)">.env는 안 보임</strong> → 저장소 URL을 팀방에 공유</span></div>
   </div>
   <div class="src"><a href="https://github.com/signup" target="_blank">GitHub 가입</a> · 팀당 최소 1계정 · 로그인 승인 창은 팀 계정으로 진행</div>
 </section>
