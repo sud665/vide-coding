@@ -90,6 +90,18 @@ body{
 .sl[data-toc="Git 최초 설정 — Mac·Windows 공통"] .grow{justify-content:flex-start}
 .sl[data-toc="Git 최초 설정 — Mac·Windows 공통"] .code.big{font-size:21px;line-height:1.58;padding:20px 24px}
 .sl[data-toc="Git 최초 설정 — Mac·Windows 공통"] .card{padding:24px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] h2{margin-bottom:24px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .grow{justify-content:flex-start}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .flow{margin-top:0!important}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .fstep{padding:17px 15px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .farrow{padding:0 9px;font-size:24px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .fstep .fnum{font-size:13px;margin-bottom:8px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .fstep h4{font-size:22px;margin-bottom:7px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .fstep p{font-size:15.5px;line-height:1.35}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .flow+div{margin-top:16px!important}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .code{font-size:15.5px!important;line-height:1.45!important;padding:16px 20px}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] ul.check{font-size:16px!important;gap:9px!important}
+.sl[data-toc="부록 · 실제 운영 배포 순서"] .warn{margin-top:14px!important;padding:13px 18px;font-size:16px;line-height:1.4}
 
 /* type scale */
 .kicker{font-family:var(--mono);font-size:15px;letter-spacing:.24em;color:var(--ink3);text-transform:uppercase;margin-bottom:22px}
@@ -1953,7 +1965,7 @@ body.light .caret{background:#000}
 </section>
 
 <!-- APPENDIX · 심화 · Claude 모델 고르기 -->
-<section class="sl" data-toc="부록 · 심화 — 모델 고르기 &amp; 바꾸기" data-notes="[모델별 특징 + 바꾸는 법] 이번 해커톤의 기본 모델은 Opus 5. 팀별 결과 차이를 모델 선택에서 만들지 않도록 전 팀이 같은 모델로 시작한다. Claude 입력창에서 /model을 열어 Opus 5를 선택하고, /usage로 팀 공유 한도를 확인한다.">
+<section class="sl" data-toc="부록 · 심화 — 모델 고르기 &amp; 바꾸기" data-notes="[모델별 특징 + 바꾸는 법] 이번 해커톤의 추천 모델은 Sonnet 5다. 코딩과 도구 사용 성능이 강하면서 속도와 사용량의 균형이 좋아 대부분의 구현을 Sonnet 5로 시작한다. 아주 복잡한 문제에서만 상위 모델을 선택한다. Claude 입력창에서 /model을 열어 Sonnet 5를 선택하고, /usage로 팀 공유 한도를 확인한다.">
   <div class="chips"><span class="chip chip-tip">권고</span></div>
   <div class="kicker">APPENDIX · Claude 모델 고르기</div>
   <h2>어떤 모델을 언제? — 그리고 <em>바꾸는 법</em></h2>
@@ -1964,14 +1976,14 @@ body.light .caret{background:#000}
         <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4">가장 <strong style="color:var(--ink)">빠르고 저렴</strong> · 간단·반복(요약·분류·자잘한 수정)</p>
         <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$1 / $5 · 200K</div>
       </div>
-      <div class="card" style="padding:17px 18px">
-        <h4 style="font-size:20px"><span class="am">Sonnet</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span></h4>
-        <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4">속도·지능 <strong style="color:var(--ink)">균형</strong> · 대부분의 코딩은 <strong style="color:var(--ink)">여기서 시작</strong></p>
-        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$3 / $15 · 1M</div>
-      </div>
       <div class="card" style="padding:17px 18px;border-color:rgba(255,200,87,.55);background:rgba(255,200,87,.08)">
-        <h4 style="font-size:20px"><span class="co">Opus</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span> <span style="font-size:13px;color:var(--amber);font-weight:700">★ 행사 기본</span></h4>
-        <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4"><strong style="color:var(--ink)">이번 해커톤 기본 모델</strong> · 전 팀이 같은 모델로 시작</p>
+        <h4 style="font-size:20px"><span class="am">Sonnet</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span> <span style="font-size:13px;color:var(--amber);font-weight:700">★ 행사 추천</span></h4>
+        <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4"><strong style="color:var(--ink)">속도·코딩·사용량 균형</strong> · 대부분의 작업은 여기서 시작</p>
+        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$2 / $10* · 1M</div>
+      </div>
+      <div class="card" style="padding:17px 18px">
+        <h4 style="font-size:20px"><span class="co">Opus</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span></h4>
+        <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4">더 깊은 <strong style="color:var(--ink)">추론</strong> · Sonnet으로 풀리지 않는 복잡한 문제에 선택</p>
         <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$5 / $25 · 1M</div>
       </div>
       <div class="card" style="padding:17px 18px">
@@ -1985,9 +1997,9 @@ body.light .caret{background:#000}
       <div style="flex:1;height:8px;border-radius:5px;background:linear-gradient(90deg,#5AD7E0 0%,#FFC857 55%,#FF7A59 100%)"></div>
       <span style="font-size:15px;color:var(--ink2);flex:none">똑똑하고 한도 많이 씀 🧠</span>
     </div>
-    <div class="code" style="font-size:19px;margin-top:20px"><span class="cm"># Claude 입력창에서 언제든 — 모델 바꾸기</span><br><span class="hl">/model</span>   <span class="cm"># 목록에서 원하는 모델 선택</span><br><span class="hl">/fast</span>    <span class="cm"># Opus를 더 빠르게 (fast 모드)</span></div>
+    <div class="code" style="font-size:19px;margin-top:20px"><span class="cm"># Claude 입력창에서 언제든 — 모델 바꾸기</span><br><span class="hl">/model</span>   <span class="cm"># 목록에서 Sonnet 5 선택</span><br><span class="hl">/usage</span>   <span class="cm"># 팀 공유 한도 확인</span></div>
   </div>
-  <div class="src">행사 기본은 <b>Opus 5</b> — <code>/model</code>에서 선택하고 <code>/usage</code>로 팀 공유 한도 확인</div>
+  <div class="src">행사 추천은 <b>Sonnet 5</b> · <a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank">Anthropic 공식 안내</a> · *API 도입 가격은 2026-08-31까지</div>
 </section>
 
 <section class="sl" data-toc="발표자 프로필" data-notes="마지막 장 — 발표자 소개. 서외구(Max). 질문은 해커톤 동안 언제든.">
