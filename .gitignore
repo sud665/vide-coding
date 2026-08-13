@@ -1,2 +1,23 @@
 .DS_Store
 .vscode/
+
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+dist/
+out/
+
+# Local tooling
+.claude/
+.vercel/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*~
+.env
+.env.*
+!.env.example
