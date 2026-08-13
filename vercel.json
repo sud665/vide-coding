@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/hackathon.html"
+      "destination": "/claude-code-beginner.html"
     }
   ]
 }

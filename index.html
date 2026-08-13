@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>바이브 코딩 1시간 특강 — 해커톤 with Claude Code</title>
+<title>완전 초보를 위한 Claude Code 시작하기 — 설치부터 Git까지</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
 <style>
 /* ============ tokens ============ */
@@ -45,11 +45,13 @@ body{
 .sl{
   position:absolute;inset:0;padding:76px 100px 68px;
   display:flex;flex-direction:column;
+  overflow:hidden;
   opacity:0;visibility:hidden;transform:translateY(14px);
   transition:opacity .26s ease,transform .26s ease,visibility .26s;
 }
 .sl.active{opacity:1;visibility:visible;transform:none}
 .sl .grow{flex:1;display:flex;flex-direction:column;justify-content:center}
+.sl .grow,.cols>*,.cols3>*,.cards>*,.flow>*,.bigflow>*,.journey>*{min-width:0;min-height:0}
 .sl[data-toc="부록 · 개념 — 멱등성"],
 .sl[data-toc="부록 · 개념 — ACID 트랜잭션"],
 .sl[data-toc="부록 · 개념 — YAGNI"]{padding:38px 32px 18px}
@@ -149,6 +151,50 @@ em{font-style:normal;color:var(--vibe)}
 .fstep .fnum{font-family:var(--mono);font-size:15px;color:var(--eng);letter-spacing:.14em;margin-bottom:12px}
 .fstep h4{font-size:27px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
 .fstep p{font-size:18.5px;color:var(--ink2);line-height:1.45}
+
+/* large teaching diagrams — 초보자가 멀리서도 구조를 읽도록 */
+.bigflow{display:grid;grid-template-columns:1fr 72px 1fr 72px 1fr;align-items:center;width:100%}
+.bigflow.four{grid-template-columns:1fr 54px 1fr 54px 1fr 54px 1fr}
+.bignode{min-height:190px;border:1px solid var(--line-strong);background:rgba(23,27,51,.66);border-radius:22px;padding:26px 24px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.bignode::after{content:"";position:absolute;inset:auto -42px -66px auto;width:150px;height:150px;border-radius:50%;background:var(--halo,rgba(155,163,199,.08))}
+.clean-boxes .bignode::after{display:none}
+.bignode .bn{font-family:var(--mono);font-size:15px;letter-spacing:.14em;color:var(--accent,var(--eng));margin-bottom:13px}
+.bignode strong{font-size:30px;line-height:1.15;letter-spacing:-.02em;position:relative;z-index:1}
+.bignode p{font-size:18px;line-height:1.45;color:var(--ink2);margin-top:12px;position:relative;z-index:1}
+.bigarrow{display:flex;align-items:center;justify-content:center;color:var(--ink3);font-family:var(--mono);font-size:40px}
+.toolmap{display:grid;grid-template-columns:1fr 120px 1fr;grid-template-rows:1fr 92px 1fr;align-items:center;min-height:390px}
+.toolcore{grid-column:2;grid-row:2;width:120px;height:92px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:20px;background:var(--ink);color:var(--bg);box-shadow:0 0 0 12px rgba(232,234,246,.06)}
+.toolnode{border:1px solid var(--line-strong);border-radius:18px;padding:20px 24px;background:rgba(23,27,51,.62);min-height:125px;display:flex;flex-direction:column;justify-content:center}
+.toolnode strong{font-size:25px}.toolnode span{font-size:17px;color:var(--ink2);line-height:1.45;margin-top:8px}
+.toolnode.tl{grid-column:1;grid-row:1}.toolnode.tr{grid-column:3;grid-row:1}.toolnode.bl{grid-column:1;grid-row:3}.toolnode.br{grid-column:3;grid-row:3}
+.toolline{height:2px;background:var(--line-strong);position:relative}.toolline::after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid var(--ink3);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.journey{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:0;align-items:stretch;min-height:300px}
+.journey .zone{padding:28px 30px;border:1px solid var(--line-strong);background:rgba(23,27,51,.56);position:relative}
+.journey .zone:first-child{border-radius:22px 0 0 22px}.journey .zone:last-child{border-radius:0 22px 22px 0}
+.journey .zone.mid{background:rgba(232,92,56,.09);border-color:rgba(255,122,89,.48);border-radius:0;z-index:2}
+.journey .date{font-family:var(--mono);font-size:15px;letter-spacing:.12em;color:var(--eng);margin-bottom:16px}.journey .mid .date{color:var(--vibe)}
+.journey h4{font-size:28px;line-height:1.18;margin-bottom:17px}.journey p{font-size:18px;line-height:1.55;color:var(--ink2)}
+.journey .finish{display:inline-block;margin-top:18px;padding:6px 11px;border-radius:7px;font-family:var(--mono);font-size:14px;color:var(--amber);border:1px solid rgba(255,200,87,.38)}
+.scope-diagram{display:grid;grid-template-columns:1fr 90px 1fr;align-items:center}
+.scope-person{width:88px;height:88px;border-radius:50%;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 14px;background:rgba(23,27,51,.8)}
+.scope-box{min-height:300px;border:1px solid var(--line-strong);border-radius:24px;padding:28px 30px;background:rgba(23,27,51,.58)}
+.scope-box h4{font-size:30px;margin-bottom:20px;text-align:center}.scope-box ul{list-style:none;display:flex;flex-direction:column;gap:13px;color:var(--ink2);font-size:19px}.scope-box li::before{content:"✓";color:var(--accent,var(--eng));margin-right:12px;font-family:var(--mono)}
+.scope-bridge{text-align:center;color:var(--ink3);font-family:var(--mono);font-size:32px}.scope-bridge span{display:block;font-size:13px;line-height:1.4;margin-top:10px;letter-spacing:.08em}
+.site-link{display:inline-flex;align-items:center;gap:10px;width:max-content;max-width:100%;padding:10px 16px;border:1px solid rgba(90,215,224,.48);border-radius:9px;color:var(--eng);background:rgba(24,154,168,.08);font-family:var(--mono);font-size:16px;text-decoration:none}
+.site-link:hover{background:rgba(24,154,168,.16);border-color:var(--eng)}
+.install-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.install-lane{border-top:2px solid var(--accent);padding:22px 24px 20px;background:rgba(23,27,51,.46)}
+.install-lane h4{font-size:26px;margin-bottom:16px}.install-lane ol{list-style:none;counter-reset:install;display:flex;flex-direction:column;gap:13px}
+.install-lane li{counter-increment:install;display:grid;grid-template-columns:29px 1fr;gap:10px;color:var(--ink2);font-size:18px;line-height:1.42}
+.install-lane li::before{content:counter(install);width:27px;height:27px;border:1px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);font:700 14px var(--mono)}
+.role-visual{display:grid;grid-template-columns:1fr 88px 1fr;align-items:center;gap:0}
+.role-scene{min-height:330px;padding:28px 30px;border:1px solid var(--line-strong);background:rgba(23,27,51,.5);display:flex;flex-direction:column;justify-content:space-between}
+.role-scene:first-child{border-radius:22px}.role-scene:last-child{border-radius:22px}
+.role-top{display:flex;align-items:center;gap:17px}.role-icon{font-size:38px;width:72px;height:72px;border-radius:50%;border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;background:rgba(13,15,28,.6)}
+.role-top h4{font-size:31px}.role-bubble{padding:17px 20px;border-radius:16px;font-size:19px;line-height:1.45;background:rgba(13,15,28,.58);color:var(--ink2);border:1px solid var(--line)}
+.role-result{display:flex;align-items:center;gap:14px;font-size:20px;color:var(--ink2)}.role-result b{color:var(--ink)}
+.role-result .result-icon{font-size:34px}.role-or{text-align:center;font-family:var(--mono);font-size:14px;color:var(--ink3);line-height:1.55}.role-or b{display:block;font-size:27px;color:var(--ink2)}
+.same-request{display:grid;grid-template-columns:1fr 1fr;gap:28px}.request-case{border:1px solid var(--line-strong);padding:23px 26px;background:rgba(23,27,51,.48);min-height:280px}.request-case h4{font-size:26px;margin-bottom:14px}.request-case .ask{font-size:17px;line-height:1.45;padding:13px 16px;background:rgba(13,15,28,.6);border-radius:10px;color:var(--ink);margin-bottom:17px}.request-case .out{font-size:18px;line-height:1.55;color:var(--ink2)}.request-case .out b{color:var(--ink)}
 
 /* big vertical steps (실습용) */
 .steps{display:flex;flex-direction:column;gap:22px}
@@ -301,6 +347,9 @@ body.light .pf-name .en{color:var(--ink);background:linear-gradient(180deg,trans
 .qa{display:flex;flex-direction:column;gap:18px}
 .qa-row{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:18px 26px;background:rgba(23,27,51,.45)}
 .qa-row .sym{font-size:22px;font-weight:700;color:var(--vibe)}
+.qa-row .sym a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+.qa-row .sym a::after{content:" ↗";font-family:var(--mono);font-size:.72em;color:var(--eng)}
+.qa-row .sym a:hover{color:var(--eng)}
 .qa-row .fix{font-size:21px;color:var(--ink2);line-height:1.45}
 .qa-row .fix b{color:var(--ink)}
 .qa-row .fix code{font-family:var(--mono);font-size:19px;color:var(--eng)}
@@ -396,9 +445,27 @@ body.light .prog{height:5px;background:linear-gradient(90deg,#FF7A59 0%,#FFC857 
 body.light .warn{background:rgba(255,193,61,.20);border-color:rgba(143,100,0,.5);border-left:5px solid #C89000;color:var(--ink2)}
 body.light .warn b{color:#000}
 body.light .tl-rule .rk{border-color:rgba(143,100,0,.5);background:rgba(255,193,61,.2);color:#000}
-/* 면 요소 — 흰 카드 + 옅은 그림자 */
-body.light .hero{background:#FFFFFF;box-shadow:0 2px 10px rgba(0,0,0,.07)}
-body.light .card,body.light .fstep,body.light .qa-row{background:#FFFFFF}
+/* 면 요소 — 라이트 모드에서는 회색 면을 전부 흰색으로 통일 */
+body.light .hero,
+body.light .card,
+body.light .fstep,
+body.light .qa-row,
+body.light .bignode,
+body.light .toolnode,
+body.light .journey .zone,
+body.light .scope-box,
+body.light .scope-person,
+body.light .install-lane,
+body.light .role-scene,
+body.light .role-icon,
+body.light .role-bubble,
+body.light .request-case,
+body.light .request-case .ask,
+body.light .dnode{
+  background:#FFFFFF;
+  box-shadow:0 2px 9px rgba(0,0,0,.055);
+}
+body.light .journey .zone.mid{background:#FFFFFF}
 body.light .prompt{background:rgba(232,92,56,.05)}
 body.light .step .sn{background:rgba(232,92,56,.07)}
 body.light .tl-seg{border-right-color:rgba(252,252,249,.95)}
@@ -409,7 +476,7 @@ body.light .caret{background:#000}
 /* print → PDF */
 @media print{
   body{overflow:visible;background:var(--bg)}
-  .stage{position:static;transform:none;width:1280px;height:auto}
+  .stage{position:static;left:auto;top:auto;transform:none!important;width:1280px;height:auto}
   .sl{position:relative;inset:auto;width:1280px;height:720px;opacity:1;visibility:visible;transform:none;page-break-after:always;break-after:page}
   .frag{opacity:1;filter:none}
   .prog,.counter,.hint,.timer,.notes-panel,.ovl{display:none!important}
@@ -432,38 +499,210 @@ body.light .caret{background:#000}
 <section class="sl" data-toc="타해커톤" data-notes="[0:00] 인사 + 30초 훅: '오늘 1시간 뒤, 여러분 팀마다 노트북에 AI 개발자를 한 명씩 고용해서 돌아갑니다. 해커톤 뒤엔 여러분 아이디어가 링크 하나로 동작하는 서비스가 되어 있을 거고요.'&#10;청중 파악 질문 2개: ①코딩 경험 있으신 분? ②ChatGPT/Claude 써보신 분? — '두 번째가 많으면 충분합니다. 오늘 필요한 건 코딩이 아니라 한국어니까요.'">
   <div class="grow">
     <div class="term"><span class="term-host">team@hackathon</span><span class="term-sep">:~$</span> <span class="term-cmd" data-type='claude "해커톤 동안 우리 서비스 만들어줘"'></span><span class="caret"></span></div>
-    <h1>말하면, <span class="co">만들어진다</span>.</h1>
-    <p class="lead" style="margin-top:30px;max-width:980px">1시간 특강 — <strong>Claude Code</strong>로 바이브 코딩<br>핵심기능 3개를 만들고, IR 덱 PDF와 데모 영상 MP4까지</p>
-    <div class="attr" style="margin-top:56px">Max · 창업팀을 위한 60분 세팅 &amp; 전략</div>
+    <h1 style="font-size:78px">기획 문서를, <span class="co">클릭 가능한 링크로</span>.</h1>
+    <p class="lead" style="margin-top:30px;max-width:1040px"><strong>무료 AI + Cursor</strong>로 HTML 데모를 만들고<br>GitHub Public · Vercel 배포까지</p>
+    <div class="attr" style="margin-top:56px">Max · 완전 초보를 위한 사전 10일 바이브코딩</div>
   </div>
   <div class="src">→ 또는 Space로 진행 · O 목차 · N 발표자 메모 · L 라이트 모드 · ? 도움말</div>
 </section>
 
 <!-- 2 · MISSION -->
-<section class="sl" data-toc="미션 브리핑" data-notes="[0:02] 학생별 개발 경험 편차가 큰 만큼 출발선을 배포로 맞추지 않는다. 모두가 같은 목표를 보도록 결과물 세 가지를 먼저 고정한다. ①심사의 중심인 핵심기능 3가지 ②IR 덱은 PDF ③데모 영상은 MP4.&#10;'해커톤이 짧아 보이지만 AI는 밤에도 지치지 않습니다. 관건은 시간이 아니라 방향입니다.'">
+<section class="sl clean-boxes" data-toc="오늘의 미션" data-notes="[오늘의 최종 목표] 팀의 기획 문서를 AI에게 전달해 브라우저에서 열리는 단일 HTML 데모를 만든다. 코드를 직접 작성하는 것이 아니라 기획을 구체적인 화면과 클릭 흐름으로 바꾸는 경험이 핵심이다. 결과물은 ①정리된 기획 문서 ②index.html 데모 ③GitHub Public 저장소 ④Vercel 공개 URL 네 가지다. 실제 데이터베이스·로그인·결제·완성 서비스 개발은 오늘 목표가 아니며 본캠프 부록에서 다룬다.">
   <div class="kicker">MISSION</div>
-  <h2>이번 해커톤의 미션</h2>
+  <h2>기획을 <em>클릭 가능한 링크</em>로</h2>
   <div class="grow">
-    <div class="hero-row" style="margin-top:16px">
-      <div class="hero"><div class="hero-num co">3</div><div class="hero-lbl"><strong>핵심기능 3가지</strong>가 심사의 중심 —<br>많이가 아니라 <strong>확실하게 3개</strong></div></div>
-      <div class="hero"><div class="hero-num cy" style="font-size:64px;line-height:1.25">PDF</div><div class="hero-lbl"><strong>IR 덱은 PDF</strong> —<br>어떤 환경에서도 같은 화면으로 제출</div></div>
-      <div class="hero"><div class="hero-num am" style="font-size:64px;line-height:1.25">MP4</div><div class="hero-lbl"><strong>데모 영상은 MP4</strong> —<br>핵심기능 3가지를 하나의 흐름으로 증명</div></div>
+    <div class="bigflow" style="margin-top:12px">
+      <div class="bignode" style="--accent:var(--vibe);--halo:rgba(255,122,89,.13)"><div class="bn">01 · THINK</div><strong>기획 문서</strong><p>문제 · 사용자 · 핵심 흐름을<br>DEMO_PLAN.md 한 장으로</p></div>
+      <div class="bigarrow">→</div>
+      <div class="bignode" style="--accent:var(--eng);--halo:rgba(90,215,224,.13)"><div class="bn">02 · BUILD</div><strong>HTML 데모</strong><p>AI가 index.html 제작<br>내가 버튼을 직접 클릭</p></div>
+      <div class="bigarrow">→</div>
+      <div class="bignode" style="--accent:var(--amber);--halo:rgba(255,200,87,.13)"><div class="bn">03 · SHARE</div><strong>공개 URL</strong><p>GitHub에 보관하고<br>Vercel로 누구나 접속</p></div>
     </div>
-    <p class="lead" style="margin-top:38px;font-size:26px">시간은 부족하지 않다. <strong>방향이 부족할 뿐.</strong> — 이번 1시간이 그 방향이다.</p>
+    <p class="lead" style="margin-top:38px;font-size:26px"><strong>완성 기준:</strong> 휴대전화에서 URL을 열고, 우리 아이디어의 핵심 흐름을 직접 눌러볼 수 있다.</p>
+  </div>
+</section>
+
+<!-- PRE-CAMP · ORGANIZER BRIEF -->
+<section class="sl" data-toc="사전 10일 + 본캠프 2일" data-notes="[운영 구조] 8월 14일부터 23일까지 팀별로 기획 문서를 HTML 데모로 만들고 GitHub와 Vercel에 공개한다. 8월 24~25일 본캠프에서는 제공되는 Claude Code Max 계정으로 이 데모를 실제 서비스 기능으로 발전시킨다. 오늘 본편은 사전 준비까지만 다루며 본캠프 작업은 모두 부록으로 제공한다.">
+  <div class="kicker">ROADMAP · 8월 14일 → 25일</div>
+  <h2><em>10일 준비</em>하고, <span class="cy">2일 집중 구현</span></h2>
+  <div class="grow">
+    <div class="journey" style="margin-top:20px">
+      <div class="zone"><div class="date">8.14–8.18</div><h4>아이디어를<br>눈에 보이게</h4><p>기획 문서 정리<br>Manus·Cursor로 HTML 데모<br>팀 안에서 클릭 검증</p><span class="finish">결과 · index.html</span></div>
+      <div class="zone mid"><div class="date">8.19–8.23 · 본편</div><h4>링크로 공유하고<br>반응을 관찰</h4><p>GitHub Public 업로드<br>Vercel URL 만들기<br>팀 밖 3명에게 테스트</p><span class="finish">결과 · 공개 URL</span></div>
+      <div class="zone"><div class="date">8.24–8.25 · 부록</div><h4>본캠프에서<br>실제 기능 구현</h4><p>Claude Code Max<br>핵심기능 · 데이터 · 검증<br>발표·영상·최종 제출</p><span class="finish">결과 · 작동 서비스</span></div>
+    </div>
+    <p class="lead" style="margin-top:28px;font-size:25px">오늘은 <strong>URL 하나를 만드는 데 집중</strong>한다. 본캠프 작업은 뒤쪽 <strong class="cy">부록</strong>에서 찾아본다.</p>
+  </div>
+</section>
+
+<section class="sl" data-toc="무료로 어디까지 가능한가?" data-notes="[무료 도구 안내] 무료 Claude와 ChatGPT는 아이디어 구체화, 기능 우선순위, 개발 명세와 오류 해석에 활용한다. Cursor Hobby Free는 신용카드 없이 제한된 Agent 요청과 Composer를 제공하므로 실제 프로젝트 파일을 생성·수정하는 첫 경험에 적합하다. 무료 사용량은 제한적이고 정확한 횟수는 공개 고정값이 아니므로 기능을 작게 요청한다. 본캠프에서는 팀별 Claude Code Max 계정으로 이어서 구현한다. API는 별도 과금이므로 수업에서 요구하지 않는다.">
+  <div class="kicker">FREE FIRST · 결제 없이 시작</div>
+  <h2>무료로도 <em>준비는 충분히</em> 가능하다</h2>
+  <div class="grow">
+    <div class="bigflow" style="margin-top:10px">
+      <div class="bignode" style="--accent:var(--vibe);--halo:rgba(255,122,89,.13)"><div class="bn">생각 · 무료</div><strong>Claude<br>ChatGPT</strong><p>질문 → 문제 정의<br>기획·문구·오류 설명</p></div>
+      <div class="bigarrow">→</div>
+      <div class="bignode" style="--accent:var(--amber);--halo:rgba(255,200,87,.13)"><div class="bn">연습 · 무료 한도</div><strong>Manus<br>Cursor</strong><p>기획 → HTML 데모<br>파일 생성·수정 경험</p></div>
+      <div class="bigarrow">→</div>
+      <div class="bignode" style="--accent:var(--eng);--halo:rgba(90,215,224,.13)"><div class="bn">본캠프 · 팀 계정</div><strong>Claude Code<br>Max</strong><p>실제 기능 · 테스트<br>Git·배포 반복 자동화</p></div>
+    </div>
+    <div class="warn" style="margin-top:26px"><b>추천 경로:</b> 무료 채팅 AI로 명세 작성 → <b>Cursor Free로 작은 기능 1개</b> → 본캠프 Max로 핵심기능 3개 완성.</div>
+  </div>
+  <div class="src"><a href="https://cursor.com/en-US/pricing" target="_blank">Cursor Hobby Free</a> · <a href="https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan" target="_blank">Claude Code 플랜</a> · <a href="https://developers.openai.com/" target="_blank">ChatGPT 공식 안내</a> · 2026-08-12 기준</div>
+</section>
+
+<section class="sl" data-toc="STEP 1 · 기획 문서 한 장" data-notes="[첫 번째 산출물] 무료 Claude나 ChatGPT로 팀의 아이디어를 한 장짜리 DEMO_PLAN.md로 정리한다. 반드시 포함할 내용은 서비스 한 문장, 대표 사용자, 해결할 문제, 화면에 보여줄 핵심 흐름 3단계, 필요한 화면 문구와 예시 데이터, 디자인 분위기다. 실제 개발 기술이나 데이터베이스 구조를 정하는 문서가 아니라 HTML 데모가 무엇을 보여줘야 하는지 정하는 문서다.">
+  <div class="kicker">STEP 1 · PLAN</div>
+  <h2>먼저 <em>DEMO_PLAN.md</em> 한 장</h2>
+  <div class="grow">
+    <div class="cols" style="grid-template-columns:.75fr 1.25fr;gap:34px">
+      <div class="code" style="font-size:18px;line-height:1.65"><span class="hl">DEMO_PLAN.md</span><br><br>1. 서비스 한 문장<br>2. 대표 사용자<br>3. 해결할 문제<br>4. 핵심 흐름 3단계<br>5. 화면 문구·예시 데이터<br>6. 디자인 분위기</div>
+      <div class="prompt" style="font-size:18px;line-height:1.5"><div class="prompt-t">무료 CLAUDE · CHATGPT</div>“우리 아이디어를 <b>클릭 가능한 HTML 데모</b>로 만들 준비를 해줘. 질문이 필요하면 한 번에 하나씩 물어보고, 답변을 바탕으로 DEMO_PLAN.md를 작성해줘.<br><br>서비스 한 문장, 대표 사용자, 해결할 문제, 사용자가 누르는 핵심 흐름 3단계, 화면 문구와 예시 데이터, 원하는 디자인 분위기를 포함해줘.”</div>
+    </div>
+    <div class="tl-rule" style="margin-top:24px"><span class="rk">완료</span><span>팀원 모두가 읽고 <strong style="color:var(--ink)">“이 화면이면 아이디어가 설명된다”</strong>고 동의</span></div>
+  </div>
+</section>
+
+<section class="sl" data-toc="사전 개발 추천 — Manus" data-notes="[사전 연습 추천] 행사 안내 기준으로 8월 25일까지 무료로 사용할 수 있는 Manus를 사전 개발의 빠른 시작 도구로 활용한다. 브라우저에서 별도 개발 환경 설치 없이 DEMO_PLAN.md의 내용을 붙여 넣고 클릭 가능한 HTML 데모를 요청한다. 결과를 눈으로 확인한 뒤 수정 요청을 반복하고, 완성된 파일을 반드시 내려받아 팀의 GitHub Public 저장소에 올린다. Manus 안의 미리보기나 임시 공유 링크만 제출하지 않고 최종 공개 주소는 Vercel로 만든다. 공개 공식 도움말에서는 상시 Free 플랜과 크레딧 정책은 확인되지만 8월 25일 종료 프로모션은 확인되지 않으므로 행사 안내와 계정 화면의 잔여 크레딧을 함께 확인한다.">
+  <div class="chips"><span class="chip chip-tip">사전 연습 1순위</span><span class="chip chip-warn">행사 안내 기준 · 8월 25일까지</span></div>
+  <div class="kicker">MANUS · 설치 없이 브라우저에서</div>
+  <h2>기획을 넣고 <em>데모부터 만들어 본다</em></h2>
+  <div class="grow">
+    <p class="lead" style="font-size:21px;line-height:1.5;margin:4px 0 18px"><strong>Manus</strong>는 브라우저에서 요청을 받아 자료 조사·문서 작성·웹페이지 제작 같은 작업을 대신 수행하는 <strong class="cy">AI 에이전트</strong>입니다. 설치 없이 기획서를 HTML 데모로 바꾸는 연습에 적합합니다.</p>
+    <div class="flow">
+      <div class="fstep"><div class="fnum">01 · SIGN IN</div><h4>무료로 시작</h4><p><b>manus.im</b> 접속<br>계정 생성 · 잔여 크레딧 확인</p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">02 · BUILD</div><h4>기획서 전달</h4><p>DEMO_PLAN.md 붙여넣기<br>HTML 데모 제작 요청</p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">03 · EXPORT</div><h4>파일 가져오기</h4><p>결과 확인 · 수정 반복<br><b>index.html 다운로드</b></p></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:22px"><a class="site-link" href="https://manus.im/" target="_blank" rel="noopener">Manus 실행하기 ↗</a><div class="tl-rule" style="margin-top:0"><span class="rk">다음</span><span>파일 확인 → <strong style="color:var(--ink)">GitHub Public → Vercel</strong></span></div></div>
+  </div>
+  <div class="src"><a href="https://manus.im/" target="_blank">Manus 시작하기</a> · <a href="https://help.manus.im/en/articles/11711111-what-is-the-current-membership-pricing-for-manus" target="_blank">공식 Free 플랜 안내</a> · 무료 기간·크레딧은 계정 화면에서 재확인</div>
+</section>
+
+<section class="sl" data-toc="사전 개발 추천 — Cursor Free" data-notes="[사전 10일 추천 도구] Cursor는 VS Code와 비슷한 코드 편집기에 AI Agent가 결합된 도구다. Hobby Free는 신용카드 없이 시작할 수 있고 제한된 Agent 요청 및 Composer 접근을 제공한다. Claude Code처럼 프로젝트 폴더 안의 파일을 읽고 수정하는 경험을 미리 할 수 있어 사전 개발에 적합하다. 다만 무료 요청량이 제한되므로 큰 기능 전체를 한 번에 요청하지 않고 기능 하나를 작은 단계로 나눈다.">
+  <div class="chips"><span class="chip chip-tip">사전 10일 추천</span></div>
+  <div class="kicker">CURSOR · HOBBY FREE</div>
+  <h2>무료로 <em>실제 파일을 수정</em>해 본다</h2>
+  <div class="grow">
+    <div class="cols" style="gap:36px">
+      <div><div class="code" style="font-size:20px;line-height:1.75"><span class="hl">Cursor</span><br>├── 프로젝트 폴더 읽기<br>├── Agent에게 한국어로 요청<br>├── 파일 생성·수정 제안<br>├── 코드 실행·오류 질문<br>└── 변경 내용 직접 확인</div></div>
+      <div><ul class="check" style="font-size:24px;gap:18px"><li><strong>신용카드 없이</strong> Hobby Free 시작</li><li>제한된 Agent 요청 제공</li><li>Composer 사용 가능</li><li>무료 한도는 작게 나눠 사용</li></ul></div>
+    </div>
+    <div class="warn" style="margin-top:24px"><b>목표는 완성품이 아니다.</b> 사전에는 랜딩 페이지 또는 핵심기능 1개를 직접 만들고, AI에게 요청하고 검증하는 흐름을 익힙니다.</div>
+  </div>
+  <div class="src"><a href="https://cursor.com/downloads" target="_blank">Cursor 공식 다운로드</a> · <a href="https://cursor.com/en-US/pricing" target="_blank">Hobby Free 플랜 확인</a></div>
+</section>
+
+<section class="sl" data-toc="Cursor 설치 — Windows·Mac" data-notes="[Cursor 설치 실습] cursor.com/downloads에서 운영체제에 맞는 설치 파일을 받는다. Mac은 Apple Silicon 또는 Intel 여부를 확인하고 응용 프로그램 폴더에 설치한다. Windows는 설치 파일을 실행하고 기본 옵션으로 진행한다. 실행 후 무료 계정을 만들고 프로젝트 폴더 열기를 선택한다. 처음에는 VS Code 설정 가져오기를 건너뛰어도 된다. 완료 기준은 team-project 폴더가 왼쪽 탐색기에 보이는 것이다.">
+  <div class="kicker">CURSOR · 설치 5분</div>
+  <h2>다운로드 → 로그인 → <em>폴더 열기</em></h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="fstep"><div class="fnum">01 · DOWNLOAD</div><h4>공식 사이트</h4><p><b>cursor.com/downloads</b><br>Windows 또는 Mac 선택</p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">02 · SIGN IN</div><h4>무료 가입</h4><p>Hobby Free 시작<br>카드 등록 불필요</p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">03 · OPEN</div><h4>폴더 열기</h4><p><b>Open project</b><br>team-project 선택</p></div>
+    </div>
+    <div class="cols" style="margin-top:30px;gap:28px"><div class="dnode"><b class="cy">Mac</b><span class="s">다운로드 → Applications로 이동 → 실행</span></div><div class="dnode"><b class="co">Windows</b><span class="s">설치 파일 실행 → 기본 옵션 → 실행</span></div></div>
+    <div class="tl-rule" style="margin-top:25px"><span class="rk">완료</span><span>왼쪽 파일 목록에 <strong style="color:var(--ink)">team-project 폴더</strong>가 보이면 성공</span></div>
+  </div>
+</section>
+
+<section class="sl" data-toc="STEP 2 · 기획을 HTML 데모로" data-notes="[두 번째 산출물] Cursor Agent에게 DEMO_PLAN.md를 읽히고 index.html 하나로 데모를 만든다. 프레임워크, 서버, 데이터베이스, 로그인, API는 사용하지 않는다. CSS와 JavaScript는 index.html 내부에 포함해 파일 하나만 브라우저에서 열어도 동작하게 한다. 핵심 흐름의 버튼은 실제로 눌리고 다음 상태가 보이게 하며 데이터는 가짜 예시를 사용한다.">
+  <div class="kicker">STEP 2 · CURSOR AGENT</div>
+  <h2>기획 문서를 <em>index.html</em>로</h2>
+  <div class="grow">
+    <div class="prompt" style="font-size:18px;line-height:1.5"><div class="prompt-t">CURSOR AGENT · 그대로 복사</div>“DEMO_PLAN.md를 읽고 <b>index.html 하나로 클릭 가능한 서비스 데모</b>를 만들어줘. CSS와 JavaScript도 파일 안에 포함해줘. 서버·데이터베이스·로그인·API·패키지 설치는 사용하지 마. 예시 데이터만 사용하고, 핵심 흐름 3단계의 버튼이 실제로 눌리게 해줘. 모바일에서도 보기 좋게 만들고 완료 후 브라우저에서 여는 방법을 알려줘.”</div>
+    <div class="flow" style="margin-top:26px"><div class="fstep"><div class="fnum">1</div><h4>파일 열기</h4><p>index.html 더블클릭</p></div><div class="farrow">→</div><div class="fstep"><div class="fnum">2</div><h4>흐름 누르기</h4><p>버튼 3단계 확인</p></div><div class="farrow">→</div><div class="fstep"><div class="fnum">3</div><h4>모바일 확인</h4><p>창 폭을 줄여보기</p></div></div>
+  </div>
+  <div class="src">무료 한도 절약 공식 — 기획은 채팅 AI · 구현은 Cursor · 한 번에 기능 하나</div>
+</section>
+
+<section class="sl" data-toc="사전 필수 — GitHub Public" data-notes="[8월 23일까지 필수] 본캠프 당일 계정 가입과 인증에 시간을 쓰지 않도록 사전에 GitHub 계정을 만든다. 팀당 최소 한 계정은 이메일 인증까지 완료하고, team-project라는 Public 저장소를 만든다. 공개 저장소는 누구나 볼 수 있으므로 push 전에 .env, API 키, 비밀번호, 개인정보가 없는지 반드시 점검한다. Cursor에서 만든 프로젝트를 첫 커밋하고 push한 뒤 GitHub 웹에서 파일이 보이는지 확인한다. 저장소 URL은 팀 대화방에 공유한다.">
+  <div class="chips"><span class="chip chip-tip">8월 23일까지 필수</span></div>
+  <div class="kicker">GITHUB · 코드 안전망</div>
+  <h2>본캠프 전에 <em>가입 + 첫 백업</em></h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="fstep"><div class="fnum">01 · ACCOUNT</div><h4>계정 만들기</h4><p>github.com/signup<br><strong style="color:var(--ink)">이메일 인증까지</strong></p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">02 · REPOSITORY</div><h4>저장소 생성</h4><p><code>team-project</code><br><strong style="color:var(--ink)">Public 선택</strong></p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">03 · PUSH</div><h4>첫 백업</h4><p>커밋 후 push<br>웹에서 파일 확인</p></div>
+    </div>
+    <div class="prompt" style="margin-top:26px;font-size:18px;line-height:1.5"><div class="prompt-t">CURSOR에게 요청</div>“이 프로젝트를 Git 저장소로 만들고 첫 커밋을 해줘. <b>Public 저장소이므로 .env·API 키·비밀번호·개인정보가 올라가지 않게 전체를 점검</b>하고 .gitignore를 확인해줘. 저장소 연결은 한 단계씩 설명해줘.”</div>
+    <div class="tl-rule" style="margin-top:22px"><span class="rk">완료</span><span>GitHub에서 코드가 보이고 · <strong style="color:var(--ink)">.env는 안 보이고</strong> · 저장소 URL을 팀방에 공유</span></div>
+  </div>
+  <div class="src"><a href="https://github.com/signup" target="_blank">GitHub 무료 가입</a> · <a href="https://desktop.github.com/download/" target="_blank">GitHub Desktop 다운로드</a> · 팀당 최소 1계정</div>
+</section>
+
+<section class="sl" data-toc="사전 필수 — Vercel 첫 배포" data-notes="[8월 23일까지 필수] GitHub Public 저장소를 Vercel에 연결해 실제 URL을 만든다. vercel.com에서 Continue with GitHub로 가입하고 Add New, Project를 선택한다. team-project 저장소를 Import하고 프레임워크와 루트 디렉터리를 자동 감지한 값으로 둔 뒤 Deploy한다. 환경변수가 필요한 프로젝트는 코드나 GitHub에 값을 넣지 않고 Vercel Project Settings의 Environment Variables에 입력한 뒤 재배포한다. 완료 기준은 휴대전화 또는 시크릿 창에서 URL이 열리고 핵심 화면이 보이는 것이다.">
+  <div class="chips"><span class="chip chip-tip">8월 23일까지 필수</span></div>
+  <div class="kicker">VERCEL · 첫 공개 URL</div>
+  <h2>GitHub 연결하고 <em>Deploy</em></h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="fstep"><div class="fnum">01 · SIGN UP</div><h4>GitHub로 가입</h4><p>vercel.com/signup<br><b>Continue with GitHub</b></p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">02 · IMPORT</div><h4>저장소 연결</h4><p>Add New → Project<br><b>team-project Import</b></p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">03 · DEPLOY</div><h4>배포</h4><p>설정 확인 → Deploy<br><b>공개 URL 복사</b></p></div>
+    </div>
+    <div class="warn" style="margin-top:27px"><b>비밀값이 있다면:</b> GitHub에 올리지 말고 Vercel <b>Project → Settings → Environment Variables</b>에 입력 → 새로 Deploy.</div>
+    <div class="tl-rule" style="margin-top:23px"><span class="rk">완료</span><span>휴대전화 또는 시크릿 창에서 <strong style="color:var(--ink)">*.vercel.app URL</strong>이 열리고 핵심 화면이 보임</span></div>
+  </div>
+  <div class="src"><a href="https://vercel.com/signup" target="_blank">Vercel 무료 가입</a> · <a href="https://vercel.com/docs/git" target="_blank">Git 저장소 배포 공식 가이드</a> · push할 때마다 자동 재배포</div>
+</section>
+
+<section class="sl" data-toc="한눈에 보기 — GitHub와 Vercel" data-notes="[초보자용 배포 구조] 내 컴퓨터에서 만든 index.html을 GitHub Public 저장소에 push하면 코드가 인터넷 저장소에 보관된다. Vercel은 그 GitHub 저장소를 연결해 웹사이트로 배포하고 공개 URL을 만든다. 이후 파일을 수정해 다시 push하면 Vercel이 자동으로 새 버전을 배포한다. GitHub URL은 코드를 보는 주소이고 Vercel URL은 실제 화면을 사용하는 주소다.">
+  <div class="kicker">MENTAL MODEL · 저장과 공개의 차이</div>
+  <h2>GitHub는 <em>보관함</em>, Vercel은 <span class="cy">전시장</span></h2>
+  <div class="grow">
+    <div class="bigflow four" style="margin-top:12px">
+      <div class="bignode" style="min-height:225px;--accent:var(--vibe);--halo:rgba(255,122,89,.13)"><div class="bn">내 컴퓨터</div><strong style="font-size:27px">index.html</strong><p>AI와 만들고<br>직접 클릭해 확인</p></div>
+      <div class="bigarrow" style="font-size:15px;line-height:1.65;flex-direction:column"><span>push</span><span style="font-size:28px">→</span></div>
+      <div class="bignode" style="min-height:225px;--accent:var(--amber);--halo:rgba(255,200,87,.13)"><div class="bn">GITHUB PUBLIC</div><strong style="font-size:27px">코드 보관</strong><p>변경 이력과 파일을<br>인터넷에 백업</p></div>
+      <div class="bigarrow" style="font-size:15px;line-height:1.65;flex-direction:column"><span>연결</span><span style="font-size:28px">→</span></div>
+      <div class="bignode" style="min-height:225px;--accent:var(--eng);--halo:rgba(90,215,224,.13)"><div class="bn">VERCEL</div><strong style="font-size:27px">웹으로 배포</strong><p>코드를 실행 가능한<br>사이트로 변환</p></div>
+      <div class="bigarrow" style="font-size:15px;line-height:1.65;flex-direction:column"><span>URL</span><span style="font-size:28px">→</span></div>
+      <div class="bignode" style="min-height:225px;--accent:var(--vibe);--halo:rgba(255,122,89,.13)"><div class="bn">사용자</div><strong style="font-size:27px">휴대전화</strong><p>설치 없이 링크를 열고<br>데모를 직접 클릭</p></div>
+    </div>
+    <div class="tl-rule" style="margin-top:28px"><span class="rk">기억</span><span><strong style="color:var(--ink)">GitHub URL = 코드 보기</strong> · <strong class="cy">Vercel URL = 서비스 사용</strong></span></div>
+  </div>
+</section>
+
+<section class="sl" data-toc="채팅 AI로 개발 준비하는 법" data-notes="[사전 기간 실습] 채팅 AI는 내 폴더를 자동으로 알지 못하므로 매번 필요한 맥락을 함께 준다. 맥락, 목표, 제약, 완료기준 네 요소로 요청하고 결과를 PLAN.md 같은 문서에 계속 저장한다. 도구를 바꿔도 같은 문서를 첨부하면 이어서 작업할 수 있다. 무료 한도에 닿았을 때 다른 도구로 옮겨도 팀의 지식이 사라지지 않게 만드는 것이 핵심이다.">
+  <div class="kicker">WORKFLOW · 무료 채팅 AI 활용법</div>
+  <h2>도구보다 중요한 것은 <em>남는 문서</em></h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="fstep"><div class="fnum">01 · CONTEXT</div><h4>맥락 제공</h4><p>누구의 어떤 문제인지<br>현재 결정된 내용 첨부</p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">02 · ASK</div><h4>작게 요청</h4><p>목표 + 제약 +<br>완료기준을 한 번에</p></div><div class="farrow">→</div>
+      <div class="fstep"><div class="fnum">03 · SAVE</div><h4>문서로 저장</h4><p>결정 내용을 PLAN.md와<br>화면 명세에 계속 누적</p></div>
+    </div>
+    <div class="prompt" style="margin-top:30px;font-size:19px"><div class="prompt-t">무료 Claude·ChatGPT 공통 프롬프트</div>“우리는 <span class="ph">[사용자]</span>의 <span class="ph">[문제]</span>를 해결하는 서비스를 준비 중이야. 핵심기능 후보를 5개 제안한 뒤, <b>10일 안에 검증 가능한 3개만</b> 골라줘. 각 기능을 ‘사용자 입력 → 화면 결과 → 완료기준’으로 정리해줘.”</div>
+  </div>
+</section>
+
+<section class="sl" data-toc="오늘의 완료 체크리스트" data-notes="[본편 완료 기준] DEMO_PLAN.md와 index.html이 프로젝트 폴더에 있고, HTML의 핵심 흐름 3단계를 직접 눌러 확인한다. GitHub Public 저장소에 두 파일을 push하고 Vercel URL을 만든다. 휴대전화에서 URL을 열어 화면과 클릭이 동작하면 완료다. 실제 API 키, 비밀번호, 개인정보는 사용하지 않는다.">
+  <div class="kicker">CHECKLIST · 오늘의 완주선</div>
+  <h2>링크가 열리면 <em>완료</em></h2>
+  <div class="grow">
+    <div class="cols" style="gap:38px">
+      <ul class="check" style="font-size:23px;gap:17px"><li><strong>DEMO_PLAN.md 완성</strong></li><li><strong>index.html 생성</strong></li><li>핵심 흐름 3단계 클릭</li><li>모바일 화면 확인</li><li>가짜 예시 데이터만 사용</li></ul>
+      <ul class="check" style="font-size:23px;gap:17px"><li>GitHub Public 첫 push</li><li>비밀값·개인정보 없음</li><li><strong>Vercel 공개 URL 생성</strong></li><li>휴대전화에서 URL 확인</li><li>두 URL을 팀방에 공유</li></ul>
+    </div>
+    <div class="tl-rule" style="margin-top:24px"><span class="rk">완료</span><span>팀원이 아닌 사람도 URL을 열고 <strong style="color:var(--ink)">아이디어의 핵심 흐름을 이해</strong>할 수 있음</span></div>
   </div>
 </section>
 
 <!-- 3 · OVERVIEW (수미상관 · 개요) -->
-<section class="sl" data-toc="★ 오늘의 핵심 5" data-notes="[0:03] 수미상관의 앞부분 — 오늘 가져갈 것 다섯 개를 먼저 보여준다. '딱 다섯 개입니다. 1시간 뒤에 이 다섯 줄을 다시 보여드릴 건데, 그땐 전부 여러분 것이 되어 있을 겁니다.'&#10;하나씩 짧게: ①마인드셋 ②세팅(오늘 안에) ③CLAUDE.md — 설치 없이 팀 작업 규칙 자동 적용 ④보안 — .env와 .gitignore ⑤핵심기능 3가지 완성 — IR 덱은 PDF, 데모 영상은 MP4.">
+<section class="sl" data-toc="★ 오늘의 핵심 5" data-notes="[오늘의 5단계] ①기획 문서 한 장 ②Cursor로 index.html 생성 ③직접 클릭 검증 ④GitHub Public push ⑤Vercel URL 확인. 여기까지가 본편이며 실제 서비스 개발과 본캠프 운영은 부록이다.">
   <div class="kicker">OVERVIEW · 오늘 가져갈 것</div>
   <h2>오늘의 핵심 <em>5</em></h2>
   <div class="grow">
     <ul class="keylist">
-      <li class="frag"><span class="kn">1</span><span><strong>말하면, 만들어진다</strong> — 단, 확인은 내 눈으로</span></li>
-      <li class="frag"><span class="kn">2</span><span><strong>세팅은 복사 한 줄</strong> — 터미널 추천, 20분 안에 전원 완료</span></li>
-      <li class="frag"><span class="kn">3</span><span><strong>CLAUDE.md 한 장</strong> — 설치 없이 팀 작업 규칙 자동 적용</span></li>
-      <li class="frag"><span class="kn">4</span><span><strong>비밀값은 .env로</strong> — .gitignore가 키 유출을 막는다</span></li>
-      <li class="frag"><span class="kn">5</span><span><strong>핵심기능 3가지가 먼저</strong> — IR 덱은 PDF · 데모 영상은 MP4</span></li>
+      <li class="frag"><span class="kn">1</span><span><strong>기획 문서를 한 장으로</strong> — DEMO_PLAN.md</span></li>
+      <li class="frag"><span class="kn">2</span><span><strong>Cursor로 HTML 데모</strong> — index.html 파일 하나</span></li>
+      <li class="frag"><span class="kn">3</span><span><strong>내 눈으로 직접 클릭</strong> — 핵심 흐름 3단계 검증</span></li>
+      <li class="frag"><span class="kn">4</span><span><strong>GitHub Public에 push</strong> — 비밀값·개인정보는 제외</span></li>
+      <li class="frag"><span class="kn">5</span><span><strong>Vercel URL 공유</strong> — 휴대전화에서 열리면 완료</span></li>
     </ul>
     <div style="margin-top:34px;display:flex;gap:14px;align-items:center">
       <span class="chip chip-tip">권고</span>
@@ -525,22 +764,171 @@ body.light .caret{background:#000}
   <div class="src"><b>Stack Overflow Developer Survey 2025</b> · n≈49,000 · "almost right, but not quite"</div>
 </section>
 
+<section class="sl" data-toc="본편 완료 — 링크 하나" data-notes="[본편 클로징] 오늘의 결과물은 완성된 서비스가 아니라 아이디어를 설명하고 검증할 수 있는 공개 데모다. DEMO_PLAN.md에서 시작해 index.html을 만들고 GitHub와 Vercel에 공개했다. 팀은 8월 23일까지 이 링크를 주변 사람에게 보여주고 어디서 이해가 안 되는지 관찰해 문서와 데모를 개선한다. 본캠프에서 할 실제 기능 구현은 다음 부록을 참고한다.">
+  <div class="kicker">DONE · 본편 완료</div>
+  <h2>기획이 이제 <em>URL</em>이 되었다</h2>
+  <div class="grow">
+    <div class="flow"><div class="fstep"><div class="fnum">PLAN</div><h4>DEMO_PLAN.md</h4><p>아이디어와 사용자 흐름</p></div><div class="farrow">→</div><div class="fstep"><div class="fnum">DEMO</div><h4>index.html</h4><p>클릭 가능한 화면</p></div><div class="farrow">→</div><div class="fstep"><div class="fnum">SHARE</div><h4>Vercel URL</h4><p>누구나 여는 링크</p></div></div>
+    <div class="prompt" style="margin-top:34px;font-size:21px"><div class="prompt-t">8월 23일까지 할 일</div><b>팀 밖의 사람 3명</b>에게 URL만 보내고 사용하게 해보세요. 설명 없이 이해하지 못한 지점을 기록해 DEMO_PLAN.md와 index.html을 고칩니다.</div>
+  </div>
+  <div class="src">실제 기능 구현 · Claude Code Max · 본캠프 운영은 다음 장부터 부록</div>
+</section>
+
 <!-- 7 · DIVIDER II -->
-<section class="sl divider" data-toc="Ⅱ. 세팅 실습" data-notes="[0:11] ★ 여기서부터 20분 실습. 진행 방식: '지금부터 전원 노트북 엽니다. 화면에 Mac용·Windows용이 나란히 나오니 자기 것만 따라오세요. 막히면 바로 도움을 요청하세요 — 혼자 붙잡는 것이 가장 느린 방법입니다.'&#10;(운영 팁: 조교·멘토가 있으면 OS별 배정. 트러블슈팅 슬라이드를 프린트해 두면 순회가 빨라짐)">
+<section class="sl divider" data-toc="─ 부록 · 본캠프 가이드" data-notes="[본편 종료] 여기부터는 8월 24~25일 본캠프에서 참고하는 부록이다. Claude와 Claude Code 비교, Windows·Mac 설치, Claude 데스크톱 앱, Cursor 확장, Git 설정과 오류 해결, Max 계정 운용, 핵심기능 구현, 보안, 배포, 영상 제출 순서가 이어진다. 발표 본편에서는 필요할 때만 해당 장을 찾아본다.">
   <div class="term"><span class="term-host">team@hackathon</span><span class="term-sep">:~$</span> <span class="term-cmd" data-type='claude "우리 팀 세팅 시켜줘"'></span><span class="caret"></span></div>
-  <div class="part">Ⅱ · SETUP · 20분</div>
-  <h2>전원 노트북 —<br><span style="color:var(--ink2)">지금부터 같이 설치합니다</span></h2>
-  <div class="sub">막히면 즉시 도움 요청 · 혼자 붙잡고 있는 것이 가장 느린 방법</div>
+  <div class="part">APPENDIX · BOOTCAMP</div>
+  <h2>여기부터 부록 —<br><span style="color:var(--ink2)">본캠프에서 펼쳐보는 실전 가이드</span></h2>
+  <div class="sub">Claude Code 설치 · Max 로그인 · Git · 핵심기능 구현 · 최종 제출</div>
+</section>
+
+<!-- BEGINNER ADD-ON · CLAUDE VS CLAUDE CODE -->
+<section class="sl" data-toc="Claude vs Claude Code" data-notes="[초보자 핵심 개념] Claude는 웹·앱에서 대화하며 글쓰기, 조사, 아이디어 정리, 코드 설명을 받는 범용 AI다. Claude Code는 내 컴퓨터의 프로젝트 폴더 안에서 파일을 읽고 만들고 수정하며, 명령 실행과 Git 작업까지 수행하는 개발 에이전트다. 이름은 비슷하지만 사용 장소와 할 수 있는 행동이 다르다. 비유: Claude는 화면 너머의 컨설턴트, Claude Code는 내 작업실에 들어온 개발 파트너. 둘 다 같은 Claude 모델 계열을 사용한다.">
+  <div class="kicker">BEGINNER · 먼저 구분하기</div>
+  <h2><em>Claude</em>와 <span class="cy">Claude Code</span>는 뭐가 다를까?</h2>
+  <div class="grow">
+    <div class="role-visual" style="margin-top:12px">
+      <div class="role-scene" style="border-color:rgba(255,122,89,.42)"><div class="role-top"><div class="role-icon">💬</div><div><div class="small">대화하고 답을 받는</div><h4 class="co">Claude</h4></div></div><div class="role-bubble">“홈페이지를 어떻게 만들면 좋을까?”<br>→ 설명·문구·코드를 <b style="color:var(--ink)">답변으로 제공</b></div><div class="role-result"><span class="result-icon">🙋</span><span><b>내가 직접</b> 복사하고 파일에 붙여넣음</span></div></div>
+      <div class="role-or"><b>VS</b>같은 두뇌<br>다른 손발</div>
+      <div class="role-scene" style="border-color:rgba(90,215,224,.42)"><div class="role-top"><div class="role-icon">🛠️</div><div><div class="small">폴더에서 행동하는</div><h4 class="cy">Claude Code</h4></div></div><div class="role-bubble">“홈페이지를 만들어줘.”<br>→ 폴더를 읽고 <b style="color:var(--ink)">파일을 직접 생성·수정</b></div><div class="role-result"><span class="result-icon">📁</span><span><b>index.html이 생기고</b> 실행·검증까지 도움</span></div></div>
+    </div>
+    <p class="lead" style="margin-top:22px;font-size:23px"><strong>한 줄 차이:</strong> Claude는 <em>“방법을 알려준다”</em> · Claude Code는 내 폴더에서 <span class="cy">“실제로 바꾼다”</span>.</p>
+  </div>
+  <div class="src">공통점: 같은 Claude 모델 계열 · 차이점: 연결된 도구와 작업 범위</div>
+</section>
+
+<section class="sl" data-toc="같은 요청, 다른 결과" data-notes="[같은 요청 비교] 예를 들어 로그인 버튼을 빨간색으로 바꿔달라고 Claude 채팅에 말하면 수정할 코드와 방법을 알려준다. 사용자가 그 답을 복사해 적절한 파일을 찾아 직접 적용해야 한다. Claude Code에 같은 말을 하면 프로젝트 파일을 찾아 변경안을 보여주고, 사용자가 승인하면 직접 수정하며 실행 또는 테스트 방법까지 안내한다. 따라서 기획과 질문은 Claude, 실제 프로젝트 변경은 Claude Code가 편하다. 단 Claude 데스크톱 앱 안의 Code 화면을 열면 앱에서도 Claude Code 기능을 사용할 수 있다.">
+  <div class="kicker">BEGINNER · 실제 예시로 이해하기</div>
+  <h2>같은 요청인데, <em>결과가 다르다</em></h2>
+  <div class="grow">
+    <div class="same-request" style="margin-top:14px">
+      <div class="request-case" style="border-color:rgba(255,122,89,.42)"><h4 class="co">Claude에게 말하면</h4><div class="ask">“로그인 버튼을 빨간색으로 바꿔줘.”</div><div class="out">① 바꿀 CSS 코드를 알려줌<br>② 어느 파일인지 <b>내가 찾아야 함</b><br>③ 코드를 <b>내가 복사·붙여넣기</b><br>④ 작동 확인도 내가 진행</div></div>
+      <div class="request-case" style="border-color:rgba(90,215,224,.42)"><h4 class="cy">Claude Code에게 말하면</h4><div class="ask">“로그인 버튼을 빨간색으로 바꿔줘.”</div><div class="out">① 프로젝트에서 버튼을 직접 찾음<br>② 바꿀 내용을 보여주고 승인 요청<br>③ <b>파일을 직접 수정</b><br>④ 실행·테스트 방법까지 안내</div></div>
+    </div>
+    <div class="tl-rule" style="margin-top:26px"><span class="rk">선택법</span><span><strong>생각·질문·기획</strong>은 Claude · <strong class="cy">파일 생성·수정·실행</strong>은 Claude Code</span></div>
+    <p class="fine" style="margin-top:17px">※ Claude <b style="color:var(--ink)">데스크톱 앱의 Code 화면</b>을 열면, 앱 안에서도 Claude Code 기능을 사용할 수 있습니다.</p>
+  </div>
+</section>
+
+<section class="sl" data-toc="설치 전 3가지 확인" data-notes="설치 전에 운영체제, 인터넷, 계정을 확인한다. Windows 10 이상 또는 macOS 10.15 이상이 공식 최소 기준이며 메모리는 4GB 이상이다. 네트워크 인증이 필요하다. 개인 사용자는 Claude Pro 또는 Max 구독으로 로그인하거나 Anthropic Console의 API 과금 계정을 사용할 수 있다. API 키 환경변수가 설정되어 있으면 구독이 아닌 API 요금으로 처리될 수 있으므로 초보자는 브라우저 로그인 방식을 권장한다.">
+  <div class="kicker">SETUP · 설치 전 체크</div>
+  <h2>시작 전에 <em>3가지만</em> 확인</h2>
+  <div class="grow">
+    <div class="cards">
+      <div class="card"><h4>① 컴퓨터</h4><p><strong style="color:var(--ink)">Windows 10+</strong> 또는 <strong style="color:var(--ink)">macOS 10.15+</strong><br>메모리 4GB 이상</p></div>
+      <div class="card"><h4>② 인터넷</h4><p>설치 파일 다운로드와<br>로그인·AI 처리를 위해 필요</p></div>
+      <div class="card"><h4>③ 계정</h4><p>Claude Pro/Max 또는<br>조직 계정·Console API 계정</p></div>
+    </div>
+    <div class="warn" style="margin-top:34px"><b>초보자 권장:</b> API 키를 직접 넣지 말고, 설치 후 <b>claude</b>를 실행해 브라우저에서 Claude 계정으로 로그인하세요.</div>
+  </div>
+  <div class="src"><a href="https://docs.anthropic.com/en/docs/claude-code/getting-started" target="_blank">Anthropic 공식 설치 문서</a> · 자료 확인일 2026-08-12</div>
+</section>
+
+<section class="sl" data-toc="Mac 설치 — 한 줄씩 따라하기" data-notes="Mac 설치 실습. Spotlight로 터미널을 열고 공식 네이티브 설치 명령을 붙여넣는다. 완료 후 터미널을 완전히 닫았다가 다시 열고 claude --version으로 확인한다. command not found이면 ~/.local/bin이 PATH에 없을 가능성이 크다. 초보자는 sudo를 붙이지 않는다. Homebrew 사용자는 brew install --cask claude-code도 가능하지만 수업에서는 공식 스크립트 한 경로로 통일한다.">
+  <div class="chips"><span class="chip chip-tip">MAC 전용</span></div>
+  <div class="kicker">SETUP · MAC</div>
+  <h2>Mac 설치 — <em>그대로 따라하기</em></h2>
+  <div class="grow">
+    <div class="steps" style="gap:18px">
+      <div class="step"><div class="sn">1</div><div class="sb"><h4>터미널 열기</h4><p><strong>⌘ Command + Space</strong> → “터미널” 검색 → Enter</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="sb"><h4>공식 설치 명령 붙여넣기</h4><div class="code" style="font-size:19px;margin-top:8px"><span class="dollar">$</span> curl -fsSL https://claude.ai/install.sh | bash</div></div></div>
+      <div class="step"><div class="sn">3</div><div class="sb"><h4>터미널 완전 종료 후 확인</h4><div class="code" style="font-size:19px;margin-top:8px"><span class="dollar">$</span> claude --version<br><span class="dollar">$</span> claude</div></div></div>
+    </div>
+    <div class="warn" style="margin-top:20px"><b>절대 붙이지 않기:</b> <code>sudo</code> — 나중에 권한 오류가 생길 수 있습니다.</div>
+  </div>
+</section>
+
+<section class="sl" data-toc="Windows 설치 — 한 줄씩 따라하기" data-notes="Windows에서는 관리자 권한이 아닌 일반 PowerShell을 연다. 공식 PowerShell 설치 스크립트를 실행하거나 winget을 사용할 수 있다. Claude Code는 Windows에서 Git Bash를 사용하므로 Git for Windows가 반드시 필요하다. Git 설치 시 기본값을 유지해도 된다. 설치 후 PowerShell을 닫고 다시 열어 claude --version을 확인한다. 회사 정책으로 스크립트 실행이 막히면 winget 경로를 사용한다.">
+  <div class="chips"><span class="chip chip-tip">WINDOWS 전용</span></div>
+  <div class="kicker">SETUP · WINDOWS</div>
+  <h2>Windows 설치 — <em>Git이 먼저</em></h2>
+  <div class="grow">
+    <div class="cols" style="gap:30px">
+      <div><div class="oshead"><span class="dot" style="background:var(--vibe)"></span>1 · Git for Windows</div><div class="code" style="font-size:18px"><span class="dollar">&gt;</span> winget install --id Git.Git -e</div><p class="small" style="margin-top:12px">또는 <b>git-scm.com</b>에서 다운로드 → 기본값으로 설치</p></div>
+      <div><div class="oshead"><span class="dot" style="background:var(--eng)"></span>2 · Claude Code</div><div class="code" style="font-size:18px"><span class="dollar">&gt;</span> irm https://claude.ai/install.ps1 | iex</div><p class="small" style="margin-top:12px">대안: <code>winget install Anthropic.ClaudeCode</code></p></div>
+    </div>
+    <div class="code" style="font-size:19px;margin-top:28px"><span class="cm"># PowerShell을 완전히 닫고 다시 연 뒤</span><br><span class="dollar">&gt;</span> git --version<br><span class="dollar">&gt;</span> claude --version<br><span class="dollar">&gt;</span> claude</div>
+    <div class="warn" style="margin-top:22px"><b>관리자 PowerShell 불필요.</b> 회사 PC에서 스크립트가 차단되면 <b>winget 설치 경로</b>를 사용하세요.</div>
+  </div>
+</section>
+
+<section class="sl" data-toc="Git 최초 설정 — Mac·Windows 공통" data-notes="Git은 변경 이력을 저장하는 도구다. 설치만으로 끝나지 않고, 최초 한 번 이름과 이메일을 설정해야 커밋할 수 있다. GitHub에 가입한 이메일을 쓰는 것이 이해하기 쉽다. GitHub 이메일 공개를 원하지 않으면 GitHub Settings의 noreply 주소를 사용할 수 있다. user.name은 한글도 가능하지만 수업에서는 영문 이름을 권장한다. 기본 브랜치를 main으로 지정한다.">
+  <div class="kicker">GIT · 최초 1회 설정</div>
+  <h2>Git에게 <em>“누가 저장했는지”</em> 알려주기</h2>
+  <div class="grow">
+    <div class="cols" style="grid-template-columns:1.2fr .8fr">
+      <div class="code big"><span class="cm"># 따옴표 안을 내 정보로 변경</span><br><span class="dollar">$</span> git config --global user.name <span class="hl">"Max Seo"</span><br><span class="dollar">$</span> git config --global user.email <span class="hl">"me@example.com"</span><br><span class="dollar">$</span> git config --global init.defaultBranch main<br><br><span class="cm"># 제대로 저장됐는지 확인</span><br><span class="dollar">$</span> git config --global --list</div>
+      <div><div class="card"><h4>쉽게 기억하기</h4><p><strong style="color:var(--ink)">Git</strong> = 내 컴퓨터의 저장 이력<br><br><strong style="color:var(--ink)">커밋</strong> = 게임의 세이브 포인트<br><br><strong style="color:var(--ink)">GitHub</strong> = 인터넷 백업 창고</p></div></div>
+    </div>
+    <p class="small" style="margin-top:22px">이메일 공개가 걱정되면 GitHub Settings → Emails의 <strong style="color:var(--ink)">noreply 이메일</strong> 사용</p>
+  </div>
+</section>
+
+<section class="sl" data-toc="Windows Git 오류 해결" data-notes="Windows에서 가장 흔한 오류는 Git 미설치, PATH 미반영, bash.exe 위치 탐색 실패다. 먼저 git --version을 확인하고 안 나오면 Git for Windows 재설치 후 PowerShell을 재시작한다. Claude가 Git Bash를 찾지 못하면 현재 세션에 CLAUDE_CODE_GIT_BASH_PATH를 지정한다. 영구 저장은 setx를 사용할 수 있지만 새 터미널부터 적용된다. 기본 설치 위치가 다르면 파일 탐색기에서 bash.exe 실제 위치를 확인해 입력한다.">
+  <div class="chips"><span class="chip chip-tip">WINDOWS 오류</span></div>
+  <div class="kicker">TROUBLESHOOT · WINDOWS + GIT</div>
+  <h2>“Git Bash를 못 찾습니다”</h2>
+  <div class="grow">
+    <div class="qa">
+      <div class="qa-row"><div class="sym"><code>git</code>을 찾을 수 없음</div><div class="fix">Git for Windows 설치 → <b>PowerShell 완전 종료·재실행</b> → <code>git --version</code></div></div>
+      <div class="qa-row"><div class="sym">Claude가 <code>bash.exe</code>를 못 찾음</div><div class="fix"><code>$env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"</code></div></div>
+      <div class="qa-row"><div class="sym">설정이 재실행 후 사라짐</div><div class="fix"><code>setx CLAUDE_CODE_GIT_BASH_PATH "C:\Program Files\Git\bin\bash.exe"</code> → 새 PowerShell</div></div>
+      <div class="qa-row"><div class="sym">경로에 파일이 없음</div><div class="fix">파일 탐색기에서 <b>Git\bin\bash.exe</b> 실제 위치 확인 후 그 경로 사용</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sl" data-toc="Mac 설치 오류 해결" data-notes="Mac에서 흔한 문제는 PATH, 권한, Xcode Command Line Tools, 오래된 npm sudo 설치 흔적이다. 네이티브 설치 바이너리는 ~/.local/bin에 있으므로 claude 명령을 못 찾으면 zsh PATH에 추가한다. curl 인증서나 네트워크 오류는 다른 네트워크 또는 회사 보안 정책을 확인한다. Git이 없으면 xcode-select --install로 Command Line Tools를 설치한다. npm sudo 방식으로 설치했던 경우 네이티브 설치로 전환하는 것이 권장된다.">
+  <div class="chips"><span class="chip chip-tip">MAC 오류</span></div>
+  <div class="kicker">TROUBLESHOOT · MAC</div>
+  <h2>Mac에서 가장 자주 막히는 곳</h2>
+  <div class="grow">
+    <div class="qa">
+      <div class="qa-row"><div class="sym"><code>command not found: claude</code></div><div class="fix"><code>echo 'export PATH="$PATH:$HOME/.local/bin"' &gt;&gt; ~/.zshrc</code> → 터미널 재시작</div></div>
+      <div class="qa-row"><div class="sym"><code>git: command not found</code></div><div class="fix"><code>xcode-select --install</code> → 설치 창 완료 → 터미널 재시작</div></div>
+      <div class="qa-row"><div class="sym">npm <code>EACCES</code> 권한 오류</div><div class="fix"><b>sudo로 반복하지 않기.</b> 공식 네이티브 설치 명령 사용 또는 <code>claude migrate-installer</code></div></div>
+      <div class="qa-row"><div class="sym">다운로드·인증서·접속 오류</div><div class="fix">VPN 해제 또는 다른 네트워크 시도 · 회사 PC라면 보안 정책 담당자 확인</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sl" data-toc="로그인·요금 오류 해결" data-notes="로그인이 열리지 않으면 터미널에 표시된 URL을 브라우저에 직접 붙여넣는다. Pro/Max 구독이 있는데 Console 과금으로 연결되었다면 /logout, claude update, 터미널 재시작, claude 실행 후 올바른 로그인 방식을 선택한다. ANTHROPIC_API_KEY 환경변수가 있으면 Claude Code가 구독보다 API 키를 우선 사용할 수 있어 별도 API 요금이 발생할 수 있다. 초보자는 이 변수를 설정하지 않는다.">
+  <div class="kicker">TROUBLESHOOT · LOGIN &amp; BILLING</div>
+  <h2>로그인은 됐는데, <em>계정이 이상하다?</em></h2>
+  <div class="grow">
+    <div class="steps">
+      <div class="step"><div class="sn">1</div><div class="sb"><h4>브라우저가 안 열림</h4><p>터미널에 나온 로그인 URL을 복사해 Chrome 주소창에 직접 붙여넣기</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="sb"><h4>원하는 Pro/Max 계정이 아님</h4><div class="code" style="font-size:18px;margin-top:7px"><span class="dollar">&gt;</span> /logout&nbsp;&nbsp; → Claude Code 종료 → <span class="hl">claude update</span> → 터미널 재시작 → <span class="hl">claude</span></div></div></div>
+      <div class="step"><div class="sn">3</div><div class="sb"><h4>예상치 못한 API 요금</h4><p><code>ANTHROPIC_API_KEY</code>가 설정되어 있으면 구독 대신 API 과금이 사용될 수 있음</p></div></div>
+    </div>
+    <div class="warn"><b>초보자 원칙:</b> 행사·개인 Pro/Max를 쓸 때는 API 키를 새로 만들지 말고 <b>브라우저 로그인</b>을 선택합니다.</div>
+  </div>
+</section>
+
+<section class="sl" data-toc="설치 완료 체크리스트" data-notes="설치의 완료 기준을 명확히 한다. 버전 출력, Git 버전 출력, 로그인 후 응답, 프로젝트 폴더에서 실행, 이름과 이메일 설정이 모두 되어야 한다. claude doctor는 설치 상태 진단에 유용하다. 하나라도 실패하면 다음 실습으로 넘어가지 말고 해당 운영체제 오류 장을 본다.">
+  <div class="kicker">CHECKPOINT · 설치 완료</div>
+  <h2>이 화면까지 되면 <em>진짜 완료</em></h2>
+  <div class="grow">
+    <ul class="check">
+      <li><code>claude --version</code> → 버전 번호가 나온다</li>
+      <li><code>git --version</code> → Git 버전 번호가 나온다</li>
+      <li><code>claude doctor</code> → 치명적인 설치 오류가 없다</li>
+      <li><code>claude</code> 실행 → 브라우저 로그인 → 한국어 답변이 온다</li>
+      <li><code>git config --global --list</code> → 내 이름과 이메일이 보인다</li>
+    </ul>
+    <div class="tl-rule"><span class="rk">완료 기준</span><span><strong style="color:var(--ink)">5개 모두 체크</strong>하고 프로젝트 폴더에서 Claude Code 시작</span></div>
+  </div>
+  <div class="src">문제 발생 시 오류 메시지를 요약하지 말고 전체를 복사해 Claude 또는 멘토에게 전달</div>
 </section>
 
 <!-- 8 · READY + ACCOUNT -->
-<section class="sl" data-toc="준비물 + Max 계정" data-notes="[0:12] 준비물을 항목별로 빠르게 확인 — 특히 팀장들: 주최측 Max 계정 정보 받았는지 지금 확인(못 받았으면 스태프에게). 이번 행사는 팀당 Claude Max 계정 1개 제공 — 개인 결제 없이 최상위 플랜으로 해커톤을 달림.&#10;운용 규칙: 로그인은 메인(드라이버) 노트북 1대에 — 한도는 팀 공유 자원이라 여러 대에서 동시에 사용하면 그만큼 빨리 소진. 한도 안내가 표시되면 5시간 후 리셋 — 그 타이밍이 수면·기획 회의 타이밍. 개인 Pro 계정 있는 팀원은 자기 노트북에서 병행 자유(문구·조사용).&#10;계정은 해커톤 후 회수될 수 있으니 코드는 GitHub에 백업(배포 파트에서). '팀 대화방에 오늘 만드는 모든 것(폴더명·계정·URL)을 기록해 두세요 — 내일 새벽에 찾게 됩니다.'">
+<section class="sl" data-toc="본캠프 준비물 + Max 계정" data-notes="[본캠프 당일] 8월 24~25일에 팀별 Claude Code Max 계정 1개를 제공한다. 로그인은 메인 드라이버 노트북 1대를 기준으로 하고 한도를 팀 공유 자원으로 관리한다. 사전 기간에는 이 계정을 전제로 하지 않으며 무료 채팅 AI와 준비 문서로 진행한다. 계정은 본캠프 후 회수될 수 있으므로 결과 코드는 반드시 GitHub에 백업한다.">
   <div class="kicker">SETUP · 준비물 &amp; 계정</div>
-  <h2>준비물 — 그리고 <em>팀당 Max 1개</em></h2>
+  <h2>본캠프 — <em>팀당 Max 1개</em></h2>
   <div class="grow">
     <ul class="check" style="margin-top:10px;font-size:25px;gap:17px">
       <li class="frag"><strong>노트북 + 충전기</strong> — 배터리로 해커톤을 버틸 수 없다</li>
-      <li class="frag"><strong>팀장 — 주최측 제공 Max 계정 정보 수령</strong> (팀당 1개, 개인 결제 불필요)</li>
+      <li class="frag"><strong>8월 24일 — 주최측 제공 Max 계정 수령</strong> (팀당 1개, 개인 결제 불필요)</li>
       <li class="frag"><strong>Chrome 브라우저</strong> — 로그인·미리보기·배포 전부 여기서</li>
       <li class="frag"><strong>GitHub 계정 — 팀당 1개 이상</strong> (무료 가입 → 이메일 인증까지)</li>
       <li class="frag"><strong>Vercel 계정 — GitHub로 가입·연결</strong> (배포용)</li>
@@ -551,7 +939,7 @@ body.light .caret{background:#000}
 </section>
 
 <!-- 9 · BEGINNER SETUP 1 -->
-<section class="sl" data-toc="초보자 세팅 ① 계정·환경·폴더" data-notes="[초보자 세팅 1/3] 목표는 도구를 많이 설치하는 것이 아니라 전원이 같은 출발선에 서는 것. ①주최측 Max 계정 로그인 후 /model에서 Opus 5 선택, /usage 위치 확인. ②완전 초보는 Claude 데스크톱 앱, 터미널 경험자는 터미널, 기존 Cursor·VS Code 사용자는 익숙한 환경 유지. 선택지를 오래 고민하지 않게 한다. ③바탕화면에 영문 프로젝트 폴더 하나를 만들고 Claude에서 그 폴더를 연다. 다운로드 폴더나 파일이 흩어진 위치에서 작업하지 않는다. 완료 기준은 Claude가 폴더를 읽고 답변하는 것.">
+<section class="sl" data-toc="초보자 세팅 ① 계정·환경·폴더" data-notes="[초보자 세팅 1/3] 사전 기간에는 무료 Claude·ChatGPT로 프로젝트 폴더와 문서를 준비한다. Claude Code 유료 접근이 있는 학생만 미리 로그인해 볼 수 있으며 필수는 아니다. 본캠프 당일에는 주최측 Max 계정으로 로그인하고 /model과 /usage를 확인한 뒤, 준비해 온 영문 프로젝트 폴더를 연다.">
   <div class="chips"><span class="chip chip-tip">초보자 · 1/3</span></div>
   <div class="kicker">SETUP · 같은 출발선 만들기</div>
   <h2>로그인 → 환경 선택 → <em>폴더 열기</em></h2>
@@ -559,7 +947,7 @@ body.light .caret{background:#000}
     <div class="steps" style="margin-top:12px;gap:18px">
       <div class="step frag">
         <div class="sn" style="width:68px;height:68px;font-size:30px">01</div>
-        <div class="sb"><h4>Max 로그인 · Opus 5 선택 <span class="am" style="font-family:var(--mono);font-size:16px">5분</span></h4><p>팀 메인 노트북에서 로그인 → <code>/model</code>에서 Opus 5 → <code>/usage</code> 위치 확인</p></div>
+        <div class="sb"><h4>본캠프 당일 · Max 로그인 <span class="am" style="font-family:var(--mono);font-size:16px">5분</span></h4><p>팀 메인 노트북에서 로그인 → <code>/model</code> 확인 → <code>/usage</code> 위치 확인</p></div>
       </div>
       <div class="step frag">
         <div class="sn" style="width:68px;height:68px;font-size:30px">02</div>
@@ -603,7 +991,7 @@ body.light .caret{background:#000}
 </section>
 
 <!-- 11 · BEGINNER SETUP 3 -->
-<section class="sl" data-toc="초보자 세팅 ③ GitHub·Git 안전망" data-notes="[초보자 세팅 3/3] 먼저 github.com/signup에서 가입하고 이메일 인증까지 끝낸다. 팀당 최소 한 계정이 필요하다. GitHub에서 New repository를 눌러 team-project라는 Private 저장소를 만든 뒤 저장소 주소를 복사한다. Claude에게 git 저장소 초기화, .gitignore 보안 점검, 첫 커밋, GitHub remote 연결과 push를 요청한다. 로그인·권한 승인 창이 나오면 팀 계정으로 승인한다. 완료 기준은 GitHub에 코드가 보이고 .env와 .env.local은 보이지 않으며 저장소 URL을 팀 채팅방에 공유한 상태. 초보자에게는 커밋=저장 지점, GitHub=외부 백업, Private=팀만 보는 저장소 세 개념만 설명한다.">
+<section class="sl" data-toc="초보자 세팅 ③ GitHub·Git 안전망" data-notes="[초보자 세팅 3/3] GitHub에서 team-project Public 저장소를 만든 뒤 저장소 주소를 복사한다. 공개 저장소이므로 .gitignore와 비밀값 점검을 먼저 한다. Claude에게 git 초기화, 첫 커밋, remote 연결과 push를 요청한다. 완료 기준은 GitHub에 코드가 보이고 .env와 .env.local은 보이지 않으며 저장소 URL을 팀 채팅방에 공유한 상태다. 커밋=저장 지점, GitHub=외부 백업, Public=누구나 볼 수 있음 세 개념을 설명한다.">
   <div class="chips"><span class="chip chip-tip">초보자 · 3/3</span></div>
   <div class="kicker">SETUP · 코드 잃어버리지 않기</div>
   <h2>GitHub 가입 → <em>첫 백업</em></h2>
@@ -611,18 +999,18 @@ body.light .caret{background:#000}
     <div class="flow" style="margin-top:4px">
       <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">01 · SIGN UP</div><h4 style="font-size:21px;margin-bottom:4px">GitHub 가입</h4><p style="font-size:16px;line-height:1.35">github.com/signup<br><strong style="color:var(--ink)">이메일 인증까지</strong></p></div>
       <div class="farrow" style="padding:0 10px">→</div>
-      <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">02 · PRIVATE</div><h4 style="font-size:21px;margin-bottom:4px">저장소 생성</h4><p style="font-size:16px;line-height:1.35"><code>team-project</code><br><strong style="color:var(--ink)">Private 선택</strong></p></div>
+      <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">02 · PUBLIC</div><h4 style="font-size:21px;margin-bottom:4px">저장소 생성</h4><p style="font-size:16px;line-height:1.35"><code>team-project</code><br><strong style="color:var(--ink)">Public 선택</strong></p></div>
       <div class="farrow" style="padding:0 10px">→</div>
       <div class="fstep frag" style="padding:14px 18px"><div class="fnum" style="margin-bottom:5px">03 · BACKUP</div><h4 style="font-size:21px;margin-bottom:4px">Claude에게 요청</h4><p style="font-size:16px;line-height:1.35">Git 초기화 · 보안 확인<br>커밋 · GitHub push</p></div>
     </div>
     <div class="prompt" style="margin-top:14px;font-size:17px;line-height:1.42;padding:14px 20px">
       <div class="prompt-t" style="margin-bottom:5px">PROMPT · 저장소 주소를 붙여 전송</div>
-      “이 프로젝트에 git 저장소를 만들어줘. <b>.env·.env.local·API 키·개인정보가 올라가지 않도록 .gitignore를 확인</b>하고 첫 커밋을 해줘. 그다음 이 Private 저장소에 연결해 push해줘: <span class="ph">[GitHub 저장소 주소]</span>”
+      “이 프로젝트에 git 저장소를 만들어줘. <b>Public 저장소이므로 .env·.env.local·API 키·개인정보가 올라가지 않도록 점검</b>하고 첫 커밋을 해줘. 그다음 저장소에 연결해 push해줘: <span class="ph">[GitHub 저장소 주소]</span>”
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
       <div class="dnode" style="padding:9px 14px"><b>커밋</b><span class="s">코드 저장 지점</span></div>
       <div class="dnode" style="padding:9px 14px"><b>GitHub</b><span class="s">노트북 밖 외부 백업</span></div>
-      <div class="dnode" style="padding:9px 14px"><b>Private</b><span class="s">팀만 보는 저장소</span></div>
+      <div class="dnode" style="padding:9px 14px"><b>Public</b><span class="s">누구나 볼 수 있음</span></div>
     </div>
     <div class="tl-rule" style="margin-top:12px;font-size:18px"><span class="rk">완료</span><span>GitHub에 코드는 보이고 <strong style="color:var(--ink)">.env는 안 보임</strong> → 저장소 URL을 팀방에 공유</span></div>
   </div>
@@ -630,36 +1018,67 @@ body.light .caret{background:#000}
 </section>
 
 <!-- 9 · ENV PATHS -->
-<section class="sl" data-toc="환경 선택 — 터미널·IDE·앱" data-notes="[0:14] Claude Code를 쓰는 환경은 셋 — 전부 같은 엔진, 인터페이스만 다릅니다. ①터미널(강의 기준): 실행·git·배포까지 한 자리, 문제 해결 자료 대부분이 터미널 기준. 오늘 쓸 명령은 복사·붙여넣기 두 줄이 전부, 그 뒤로는 한국어. 심화 — 세션을 여러 개 돌리게 되면 orca(에이전트 세션·워크트리 관리 데스크톱 앱)나 cmux(에이전트 병렬 실행용 macOS 네이티브 터미널 — Mac 전용) 같은 도구로 확장 가능, 지금은 기본 터미널로 충분. ②IDE: Cursor·VS Code를 이미 써봤다면 — Claude Code 확장을 설치하면 에디터 안에서 코드를 보며 같은 엔진을 사용. ③Claude 데스크톱 앱(claude.com/download): 요즘은 Chat과 Claude Code가 한 앱에 들어와 꽤 쓸 만하고, 터미널이 낯선 입문자에게 추천. 익숙한 채팅 화면에서 폴더를 지정해 바로 작업할 수 있습니다. 이 자료의 프롬프트는 셋 어디서나 동일 작동(슬래시 명령어는 터미널 기준).&#10;'강의 시연은 터미널로 가지만, 처음 시작하는 팀원은 Claude 앱도 적극 추천합니다.'">
+<section class="sl" data-toc="기간별 도구 선택" data-notes="[기간별 권장 환경] 사전 10일의 기본 실습은 Cursor Hobby Free다. 무료 채팅 AI로 기획을 정리하고 Cursor로 실제 파일을 수정한다. 본캠프에서는 제공되는 Claude Code Max를 터미널에서 실행해 구현을 이어간다. 기존 Cursor 프로젝트 폴더를 그대로 Claude Code에서 열 수 있으므로 다시 만들 필요가 없다. IDE 경험자는 Cursor 안에서 계속 작업해도 된다.">
   <div class="chips"><span class="chip chip-tip">권고</span></div>
-  <div class="kicker">SETUP · 환경 선택</div>
-  <h2>환경은 셋 — <em>터미널 + Claude 앱 추천</em></h2>
+  <div class="kicker">SETUP · 기간별 도구 선택</div>
+  <h2>사전에는 <em>Cursor</em>, 본캠프는 <span class="cy">Claude 앱</span></h2>
   <div class="grow">
     <div class="cards" style="margin-top:12px;gap:22px">
       <div class="card" style="border-color:rgba(90,215,224,.45)">
-        <div class="rec" style="display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.12em;border:1px solid rgba(90,215,224,.5);border-radius:8px;padding:4px 10px;color:var(--eng);margin-bottom:12px">추천 · 오늘의 기준</div>
-        <h4>터미널</h4>
-        <p><strong style="color:var(--ink)">실행·git·배포까지 한 자리</strong> — 문제 해결 자료 대부분이 이 기준.<br><span style="color:var(--ink3);font-size:17px">심화: orca · cmux(Mac) — 멀티 세션 관리</span></p>
+        <div class="rec" style="display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.12em;border:1px solid rgba(90,215,224,.5);border-radius:8px;padding:4px 10px;color:var(--eng);margin-bottom:12px">8.14–23 · 기본 경로</div>
+        <h4>Cursor Hobby Free</h4>
+        <p><strong style="color:var(--ink)">무료로 파일 수정 경험</strong> — 기획서를 읽히고 작은 기능 1개를 직접 구현</p>
       </div>
       <div class="card">
-        <h4>IDE — Cursor · VS Code</h4>
-        <p>이미 에디터를 써봤다면 — <strong style="color:var(--ink)">Claude Code 확장</strong>으로 코드를 보며 같은 엔진 사용</p>
+        <h4>무료 Claude · ChatGPT</h4>
+        <p><strong style="color:var(--ink)">기획·명세·오류 질문</strong> — 결정한 내용은 PLAN.md에 저장해 도구 간 이동</p>
       </div>
       <div class="card">
-        <div class="rec" style="display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.12em;border:1px solid rgba(255,200,87,.5);border-radius:8px;padding:4px 10px;color:var(--amber);margin-bottom:12px">입문자 추천 · 요즘 꽤 쓸 만함</div>
+        <div class="rec" style="display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.12em;border:1px solid rgba(255,200,87,.5);border-radius:8px;padding:4px 10px;color:var(--amber);margin-bottom:12px">8.24–25 · 초보자 추천</div>
         <h4>Claude 데스크톱 앱</h4>
-        <p><strong style="color:var(--ink)">Chat + Claude Code를 한 앱에서</strong> — 익숙한 화면에서 폴더를 지정하고 바로 작업</p>
+        <p><strong style="color:var(--ink)">익숙한 채팅 화면에서 Code 실행</strong> — 폴더 선택 후 파일 수정·명령 실행</p>
       </div>
     </div>
-    <p class="lead" style="margin-top:32px;font-size:25px">전부 같은 엔진 — 프롬프트는 어디서나 동일. <strong>강의 기준은 터미널</strong>, 처음이라면 <strong class="am">Claude 앱도 추천</strong>.</p>
+    <p class="lead" style="margin-top:32px;font-size:25px"><strong>초보자는 Claude 앱 추천</strong> · Cursor 안의 Claude Code도 가능 · 터미널은 선택.</p>
   </div>
-  <div class="src"><a href="https://claude.com/download" target="_blank">Claude 앱 공식 다운로드</a> · 슬래시 명령어·문제 해결 자료는 터미널 기준</div>
+  <div class="src"><a href="https://cursor.com/downloads" target="_blank">Cursor 다운로드</a> · <a href="https://claude.com/download" target="_blank">Claude 앱 다운로드</a> · Claude Code 명령어는 터미널 기준</div>
+</section>
+
+<section class="sl" data-toc="Claude 앱 설치 — Windows·Mac" data-notes="[완전 초보 권장 설치] 터미널 명령을 입력하지 않고 Claude 데스크톱 앱을 설치하는 방법이다. 먼저 claude.com/download를 열면 운영체제에 맞는 설치 파일을 받을 수 있다. Windows는 내려받은 설치 파일을 실행하고 안내에 따라 설치한 뒤 시작 메뉴에서 Claude를 연다. Mac은 내려받은 파일을 열어 Claude를 Applications 폴더로 옮긴 뒤 응용 프로그램에서 실행한다. 앱에서 주최측 Max 계정으로 로그인하고 Code 메뉴에서 기존 team-project 폴더를 선택한다. macOS가 처음 실행을 막으면 시스템 설정의 개인정보 보호 및 보안에서 열기를 허용한다. Windows 보안 경고가 나오면 게시자가 Anthropic인지 확인한다. 폴더 접근과 명령 실행 승인 창은 내용을 읽은 뒤 허용한다.">
+  <div class="chips"><span class="chip chip-tip">완전 초보 추천</span></div>
+  <div class="kicker">CLAUDE DESKTOP · 터미널 불필요</div>
+  <h2><em>Claude 앱</em> 설치 — Windows · Mac</h2>
+  <div class="grow">
+    <a class="site-link" href="https://claude.com/download" target="_blank" rel="noopener" style="margin:8px 0 20px">Claude 공식 앱 다운로드 ↗</a>
+    <div class="install-grid">
+      <div class="install-lane" style="--accent:var(--eng)"><h4 class="cy">Windows</h4><ol><li><span><b>Download for Windows</b> 선택</span></li><li><span>내려받은 설치 파일 실행</span></li><li><span>설치 후 시작 메뉴에서 <b>Claude</b> 실행</span></li><li><span>Max 로그인 → <b>Code</b> → team-project 선택</span></li></ol></div>
+      <div class="install-lane" style="--accent:var(--vibe)"><h4 class="co">Mac</h4><ol><li><span><b>Download for macOS</b> 선택</span></li><li><span>파일을 열고 Claude를 <b>Applications</b>로 이동</span></li><li><span>응용 프로그램에서 <b>Claude</b> 실행</span></li><li><span>Max 로그인 → <b>Code</b> → team-project 선택</span></li></ol></div>
+    </div>
+    <div class="tl-rule" style="margin-top:20px"><span class="rk">완료</span><span>앱의 Code 화면에서 <strong style="color:var(--ink)">Cursor로 준비한 같은 폴더</strong>가 열리면 성공</span></div>
+  </div>
+  <div class="src"><a href="https://claude.com/download" target="_blank">Claude 공식 앱 다운로드</a> · Code 세션을 지원하는 최신 앱 사용</div>
+</section>
+
+<section class="sl" data-toc="추천 ② Cursor 안에 Claude Code" data-notes="[Cursor 연속 경로] 사전 기간에 Cursor를 사용했다면 본캠프에서도 에디터를 바꾸지 않고 Claude Code를 사용할 수 있다. Cursor는 VS Code 계열 에디터이므로 Extensions 화면에서 Anthropic의 Claude Code 확장을 검색해 설치한다. 설치 후 주최측 Max 계정으로 로그인하고 현재 프로젝트 폴더에서 Claude Code 패널을 연다. Cursor 자체 Agent에서 Claude 모델을 선택하는 것과 Anthropic의 Claude Code 확장을 설치하는 것은 서로 다른 기능이다.">
+  <div class="chips"><span class="chip chip-tip">Cursor 사용자 추천</span></div>
+  <div class="kicker">CURSOR + CLAUDE CODE</div>
+  <h2>Cursor를 그대로 쓰고, <em>Claude Code 추가</em></h2>
+  <div class="grow">
+    <div class="steps" style="gap:18px">
+      <div class="step"><div class="sn">1</div><div class="sb"><h4>Cursor에서 Extensions 열기</h4><p>왼쪽 확장 아이콘 또는 <strong>Mac ⇧⌘X · Windows Ctrl+Shift+X</strong></p></div></div>
+      <div class="step"><div class="sn">2</div><div class="sb"><h4><span class="cy">Claude Code</span> 검색·설치</h4><p>게시자가 <strong>Anthropic</strong>인지 확인하고 Install</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="sb"><h4>Max 로그인 후 현재 폴더에서 시작</h4><p>Claude Code 패널 열기 → 제공 계정 로그인 → 준비한 기능 ① 요청</p></div></div>
+    </div>
+    <div class="warn" style="margin-top:22px"><b>혼동 주의:</b> Cursor Agent에서 “Claude 모델”을 고르는 것과 <b>Anthropic Claude Code 확장</b>을 설치하는 것은 다릅니다.</div>
+  </div>
+  <div class="src"><a href="https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan" target="_blank">Claude Code IDE 지원 안내</a> · Cursor 및 VS Code 계열 지원</div>
 </section>
 
 <!-- 10 · TERMINAL INSTALL -->
-<section class="sl" data-toc="터미널 설치 — Mac / Windows" data-notes="[0:16] 동시 진행 — 자기 OS만 따라오기.&#10;Mac: ⌘+Space(Spotlight) → '터미널' → Enter. 검은/흰 창이 열리면 성공. 왼쪽 한 줄 복사 → ⌘V → Enter. 1~2분간 설치 로그 출력.&#10;Windows: 시작 → 'PowerShell' → Enter (관리자 불필요). 오른쪽 한 줄 복사 → 우클릭 또는 Ctrl+V → Enter. WSL·리눅스 필요 없음, Windows에서 바로 동작합니다.&#10;★공통: 설치 끝나면 터미널을 완전히 종료(⌘Q)했다가 다시 열기 — 안 하면 다음 단계에서 명령을 못 찾습니다(문제 1위). Windows에서 git 안내가 나오면 git-scm.com 설치(전부 Next) — 어차피 필요.&#10;에러가 난 팀은 12번 트러블슈팅 장 참고 — 즉효 처방전.">
-  <div class="kicker">SETUP · STEP 1 · 터미널 설치</div>
-  <h2>복사 한 줄 — <em>자기 OS만</em></h2>
+<section class="sl" data-toc="선택 · 터미널 설치 — Mac / Windows" data-notes="[선택 경로] 터미널 사용에 익숙하거나 문제 해결 자료를 그대로 따라가려는 학생을 위한 설치법이다. 완전 초보의 기본 경로는 앞 장의 Claude 데스크톱 앱이며, Cursor 사용자는 Claude Code 확장 경로를 선택한다.">
+  <div class="chips"><span class="chip chip-tip">선택 · 터미널 사용자</span></div>
+  <div class="kicker">SETUP · 터미널 설치</div>
+  <h2>터미널 방식은 <em>선택 사항</em></h2>
   <div class="grow">
     <div class="cols" style="margin-top:10px;gap:34px">
       <div>
@@ -677,7 +1096,7 @@ body.light .caret{background:#000}
 </section>
 
 <!-- 11 · LOGIN -->
-<section class="sl" data-toc="실행 + 로그인" data-notes="[0:19] ①터미널/PowerShell에 claude 입력 → Enter. ②처음 실행이면 테마 선택 → 아무거나 Enter. ③브라우저가 열리면 — 메인(팀장) 노트북은 주최측 Max 계정으로, 개인 유료 계정 있는 사람은 각자 계정으로 로그인 → 승인 → 터미널 복귀. ④대화 입력창이 깜빡이면 성공.&#10;성공 확인: 입력창에 '안녕?'을 입력해 답이 오는지 각 팀 확인 — 모든 팀의 메인 노트북에서 확인될 때까지 진행 상황을 점검하며 대기. 계정 없는 팀원은 메인 노트북 화면을 같이 보며 진행(설치는 이미 끝났으니 손해 없음).&#10;심화(선택): 세팅에 익숙해진 팀에게만 짧게 소개 — orca는 여러 에이전트 세션·작업 폴더를 한 화면에서 관리하는 데스크톱 앱, cmux는 여러 에이전트를 병렬 실행하는 macOS 네이티브 터미널(Mac 전용). 지금은 기본 터미널로 충분, 첫 참가자는 신경 쓸 필요 없음.">
+<section class="sl" data-toc="본캠프 · 실행 + 로그인" data-notes="[본캠프 당일] 터미널 또는 PowerShell에서 claude를 실행한다. 브라우저가 열리면 팀 메인 노트북은 주최측 Max 계정으로 로그인한다. 사전 기간에 유료 접근이 없는 학생은 이 로그인 실습을 건너뛰고 무료 채팅 AI로 준비 문서를 완성하면 된다.">
   <div class="kicker">SETUP · STEP 2</div>
   <h2>실행하고, 로그인</h2>
   <div class="grow">
@@ -685,7 +1104,7 @@ body.light .caret{background:#000}
       <div class="step"><div class="sn">1</div><div class="sb"><h4>터미널에 입력</h4>
         <div class="code" style="margin-top:10px"><span class="dollar">$</span> claude</div>
       </div></div>
-      <div class="step"><div class="sn">2</div><div class="sb"><h4>브라우저가 열리면 — <span class="cy">Claude 계정으로 로그인</span></h4><p>메인 노트북은 <strong>주최측 Max 계정</strong>으로 · 개인 계정 사용자는 각자 계정 → 승인 → 터미널 복귀</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="sb"><h4>8월 24일 — <span class="cy">제공된 Max 계정으로 로그인</span></h4><p>메인 노트북 1대에서 승인 → 터미널 복귀 · 사전 기간에는 유료 접근이 있는 학생만 선택 실습</p></div></div>
       <div class="step"><div class="sn">3</div><div class="sb"><h4>성공 확인 — 한국어로 인사</h4><p>입력창에 <strong>"안녕? 넌 뭘 할 수 있어?"</strong> → 답이 오면 <strong class="co">세팅 성공</strong></p></div></div>
     </div>
     <div class="adv">
@@ -899,11 +1318,11 @@ body.light .caret{background:#000}
   <h2>프론트엔드 스킬 + <em>ponytail</em></h2>
   <div class="grow">
     <div class="qa" style="margin-top:6px;gap:10px">
-      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr;border-color:rgba(90,215,224,.5);background:rgba(24,154,168,.08)"><div class="sym">frontend-design <span style="font-family:var(--mono);font-size:12px;color:var(--eng);border:1px solid rgba(90,215,224,.5);border-radius:6px;padding:2px 7px;margin-left:4px;letter-spacing:.06em">공식</span></div><div class="fix"><b style="color:var(--ink)">Anthropic 공식 디자인 스킬</b> — 템플릿 같지 않은 고유한 UI를 설계</div></div>
-      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym">taste-skill</div><div class="fix"><b>"AI 티 나는" 밋밋한 디자인 방지</b> 스킬</div></div>
-      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym">getdesign.md</div><div class="fix">실제 서비스 <b>300+의 디자인 명세</b> — 골라서 프로젝트 폴더에</div></div>
-      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym">21st.dev</div><div class="fix"><b>UI·애니메이션 컴포넌트 갤러리</b> — 링크 붙여 "이 느낌으로"</div></div>
-      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym">ponytail</div><div class="fix"><b>과잉 코드 방지</b> "게으른 시니어" 플러그인 — 불필요한 코드 증가를 막는다</div></div>
+      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr;border-color:rgba(90,215,224,.5);background:rgba(24,154,168,.08)"><div class="sym"><a href="https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design" target="_blank" rel="noopener noreferrer">frontend-design</a> <span style="font-family:var(--mono);font-size:12px;color:var(--eng);border:1px solid rgba(90,215,224,.5);border-radius:6px;padding:2px 7px;margin-left:4px;letter-spacing:.06em">공식</span></div><div class="fix"><b style="color:var(--ink)">Anthropic 공식 디자인 스킬</b> — 템플릿 같지 않은 고유한 UI를 설계</div></div>
+      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym"><a href="https://github.com/senlindesign/taste-skill" target="_blank" rel="noopener noreferrer">taste-skill</a></div><div class="fix"><b>"AI 티 나는" 밋밋한 디자인 방지</b> 스킬</div></div>
+      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym"><a href="https://getdesign.md/" target="_blank" rel="noopener noreferrer">getdesign.md</a></div><div class="fix">실제 서비스 <b>300+의 디자인 명세</b> — 골라서 프로젝트 폴더에</div></div>
+      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym"><a href="https://21st.dev/" target="_blank" rel="noopener noreferrer">21st.dev</a></div><div class="fix"><b>UI·애니메이션 컴포넌트 갤러리</b> — 링크 붙여 "이 느낌으로"</div></div>
+      <div class="qa-row" style="padding:12px 26px;grid-template-columns:.75fr 1.9fr"><div class="sym"><a href="https://github.com/dietrichgebert/ponytail" target="_blank" rel="noopener noreferrer">ponytail</a></div><div class="fix"><b>과잉 코드 방지</b> "게으른 시니어" 플러그인 — 불필요한 코드 증가를 막는다</div></div>
     </div>
     <p class="small" style="margin-top:16px;font-size:20px"><strong style="color:var(--ink)">전부 선택 사항</strong> — 수업 중 설치하지 않는다. 시간이 남는 팀만 디자인 담당이 참고.</p>
   </div>
@@ -1043,9 +1462,9 @@ body.light .caret{background:#000}
 </section>
 
 <!-- 25 · VERCEL -->
-<section class="sl" data-toc="Vercel 배포 — 선택" data-notes="[0:50] 배포는 핵심기능 3가지가 완성된 팀을 위한 선택 단계다. 수강생별 개발 경험 편차가 있으므로 공통 진도나 완주 조건으로 잡지 않는다. 여유가 있는 팀은 GitHub 저장소를 Vercel에 연결하고 환경변수를 입력해 공개 URL을 만든다. 배포 전에는 앞 장의 보안 점검 프롬프트를 한 번 실행한다.">
+<section class="sl" data-toc="Vercel — 본캠프 자동 재배포" data-notes="[본캠프 배포] 사전 기간에 GitHub와 Vercel 연결을 완료했으므로 새 프로젝트를 만들 필요가 없다. 핵심기능을 검증하고 main에 push하면 Vercel이 자동으로 새 배포를 만든다. 환경변수를 추가하거나 변경했다면 Project Settings에 등록한 뒤 재배포한다. 최종 URL을 시크릿 창과 휴대전화에서 확인한다.">
   <div class="kicker">SHIP · VERCEL · 해커톤은 끝나도 URL은 남는다</div>
-  <h2>3가지가 끝났다면 — <em>선택 배포</em></h2>
+  <h2>git push하면 — <em>자동 재배포</em></h2>
   <div class="grow">
     <p class="lead" style="font-size:22.5px;margin-bottom:20px">영상 속 <strong>진짜 URL = 증거</strong> · 끝나도 살아있는 <strong>링크 = 사업의 시작</strong> · 노트북이 죽어도 <strong>서비스는 산다</strong></p>
     <div style="text-align:center">
@@ -1061,7 +1480,7 @@ body.light .caret{background:#000}
       <div class="dnode" style="border-color:rgba(90,215,224,.55);background:rgba(24,154,168,.08)"><b class="cy">살아있는 URL</b><span class="s">myapp.vercel.app</span></div>
     </div>
     <p class="small" style="text-align:center;margin-top:16px;font-size:18px"><b style="color:var(--ink)">GitHub 이메일 인증</b> → Vercel에서 <b style="color:var(--ink)">Continue with GitHub</b> → Add New / Project → 저장소 <b style="color:var(--ink)">Import</b> → Deploy</p>
-    <div class="warn" style="margin-top:20px"><b>먼저 확인:</b> 핵심기능 3가지가 모두 동작하는가? 그렇다면 “Vercel로 배포해줘. <b>.env는 올리지 말고</b> 필요한 환경변수 목록을 알려줘.”</div>
+    <div class="warn" style="margin-top:20px"><b>최종 확인:</b> 핵심기능 3가지 검증 → 보안 점검 → main에 push → Vercel 배포 완료 → 휴대전화에서 URL 확인.</div>
   </div>
   <div class="src"><a href="https://docs.github.com/en/get-started/start-your-journey/creating-an-account-on-github" target="_blank">GitHub 계정 안내</a> · <a href="https://vercel.com/docs/git/vercel-for-github" target="_blank">Vercel × GitHub 공식 가이드</a></div>
 </section>
