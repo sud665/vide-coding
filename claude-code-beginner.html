@@ -588,8 +588,8 @@ body.light .caret{background:#000}
   </div>
 </section>
 
-<section class="sl" data-toc="Claude Design으로 먼저 그리기" data-notes="[0:07 · 디자인 시연] claude.ai/design을 열고 왼쪽 채팅에 예제 프롬프트를 붙여 넣는다. 오른쪽 캔버스에 나온 시안을 보며 ‘선택 상태를 더 분명하게’, ‘결과 막대를 추가해줘’처럼 눈에 보이는 피드백을 준다. Claude Design은 디자인과 인터랙티브 프로토타입을 만드는 베타 기능이며 제공 플랜과 계정별 노출이 다를 수 있다. 메뉴가 보이지 않으면 Claude의 Artifact로 동일한 단일 페이지 UI를 요청하거나 Manus를 사용한다.">
-  <div class="chips"><span class="chip chip-tip">보이면 사용 · 없으면 Artifact/Manus</span></div>
+<section class="sl" data-toc="Claude Design으로 먼저 그리기" data-notes="[0:07 · 디자인 시연] claude.ai/design을 열고 왼쪽 채팅에 예제 프롬프트를 붙여 넣는다. 오른쪽 캔버스에 나온 시안을 보며 ‘선택 상태를 더 분명하게’, ‘결과 막대를 추가해줘’처럼 눈에 보이는 피드백을 준다. Claude Design은 디자인과 인터랙티브 프로토타입을 만드는 베타 기능이며 제공 플랜과 계정별 노출이 다를 수 있다. 메뉴가 보이지 않으면 Claude의 Artifact로 동일한 단일 페이지 UI를 요청한다.">
+  <div class="chips"><span class="chip chip-tip">보이면 사용 · 없으면 Artifact</span></div>
   <div class="kicker">EXAMPLE 1 · CLAUDE DESIGN</div>
   <h2>코드 전에 <em>보이는 시안</em>부터</h2>
   <div class="grow">
@@ -606,7 +606,7 @@ body.light .caret{background:#000}
   <div class="kicker">EXAMPLE 2 · DESIGN → CODE</div>
   <h2>시안을 <em>index.html 하나</em>로</h2>
   <div class="grow">
-    <div class="prompt" style="font-size:19px;line-height:1.55"><div class="prompt-t">CLAUDE · CURSOR · MANUS 공통</div>“방금 확정한 점심 메뉴 투표 디자인을 <b>index.html 파일 하나</b>로 구현해줘. CSS와 JavaScript는 파일 안에 넣고, 서버·DB·로그인·API·패키지는 사용하지 마. 메뉴를 선택하고 투표 버튼을 누르면 표 수와 막대그래프가 바뀌게 해줘. 모바일 390px부터 데스크톱까지 보기 좋게 만들고, 저장 후 여는 방법도 한 단계씩 알려줘.”</div>
+    <div class="prompt" style="font-size:19px;line-height:1.55"><div class="prompt-t">CLAUDE · CURSOR 공통</div>“방금 확정한 점심 메뉴 투표 디자인을 <b>index.html 파일 하나</b>로 구현해줘. CSS와 JavaScript는 파일 안에 넣고, 서버·DB·로그인·API·패키지는 사용하지 마. 메뉴를 선택하고 투표 버튼을 누르면 표 수와 막대그래프가 바뀌게 해줘. 모바일 390px부터 데스크톱까지 보기 좋게 만들고, 저장 후 여는 방법도 한 단계씩 알려줘.”</div>
     <div class="bigflow" style="margin-top:28px"><div class="bignode" style="min-height:145px;--accent:var(--vibe)"><div class="bn">INPUT</div><strong style="font-size:26px">확정 디자인</strong><p>화면 · 문구 · 동작</p></div><div class="bigarrow">→</div><div class="bignode" style="min-height:145px;--accent:var(--eng)"><div class="bn">AI BUILD</div><strong style="font-size:26px">index.html</strong><p>HTML + CSS + JS</p></div><div class="bigarrow">→</div><div class="bignode" style="min-height:145px;--accent:var(--amber)"><div class="bn">HUMAN CHECK</div><strong style="font-size:26px">브라우저 클릭</strong><p>선택 · 투표 · 결과</p></div></div>
   </div>
   <div class="src"><a href="https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them" target="_blank">Claude Artifacts 공식 안내</a> · 실패하면 오류 화면을 숨기지 말고 다음 슬라이드처럼 질문</div>
@@ -634,7 +634,7 @@ body.light .caret{background:#000}
   <h2><em>10일 준비</em>하고, <span class="cy">2일 집중 구현</span></h2>
   <div class="grow">
     <div class="journey" style="margin-top:20px">
-      <div class="zone"><div class="date">8.14–8.18</div><h4>아이디어를<br>눈에 보이게</h4><p>기획 문서 정리<br>Manus·Cursor로 HTML 데모<br>팀 안에서 클릭 검증</p><span class="finish">결과 · index.html</span></div>
+      <div class="zone"><div class="date">8.14–8.18</div><h4>아이디어를<br>눈에 보이게</h4><p>기획 문서 정리<br>Cursor로 HTML 데모<br>팀 안에서 클릭 검증</p><span class="finish">결과 · index.html</span></div>
       <div class="zone mid"><div class="date">8.19–8.23 · 본편</div><h4>링크로 공유하고<br>반응을 관찰</h4><p>GitHub Public 업로드<br>Vercel URL 만들기<br>팀 밖 3명에게 테스트</p><span class="finish">결과 · 공개 URL</span></div>
       <div class="zone"><div class="date">8.24–8.25 · 부록</div><h4>본캠프에서<br>실제 기능 구현</h4><p>Claude Code Max<br>핵심기능 · 데이터 · 검증<br>발표·영상·최종 제출</p><span class="finish">결과 · 작동 서비스</span></div>
     </div>
@@ -649,7 +649,7 @@ body.light .caret{background:#000}
     <div class="bigflow" style="margin-top:10px">
       <div class="bignode" style="--accent:var(--vibe);--halo:rgba(255,122,89,.13)"><div class="bn">생각 · 무료</div><strong>Claude<br>ChatGPT</strong><p>질문 → 문제 정의<br>기획·문구·오류 설명</p></div>
       <div class="bigarrow">→</div>
-      <div class="bignode" style="--accent:var(--amber);--halo:rgba(255,200,87,.13)"><div class="bn">연습 · 무료 한도</div><strong>Manus<br>Cursor</strong><p>기획 → HTML 데모<br>파일 생성·수정 경험</p></div>
+      <div class="bignode" style="--accent:var(--amber);--halo:rgba(255,200,87,.13)"><div class="bn">연습 · 무료 한도</div><strong>Cursor</strong><p>기획 → HTML 데모<br>파일 생성·수정 경험</p></div>
       <div class="bigarrow">→</div>
       <div class="bignode" style="--accent:var(--eng);--halo:rgba(90,215,224,.13)"><div class="bn">본캠프 · 팀 계정</div><strong>Claude Code<br>Max</strong><p>실제 기능 · 테스트<br>Git·배포 반복 자동화</p></div>
     </div>
@@ -668,22 +668,6 @@ body.light .caret{background:#000}
     </div>
     <div class="tl-rule" style="margin-top:24px"><span class="rk">완료</span><span>팀원 모두가 읽고 <strong style="color:var(--ink)">“이 화면이면 아이디어가 설명된다”</strong>고 동의</span></div>
   </div>
-</section>
-
-<section class="sl" data-toc="사전 개발 추천 — Manus" data-notes="[사전 연습 추천] 행사 안내 기준으로 8월 25일까지 무료로 사용할 수 있는 Manus를 사전 개발의 빠른 시작 도구로 활용한다. 브라우저에서 별도 개발 환경 설치 없이 DEMO_PLAN.md의 내용을 붙여 넣고 클릭 가능한 HTML 데모를 요청한다. 결과를 눈으로 확인한 뒤 수정 요청을 반복하고, 완성된 파일을 반드시 내려받아 팀의 GitHub Public 저장소에 올린다. Manus 안의 미리보기나 임시 공유 링크만 제출하지 않고 최종 공개 주소는 Vercel로 만든다. 공개 공식 도움말에서는 상시 Free 플랜과 크레딧 정책은 확인되지만 8월 25일 종료 프로모션은 확인되지 않으므로 행사 안내와 계정 화면의 잔여 크레딧을 함께 확인한다.">
-  <div class="chips"><span class="chip chip-tip">사전 연습 1순위</span><span class="chip chip-warn">행사 안내 기준 · 8월 25일까지</span></div>
-  <div class="kicker">MANUS · 설치 없이 브라우저에서</div>
-  <h2>기획을 넣고 <em>데모부터 만들어 본다</em></h2>
-  <div class="grow">
-    <p class="lead" style="font-size:21px;line-height:1.5;margin:4px 0 18px"><strong>Manus</strong>는 브라우저에서 요청을 받아 자료 조사·문서 작성·웹페이지 제작 같은 작업을 대신 수행하는 <strong class="cy">AI 에이전트</strong>입니다. 설치 없이 기획서를 HTML 데모로 바꾸는 연습에 적합합니다.</p>
-    <div class="flow">
-      <div class="fstep"><div class="fnum">01 · SIGN IN</div><h4>무료로 시작</h4><p><b>manus.im</b> 접속<br>계정 생성 · 잔여 크레딧 확인</p></div><div class="farrow">→</div>
-      <div class="fstep"><div class="fnum">02 · BUILD</div><h4>기획서 전달</h4><p>DEMO_PLAN.md 붙여넣기<br>HTML 데모 제작 요청</p></div><div class="farrow">→</div>
-      <div class="fstep"><div class="fnum">03 · EXPORT</div><h4>파일 가져오기</h4><p>결과 확인 · 수정 반복<br><b>index.html 다운로드</b></p></div>
-    </div>
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:22px;margin-top:22px"><a class="site-link" href="https://manus.im/" target="_blank" rel="noopener">Manus 실행하기 ↗</a><div class="tl-rule" style="margin-top:0"><span class="rk">다음</span><span>파일 확인 → <strong style="color:var(--ink)">GitHub Public → Vercel</strong></span></div></div>
-  </div>
-  <div class="src"><a href="https://manus.im/" target="_blank">Manus 시작하기</a> · <a href="https://help.manus.im/en/articles/11711111-what-is-the-current-membership-pricing-for-manus" target="_blank">공식 Free 플랜 안내</a> · 무료 기간·크레딧은 계정 화면에서 재확인</div>
 </section>
 
 <section class="sl" data-toc="사전 개발 추천 — Cursor Free" data-notes="[사전 10일 추천 도구] Cursor는 VS Code와 비슷한 코드 편집기에 AI Agent가 결합된 도구다. Hobby Free는 신용카드 없이 시작할 수 있고 제한된 Agent 요청 및 Composer 접근을 제공한다. Claude Code처럼 프로젝트 폴더 안의 파일을 읽고 수정하는 경험을 미리 할 수 있어 사전 개발에 적합하다. 다만 무료 요청량이 제한되므로 큰 기능 전체를 한 번에 요청하지 않고 기능 하나를 작은 단계로 나눈다.">
@@ -2080,31 +2064,31 @@ body.light .caret{background:#000}
 </section>
 
 <!-- APPENDIX · 심화 · Claude 모델 고르기 -->
-<section class="sl" data-toc="부록 · 심화 — 모델 고르기 &amp; 바꾸기" data-notes="[모델별 특징 + 바꾸는 법] 이번 해커톤의 추천 모델은 Sonnet 5다. 코딩과 도구 사용 성능이 강하면서 속도와 사용량의 균형이 좋아 대부분의 구현을 Sonnet 5로 시작한다. 아주 복잡한 문제에서만 상위 모델을 선택한다. Claude 입력창에서 /model을 열어 Sonnet 5를 선택하고, /usage로 팀 공유 한도를 확인한다.">
+<section class="sl" data-toc="부록 · 심화 — 모델 고르기 &amp; 바꾸기" data-notes="[모델별 특징 + 바꾸는 법] 이번 해커톤의 추천 모델은 Sonnet 5.5다. 코딩과 도구 사용 성능이 강하면서 속도와 사용량의 균형이 좋아 대부분의 구현을 Sonnet 5.5로 시작한다. 아주 복잡한 문제에서만 상위 모델을 선택한다. Claude 입력창에서 /model을 열어 Sonnet 5.5를 선택하고, /usage로 팀 공유 한도를 확인한다.">
   <div class="chips"><span class="chip chip-tip">권고</span></div>
   <div class="kicker">APPENDIX · Claude 모델 고르기</div>
   <h2>어떤 모델을 언제? — 그리고 <em>바꾸는 법</em></h2>
   <div class="grow">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:4px">
       <div class="card" style="padding:17px 18px">
-        <h4 style="font-size:20px"><span class="cy">Haiku</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">4.5</span></h4>
+        <h4 style="font-size:20px"><span class="cy">Haiku</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5.5</span></h4>
         <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4">가장 <strong style="color:var(--ink)">빠르고 저렴</strong> · 간단·반복(요약·분류·자잘한 수정)</p>
-        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$1 / $5 · 200K</div>
+        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">요약 · 분류 · 반복 수정</div>
       </div>
       <div class="card" style="padding:17px 18px;border-color:rgba(255,200,87,.55);background:rgba(255,200,87,.08)">
-        <h4 style="font-size:20px"><span class="am">Sonnet</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span> <span style="font-size:13px;color:var(--amber);font-weight:700">★ 행사 추천</span></h4>
+        <h4 style="font-size:20px"><span class="am">Sonnet</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5.5</span> <span style="font-size:13px;color:var(--amber);font-weight:700">★ 행사 추천</span></h4>
         <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4"><strong style="color:var(--ink)">속도·코딩·사용량 균형</strong> · 대부분의 작업은 여기서 시작</p>
-        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$2 / $10* · 1M</div>
+        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">일상 코딩 · 구현 · 검증</div>
       </div>
       <div class="card" style="padding:17px 18px">
-        <h4 style="font-size:20px"><span class="co">Opus</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span></h4>
+        <h4 style="font-size:20px"><span class="co">Opus</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5.5</span></h4>
         <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4">더 깊은 <strong style="color:var(--ink)">추론</strong> · Sonnet으로 풀리지 않는 복잡한 문제에 선택</p>
-        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$5 / $25 · 1M</div>
+        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">복잡한 설계 · 깊은 추론</div>
       </div>
       <div class="card" style="padding:17px 18px">
-        <h4 style="font-size:20px"><span class="co">Fable</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5</span></h4>
+        <h4 style="font-size:20px"><span class="co">Fable</span> <span style="font-size:14px;color:var(--ink3);font-family:var(--mono)">5.1</span></h4>
         <p style="font-size:16px;margin-top:6px;color:var(--ink2);line-height:1.4">최상위 <strong style="color:var(--ink)">추론</strong> · 대부분 과함 — <strong style="color:var(--ink)">정말 안 풀릴 때만</strong></p>
-        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">$10 / $50 · 1M</div>
+        <div class="dlabel" style="margin-top:9px;color:var(--ink3)">고난도 분석 · 전문 작업</div>
       </div>
     </div>
     <div style="margin-top:14px;display:flex;align-items:center;gap:14px">
@@ -2112,9 +2096,9 @@ body.light .caret{background:#000}
       <div style="flex:1;height:8px;border-radius:5px;background:linear-gradient(90deg,#5AD7E0 0%,#FFC857 55%,#FF7A59 100%)"></div>
       <span style="font-size:15px;color:var(--ink2);flex:none">똑똑하고 한도 많이 씀 🧠</span>
     </div>
-    <div class="code" style="font-size:19px;margin-top:20px"><span class="cm"># Claude 입력창에서 언제든 — 모델 바꾸기</span><br><span class="hl">/model</span>   <span class="cm"># 목록에서 Sonnet 5 선택</span><br><span class="hl">/usage</span>   <span class="cm"># 팀 공유 한도 확인</span></div>
+    <div class="code" style="font-size:19px;margin-top:20px"><span class="cm"># Claude 입력창에서 언제든 — 모델 바꾸기</span><br><span class="hl">/model</span>   <span class="cm"># 목록에서 Sonnet 5.5 선택</span><br><span class="hl">/usage</span>   <span class="cm"># 팀 공유 한도 확인</span></div>
   </div>
-  <div class="src">행사 추천은 <b>Sonnet 5</b> · <a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank">Anthropic 공식 안내</a> · *API 도입 가격은 2026-08-31까지</div>
+  <div class="src">모델명 확인: 2026-10-22 · <a href="https://www.anthropic.com/news/models" target="_blank">Anthropic 공식 모델 발표</a> · 요금·제공 모델은 계정에서 확인</div>
 </section>
 
 <section class="sl" data-toc="발표자 프로필" data-notes="마지막 장 — 발표자 소개. 서외구(Max). 질문은 해커톤 동안 언제든.">

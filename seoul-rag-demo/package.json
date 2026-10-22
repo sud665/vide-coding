@@ -1,0 +1,1 @@
+{"name":"seoul-rag-demo","version":"1.0.0","private":true,"type":"module","engines":{"node":">=20.19"},"scripts":{"dev":"node --env-file=.env.local server.mjs","start":"node server.mjs","test":"node --test","check:live":"node --env-file=.env.local scripts/check-live.mjs"}}

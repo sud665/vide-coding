@@ -21,3 +21,6 @@ out/
 .env
 .env.*
 !.env.example
+
+# Generated lecture-only deployment
+lecture-public/

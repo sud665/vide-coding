@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {normalize,retrieve,validateAnswer,DATASET} from '../lib/search.mjs';
+import {search,synthesize} from '../lib/service.mjs';
+const rows=[normalize({TITLE:'어린이 미술 전시',GUNAME:'종로구',IS_FREE:'무료',END_DATE:'2099-12-31',ORG_LINK:'https://culture.seoul.go.kr'},0),normalize({TITLE:'클래식 공연',GUNAME:'강남구',IS_FREE:'유료',END_DATE:'2099-12-31'},1),normalize({TITLE:'종료된 전시',END_DATE:'2020-01-01'},2)];
+test('search filters free, district and expired records',()=>{assert.deepEqual(retrieve(rows,{query:'무료 전시',district:'종로구'}).map(r=>r.id),['1']);assert.equal(retrieve(rows,{query:'전시',includePast:true}).length,2);assert.equal(retrieve(rows,{query:'클래식',freeOnly:true}).length,0);});
+test('unknown query returns no evidence',()=>assert.equal(retrieve(rows,{query:'양자역학 논문'}).length,0));
+test('source URL rejects javascript scheme and markup is stripped',()=>{const r=normalize({TITLE:'<script>hello</script>',ORG_LINK:'javascript:alert(1)'},0);assert.equal(r.url,DATASET);assert.equal(r.title,'hello');});
+test('reject fabricated or missing citations',()=>{assert.throws(()=>validateAnswer({answer:'test',sources:['999']},rows));assert.throws(()=>validateAnswer({answer:'test',sources:[]},rows));assert.deepEqual(validateAnswer({answer:'근거',sources:['1']},rows).sources,['1']);});
+test('invalid input rejected before external calls',async()=>{assert.equal((await search({query:''})).status,400);assert.equal((await search({query:'x'.repeat(301)})).status,400);});
+test('AI transport failure does not expose upstream response or key',async()=>{await assert.rejects(synthesize('전시',rows,async()=>({ok:false,status:403})),/AI 연결/);});
+test('valid generated structured answer is parsed',async()=>{const answer=await synthesize('전시',rows,async()=>({ok:true,json:async()=>({candidates:[{content:{parts:[{text:JSON.stringify({answer:'전시가 있습니다.',sources:['1']})}]}}]})}));assert.equal(answer.answer,'전시가 있습니다.');});

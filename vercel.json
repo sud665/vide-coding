@@ -1,8 +1,9 @@
 {
+  "buildCommand": "node scripts/build-lecture.mjs",
+  "outputDirectory": "lecture-public",
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/claude-code-beginner.html"
-    }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/live", "destination": "/live-demo-guide.html" },
+    { "source": "/archive", "destination": "/archive.html" }
   ]
 }
