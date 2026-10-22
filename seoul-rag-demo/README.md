@@ -1,67 +1,59 @@
-# 서울 한 장면
+# 오늘 뭐 보지? — 강의용 서울 문화행사 RAG 데모
 
-서울 문화행사 공공데이터를 검색하고, 검색한 자료를 근거로 AI가 답하는 라이브 데모 프로젝트입니다. HTML/CSS/JavaScript + Node.js 서버 + Vercel Function으로 구성합니다. 추가 패키지 설치 없이 실행됩니다.
+디자인 담당자를 위한 화면 구조·상태·시각 기준은 [`design.md`](./design.md)에 정리했습니다.
 
-## 실행
+강의 전에 완성해 두는 **Next.js App Router + TypeScript** 앱입니다. 강의 중에는 코드를 처음부터 만들지 않습니다. [서울시 문화행사 정보](https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do)의 자료를 검색한 뒤, **실제 Gemini 답변과 공식 원문**을 확인하는 RAG 시연을 목표로 합니다.
 
-Node.js 20.19 이상이 필요합니다.
+## 강의 전에 준비
+
+Node.js 20.9 이상을 사용합니다. 현재 앱은 Next.js 16.4.2 기준입니다.
+이 컴퓨터의 기본 셸은 Node.js 16으로 시작할 수 있으므로, 아래처럼 설치된 Node.js 22로 전환합니다.
 
 ```sh
 cd seoul-rag-demo
-# 다른 컴퓨터에서 처음 실행할 때만: cp .env.example .env.local
+nvm use
+npm install
+test -f .env.local || cp .env.example .env.local
 npm run dev
 ```
 
-http://localhost:3001 에서 확인합니다. 이 컴퓨터에는 전달받은 서울 API 키가 `.env.local`에 설정되어 있습니다. 이 파일은 Git에서 제외됩니다. 포트가 사용 중이면 `.env.local`의 PORT를 변경하세요.
+브라우저에서 `http://localhost:3000`을 엽니다. 서울 키가 없으면 상단에 **서울 API 키 설정 전**이 표시됩니다. Gemini 키가 없으면 검색 카드만 표시되므로, 그 상태를 RAG 완료로 소개하지 않습니다. 앱 파일과 화면은 이미 준비되어 있습니다.
 
-## AI 연결
+이 컴퓨터의 `.env.local`에는 서울 API 키가 이미 설정되어 있을 수 있습니다. 기존 파일을 덮어쓰거나 화면에 띄우지 마세요. Gemini 키는 [Google AI Studio API Keys](https://aistudio.google.com/api-keys)에서 발급받아 **본인이 직접** 추가합니다. `.env.local`은 Git에서 제외됩니다. `GET /api/status`는 두 키의 **설정 여부만** 알려주며 값을 반환하지 않습니다.
 
-현재는 LLM 키 없이도 실제 공공데이터 검색이 가능합니다. `.env.local`의 `GEMINI_API_KEY`에 본인 키를 입력하고 서버를 재시작하면 AI 요약이 활성화됩니다. `GEMINI_MODEL`은 계정에서 사용 가능한 모델 ID로 지정하세요. 기본 예시는 `gemini-3.5-flash`입니다. 모델·요금·할당량은 계정 설정에서 확인하세요.
+## 강의 중 보여줄 순서
 
-AI API 키를 제공받지 않아 실제 AI 생성은 검증하지 않았습니다. 요청 형식 및 응답 검증은 모의 응답 테스트로 확인했습니다. 별도의 OpenAI/Claude 연결은 구현하지 않았습니다.
+1. 서울 열린데이터광장의 [서울시 문화행사 정보](https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do)에서 **Open API**와 인증키 신청 안내를 짚습니다. 신청서에 이용 URL을 묻는다면 이 데이터셋 주소를 적습니다. 배포 URL은 필요하지 않습니다.
+2. [Google AI Studio API Keys](https://aistudio.google.com/api-keys)에서 Gemini API 키 발급 화면을 보여줍니다. 로그인·프로젝트 권한 설정이 필요할 수 있으므로 **강의 전에 본인 계정으로 발급을 마칩니다.**
+3. **화면 공유를 멈춘 뒤** 프로젝트 루트 `.env.local`에 `SEOUL_API_KEY=...`와 `GEMINI_API_KEY=...`를 직접 입력합니다. 이미 있는 서울 키는 그대로 둡니다. 키 문자열과 파일 내용은 대화·슬라이드·영상에 노출하지 않습니다.
+4. 개발 서버를 다시 시작합니다. 화면 상단에서 **서울 API 연결 준비 완료 · AI 요약: 연결 준비**를 확인하고 `무료 전시`를 검색합니다.
+5. 실제 행사 카드, **AI 요약**, 참조 자료 번호와 공식 원문을 대조합니다. `양자역학 논문`처럼 관계없는 검색어로 0건일 때 AI가 답을 만들지 않는 것도 확인합니다.
 
-## 라이브 데모: 25분
+강의 전에 `npm run check:rag`가 통과해야 실제 RAG 시연 준비가 끝납니다. 발급 절차는 공식 화면으로 설명하고, 환경변수 설정은 예시 형식을 보여준 뒤 공유를 멈추고 실제 값을 입력해도 됩니다.
 
-1. **0–3분: 문제·성공 기준.** “서울 무료 전시를 찾고, 날짜·장소·출처를 확인할 수 있게 만든다.”
-2. **3–8분: 검색 화면.** `public/index.html`, `style.css`, `app.js`를 보여주고 질문 입력과 결과 카드를 설명합니다.
-3. **8–13분: 실제 API.** 서버 환경변수 → `lib/service.mjs` → 문화행사 API → 정규화된 JSON 흐름을 보여줍니다. 화면 공유 중 `.env.local`을 열지 마세요.
-4. **13–18분: 검색과 RAG.** “무료 전시”, “클래식”을 검색합니다. 지역과 무료 조건을 변경하고, AI 키가 있으면 원문 자료와 요약을 대조합니다.
-5. **18–21분: 실패 확인.** “양자역학 논문” → 결과 없음. AI 키가 없거나 AI 연결이 실패하면 검색 결과만 제공하는 동작을 보여줍니다.
-6. **21–25분: 배포.** 별도 Vercel 프로젝트의 Root Directory를 `seoul-rag-demo`로 설정하고 환경변수를 등록합니다. 아래 체크를 따라 배포 URL에서 다시 검색합니다.
+## 앱에서 이미 구현한 것
 
-처음부터 모든 코드를 타이핑하는 대신 완성본을 미리 실행해 두고 작은 변경 하나를 직접 시연하면 됩니다. 예: “무료 행사만 보기 필터를 추가하고, 유료 행사가 제외되는 테스트를 작성해 줘.”
+- `app/page.tsx`: 검색어·자치구·무료/지난 행사 조건, 로딩·0건·오류, 결과 카드와 공식 원문 링크.
+- `app/api/search/route.ts`: 입력 검증 후 서버에서만 서울 API를 호출. 키 누락, 외부 실패, 빈 결과를 구분.
+- `app/api/status/route.ts`: 키 설정 여부만 제공.
+- `lib/search.ts`: API 원본 필드를 앱 필드로 바꾸고 조건·키워드로 최대 6건 검색.
+- `lib/service.ts`: 최대 3,000건 조회와 5분 서버 캐시. 선택적으로 찾은 자료만 Gemini에 전달하고 `sourceIds`가 실제 결과에 있는지 검사. AI 오류 때는 검색 카드 유지.
+- `scripts/check-rag.ts`: 실제 서울 자료 검색 → Gemini 답변 → 검색 결과에 있는 출처 ID 연결을 한 번에 검증.
+- `CLAUDE.md`: 이후 팀 실습을 위한 작업 규칙.
 
-### 실습용 프롬프트
+이 앱의 검색 단계는 지역·무료 필터와 키워드 일치입니다. **임베딩이나 벡터 DB는 사용하지 않습니다.** `GEMINI_API_KEY`가 있으면 검색된 기록을 AI에 전달해 답변을 만드는 RAG 경로로 이어지고, 키가 없으면 공공데이터 검색만 동작합니다. 벡터 검색은 문서가 많거나 표현이 달라도 비슷한 의미를 찾아야 할 때 검색 단계를 확장하는 방법입니다. 자연어 날짜 해석과 전체 데이터 검색은 하지 않습니다. AI 출처 ID 검사는 존재하는 자료를 인용했는지 확인하며, 답변의 모든 문장이 사실인지 보장하지 않습니다. 각 문장은 공식 원문과 대조해야 합니다.
 
-> 이 프로젝트 구조를 먼저 읽어줘. 서울 문화행사 검색 결과에 자치구 필터를 추가해줘. API 키는 서버에서만 사용하고, 원본 데이터에 없는 정보는 만들지 마. 결과 없음과 API 실패를 구분하고, 기존 동작을 유지해줘. 변경 전에 수정할 파일과 완료 기준을 설명한 뒤 구현하고 테스트해줘.
+## 설정과 확인
 
-## Vercel 배포
-
-기존 강의 사이트와 분리된 새 Vercel 프로젝트를 만드세요.
-
-- Root Directory: `seoul-rag-demo`
-- Framework Preset: Other
-- Build Command: 비워 둠 (별도 빌드 없음)
-- Output Directory: `public` (`vercel.json`에 설정)
-- 환경변수: `SEOUL_API_KEY`, 선택적으로 `GEMINI_API_KEY`, `GEMINI_MODEL`
-- 배포 후 검색, 출처 링크, 결과 없음 동작을 확인합니다. 서울 API 신청서의 사용 URL도 실제 데모 URL로 맞춥니다.
-
-서울 API는 공식 샘플과 같은 HTTP 8088 서버를 서버 측에서 호출합니다. 배포 환경의 외부 통신 정책에 따라 접근 가능 여부를 확인해야 합니다. 이 작업에서는 Vercel 배포는 수행하지 않았습니다. AI 키를 켠 공개 배포에는 비용·호출 제한을 별도 설정하세요. 현재 서버는 인스턴스별 5분 공공데이터 캐시를 사용하며 사용자 인증·분산 요청 제한은 제공하지 않습니다.
-
-## 구조와 범위
-
-- `public/`: 브라우저 화면. 키를 포함하지 않습니다.
-- `server.mjs`: 로컬 서버. 공개 파일은 세 파일만 허용합니다.
-- `api/search.mjs`: Vercel API 엔드포인트.
-- `lib/service.mjs`: 공공데이터 조회·캐시·AI 연결.
-- `lib/search.mjs`: 정규화·키워드 검색·출처 ID 검증.
-- `test/`: 검색 및 실패 상황 테스트.
-
-검색은 전체 데이터 중 API 순서대로 최대 3,000건을 가져와 최대 6건을 반환합니다. 전체 데이터 검색이나 의미 기반 벡터 검색은 아닙니다. 날짜가 지난 행사는 기본적으로 제외하지만 자연어 날짜 조건(이번 주말 등)을 해석하지 않습니다. 날짜가 비어 있는 원본은 그대로 표시하므로 원문 확인이 필요합니다. 출처 ID 검증은 존재하는 자료를 인용했는지 확인하며, AI가 쓴 모든 문장의 사실성을 보장하지 않습니다.
+`.env.example`은 빈 키 템플릿입니다. Next.js는 루트의 `.env.local`을 서버 환경변수로 읽습니다. `SEOUL_API_KEY`에 `NEXT_PUBLIC_` 접두사를 붙이지 않습니다. 변경 후 개발 서버를 다시 시작합니다.
 
 ```sh
 npm test
+npm run build
 npm run check:live
+npm run check:rag
 ```
 
-출처: [서울시 문화행사 정보](https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do), 서울특별시·서울문화포털. 공공누리 1유형 출처표시. [Gemini REST API](https://ai.google.dev/api).
+`check:live`는 실제 서울 API 조회 건수만 출력합니다. `check:rag`는 Gemini 키가 없으면 실패하고, 키가 있으면 **실제 AI 답변·출처 연결 성공 시에만 `RAG_OK`**를 출력합니다. 이 검사는 출처 ID가 검색 결과에 있는지 확인하지만 답변의 모든 문장을 사실 검증하지는 않으므로, 강의 전 공식 원문을 직접 읽어야 합니다. `GEMINI_MODEL` 기본값은 `gemini-3.6-flash`이며 계정에서 사용할 수 있는 모델인지 확인하세요.
+
+참고: [Next.js 환경변수](https://nextjs.org/docs/app/guides/environment-variables), [서울시 문화행사 정보](https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do), [Gemini API 키 안내](https://ai.google.dev/gemini-api/docs/api-key), [Gemini 모델](https://ai.google.dev/gemini-api/docs/models).
