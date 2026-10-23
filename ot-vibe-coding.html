@@ -649,12 +649,12 @@ body.light .caret{background:#000}
 
 <div class="prog" id="prog"></div>
 <div class="timer" id="timer">00:00</div>
-<div class="counter" id="counter">1 / 78</div>
+<div class="counter" id="counter">1 / 79</div>
 <div class="hint">?&nbsp;도움말</div>
 
 <div class="stage" id="stage">
 
-<!-- ═══════════ 발표 본편 (1–49 · 60분) ═══════════ -->
+<!-- ═══════════ 발표 본편 (1–50 · 60분) ═══════════ -->
 
 <!-- 1 · TITLE -->
 <section class="sl ot-cover" data-toc="표지 · 바이브코딩으로 RAG MVP 만들기" data-notes="0–1분. 강사 소개 후 오늘의 목표를 설명한다. 서울 문화행사 검색 사례로 범위 설정부터 AI 협업, 근거 기반 응답과 검증까지 살펴본다. 핵심은 2주 안에 한 사용자 흐름을 끝까지 완성하는 것이다. 다음 장에서 60분 강의의 전체 순서를 안내한다.">
@@ -859,6 +859,20 @@ body.light .caret{background:#000}
  </div><figcaption class="deep-figcaption">‘결과 없음’은 정상 응답 0건, ‘연결 실패’는 오류입니다. 두 상태를 같은 빈 화면으로 처리하지 않습니다.</figcaption></figure>
  <div class="deep-cards"><div class="deep-card"><h3>데이터 계약</h3><p><strong>제목·지역·날짜·원문 URL</strong>처럼 꼭 필요한 필드부터 정합니다.</p></div><div class="deep-card"><h3>위치 확인</h3><p>주소→좌표 변환은 <strong>후보</strong>입니다. 다른 동명 장소가 아닌지 확인합니다.</p></div><div class="deep-card"><h3>세 가지 상태</h3><p>실제 결과·0건·API 실패를 각각 표시하고 <strong>기준일</strong>을 보여줍니다.</p></div></div>
  <div class="src"><a href="https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do" target="_blank" rel="noopener">서울 열린데이터광장 · 공식 자료 예시</a> · <a href="https://developers.google.com/maps/documentation/geocoding/best-practices/" target="_blank" rel="noopener">Google · 지오코딩 주의점</a></div>
+</section>
+
+<section class="sl ot-slide deep-slide" data-toc="기술 용어 · 마스킹, NER, 지오코딩, 클러스터링" data-notes="네 용어를 같은 기술처럼 나열하지 않고 각각의 역할을 구분한다. 개인정보 마스킹은 이름·전화번호처럼 식별 가능한 값을 외부 전송이나 로그 기록 전에 가리는 것이다. 예를 들어 김민수와 010-1234-5678을 김**와 010-****-5678로 바꾼다. 다만 화면에서 가리기만 하면 서버·로그의 원본이 남을 수 있으므로 데이터 경로 전체를 확인한다. NER은 Named Entity Recognition, 개체명 인식의 약자로 문장 속 사람·장소·기관 이름을 찾아 표시한다. 예시 문장 '서울숲 근처 무료 전시'에서 서울숲을 장소 후보로 찾는다. 지오코딩은 서울숲 같은 지명이나 주소를 위도·경도 좌표 후보로 바꾼다. 동명이거나 모호한 주소라면 원본 주소와 대조한다. 지도 UI는 좌표를 마커와 카드로 사용자에게 보여주는 화면이다. 임베딩은 텍스트의 의미를 숫자 벡터로 표현하고, 클러스터링은 비슷한 벡터를 묶는 것이다. 비슷한 문의를 주제별로 분류하는 데 쓸 수 있지만 이 지도 흐름이나 작은 MVP에 필수는 아니다. 공공데이터가 이미 장소명과 좌표를 제공한다면 NER과 지오코딩을 건너뛴다. 이 장은 기술 선택 설명이며 라이브 시연이 아니다.">
+ <div class="kicker">TERMS · 어떤 문제에 쓰는 기술인가?</div>
+ <h2>이름을 찾고, 좌표로 바꿔, <em>지도에 보여줍니다.</em></h2>
+ <p class="deep-lead">예: “서울숲 근처 무료 전시”에서 장소를 찾아 지도에 표시할 때의 흐름입니다.</p>
+ <figure aria-label="사용자 문장에서 장소 이름을 찾고 좌표로 바꾼 후 지도에 표시하는 흐름"><div class="deep-flow">
+  <div class="deep-node"><div class="dn">TEXT</div><h3>입력 문장</h3><p>“서울숲 근처 무료 전시”처럼 사용자가 쓴 글</p></div>
+  <div class="deep-node key"><div class="dn">NER · 개체명 인식</div><h3>장소 이름 찾기</h3><p>문장 속 ‘서울숲’을 장소 후보로 뽑습니다.</p></div>
+  <div class="deep-node"><div class="dn">GEOCODING</div><h3>지오코딩</h3><p>‘서울숲’을 지도에서 쓸 위도·경도 좌표 후보로 바꿉니다.</p></div>
+  <div class="deep-node result"><div class="dn">MAP UI</div><h3>지도 화면</h3><p>좌표에 표시를 찍고 행사 정보와 원문 링크를 보여줍니다.</p></div>
+ </div><figcaption class="deep-figcaption">공공데이터에 장소명과 좌표가 이미 있다면 NER·지오코딩은 생략할 수 있습니다.</figcaption></figure>
+ <div class="deep-cards"><div class="deep-card"><h3>개인정보 마스킹</h3><p>이름·전화번호를 <strong>김**·010-****-5678</strong>처럼 가립니다. 외부 전송·로그 기록 전 확인합니다.</p></div><div class="deep-card"><h3>임베딩 클러스터링</h3><p>글의 의미를 숫자로 표현한 뒤 <strong>비슷한 글끼리 묶는 방법</strong>. 문의 주제 정리에 쓰는 선택 기능입니다.</p></div><div class="deep-card"><h3>지도 UI</h3><p>좌표를 <strong>마커·목록</strong>으로 보여주는 화면입니다. 장소가 맞는지는 원본 주소와 대조합니다.</p></div></div>
+ <div class="src"><a href="https://cloud.google.com/natural-language/docs/analyzing-entities" target="_blank" rel="noopener">Google · 개체명 인식</a> · <a href="https://developers.google.com/maps/documentation/geocoding/overview" target="_blank" rel="noopener">Google · 지오코딩</a> · <a href="https://developers.google.com/machine-learning/clustering/overview" target="_blank" rel="noopener">Google · 클러스터링</a></div>
 </section>
 
 <section class="sl ot-slide deep-slide" data-toc="Jev · 정해진 선택지를 판단하는 모델" data-notes="TypeSafe AI의 Jev를 선택 기술로 소개한다. Jev는 Claude Code를 대체하는 코딩 도구도, 사용자에게 긴 설명을 생성하는 챗봇도 아니다. 입력 상태와 타입이 정해진 질문을 보내면 Choice는 지정한 선택지 중 하나와 분포·confidence, Score는 정의한 단계 사이의 점수와 분포·confidence, Noul은 예일 확률을 반환한다. 예로 문의 문장을 받아 행사·정책·기타 중 하나로 분류할 수 있다. 선택지는 가능한 경우 기타·판단 불가를 포함한다. 앱 코드가 그 결과를 보고 안내 화면, 추가 질문, 사람 검토 중 하나로 분기한다. 확률이나 confidence는 정답 보증이 아니다. 한국어 사례와 애매한 입력을 따로 시험하고, 위험도가 높은 결론이나 자격 판정은 공식 자료·고정 규칙·사람 확인으로 다룬다. 글로 된 답변이 필요하면 생성형 모델을 별도로 사용한다. 핵심 기능에 필요할 때만 추가하며 이 장에서는 개념과 적용 범위만 안내한다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
@@ -1887,7 +1901,7 @@ disable-model-invocation: true
     <div><b>L</b> 라이트 / 다크 모드 (기억됨)</div>
     <div><b>P</b> 인쇄 → PDF 저장 (현재 모드로)</div>
   </div>
-  <p style="margin-top:30px;font-size:15px;color:var(--ink3);font-family:var(--mono)">발표 본편은 1–49번(60분), 50번부터 기존 강의의 전체 부록과 추가 참고자료입니다. AI 기능별 구현 방법을 익힌 뒤 Next.js·공공데이터·RAG·협업·2분 시연을 다룹니다. O 목차 · N 발표자 노트 · 슬라이드 주소 #번호.</p>
+  <p style="margin-top:30px;font-size:15px;color:var(--ink3);font-family:var(--mono)">발표 본편은 1–50번(60분), 51번부터 기존 강의의 전체 부록과 추가 참고자료입니다. AI 기능별 구현 방법을 익힌 뒤 Next.js·공공데이터·RAG·협업·2분 시연을 다룹니다. O 목차 · N 발표자 노트 · 슬라이드 주소 #번호.</p>
 </div>
 
 <script>
