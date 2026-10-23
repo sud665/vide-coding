@@ -545,6 +545,31 @@ body.light .caret{background:#000}
 .agenda-detail{font-size:17px;line-height:1.45;color:var(--ink2)}
 .agenda-slide .opening-bottom{margin-top:18px;font-size:19px;grid-template-columns:174px 1fr}
 
+/* Twelve-team demand: readable rows for a projected 16:9 lecture slide. */
+.team-demand{padding:39px 68px 47px}
+.team-demand .kicker{font-size:13px;margin-bottom:10px;color:var(--eng)}
+.team-demand h2{font-size:38px;line-height:1.18;margin-bottom:8px}
+.team-demand .team-intro{font-size:17px;line-height:1.4;color:var(--ink2);margin-bottom:15px}
+.team-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:2px solid var(--eng);flex:1;min-height:0}
+.team-row{display:grid;grid-template-columns:196px 1fr 1.14fr;gap:17px;align-items:center;border-bottom:1px solid var(--line-strong);padding:8px 4px;min-height:0}
+.team-row .team-name{font-size:20px;font-weight:750;letter-spacing:-.025em;color:var(--ink)}
+.team-row .team-scene{font-size:17px;line-height:1.32;color:var(--ink2)}
+.team-row .team-proof{font-size:16px;line-height:1.34;color:var(--ink2)}
+.team-row .team-proof b{color:var(--eng);font-weight:700}
+.team-flow{display:grid;grid-template-columns:196px 1fr 1.14fr;gap:17px;padding:0 4px 9px;color:var(--eng);font:700 13px var(--mono);letter-spacing:.03em}
+.team-demand .team-bottom{font-size:16px;line-height:1.38;color:var(--ink2);padding-top:12px}
+.team-demand .team-bottom strong{color:var(--vibe)}
+.pattern-head{display:grid;grid-template-columns:66px 260px 195px 1fr;gap:14px;padding:0 9px 10px;color:var(--ink3);font:600 13px var(--mono);letter-spacing:.04em}
+.pattern-row{display:grid;grid-template-columns:66px 260px 195px 1fr;gap:14px;align-items:center;border-top:1px solid var(--line-strong);padding:10px 9px;min-height:0}
+.pattern-row:last-child{border-bottom:1px solid var(--line-strong)}
+.pattern-count{font:700 26px var(--mono);color:var(--eng)}
+.pattern-title{font-size:20px;font-weight:750;letter-spacing:-.025em;line-height:1.2}
+.pattern-team{font-size:15px;line-height:1.32;color:var(--ink2)}
+.pattern-move{font-size:16px;line-height:1.32;color:var(--ink)}
+.pattern-move b{color:var(--vibe)}
+.pattern-head-public,.pattern-row-public{grid-template-columns:250px 1fr 300px}
+.pattern-row-public .pattern-team{font-size:16px}
+
 /* Full-page pauses between the five teaching chapters. */
 .chapter-divider{padding:68px 84px 58px;justify-content:space-between;overflow:hidden;--chapter-accent:var(--eng)}
 .chapter-divider[data-chapter-number="02"],.chapter-divider[data-chapter-number="05"]{--chapter-accent:var(--vibe)}
@@ -578,12 +603,12 @@ body.light .caret{background:#000}
 
 <div class="prog" id="prog"></div>
 <div class="timer" id="timer">00:00</div>
-<div class="counter" id="counter">1 / 70</div>
+<div class="counter" id="counter">1 / 71</div>
 <div class="hint">?&nbsp;도움말</div>
 
 <div class="stage" id="stage">
 
-<!-- ═══════════ 발표 본편 (1–41 · 60분) ═══════════ -->
+<!-- ═══════════ 발표 본편 (1–42 · 60분) ═══════════ -->
 
 <!-- 1 · TITLE -->
 <section class="sl ot-cover" data-toc="표지 · 바이브코딩으로 RAG MVP 만들기" data-notes="0–1분. 강사 소개 후 오늘의 목표를 설명한다. 서울 문화행사 검색 사례로 범위 설정부터 AI 협업, 근거 기반 응답과 검증까지 살펴본다. 핵심은 2주 안에 한 사용자 흐름을 끝까지 완성하는 것이다. 다음 장에서 60분 강의의 전체 순서를 안내한다.">
@@ -594,11 +619,11 @@ body.light .caret{background:#000}
   <div class="cover-footer"><span>→ 시작 · O 목차 · N 발표자 노트</span></div>
 </section>
 
-<section class="sl ot-slide opening-slide agenda-slide" data-toc="오늘의 강의 · 다섯 가지 주제" data-notes="강의 전체 흐름을 다섯 주제로 안내한다. 첫째, 사용자 문제와 핵심 시나리오를 좁힌다. 둘째, Claude에게 일을 요청하고 팀 규칙을 남기는 방법을 다룬다. 셋째, Next.js 화면을 만들고 공공데이터 API와 환경변수를 연결한다. 넷째, 검색한 자료를 Gemini에 전달하는 RAG와 출처 검증을 보여준다. 다섯째, 오류 대응과 브랜치·워크트리·병합을 설명한 뒤 2주 계획과 2분 시연영상으로 마무리한다. 강의에서는 화면 제작부터 실제 데이터 연결과 검증까지 단계별로 시연한다.">
+<section class="sl ot-slide opening-slide agenda-slide" data-toc="오늘의 강의 · 다섯 가지 주제" data-notes="강의 전체 흐름을 다섯 주제로 안내한다. 첫째, 공통 기술 패턴을 보고 사용자 문제와 핵심 시나리오를 좁힌다. 둘째, Claude에게 일을 요청하고 팀 규칙을 남기는 방법을 다룬다. 셋째, Next.js 화면을 만들고 공공데이터 API와 환경변수를 연결한다. 넷째, 검색한 자료를 Gemini에 전달하는 RAG와 출처 검증을 보여준다. 다섯째, 오류 대응과 브랜치·워크트리·병합을 설명한 뒤 2주 계획과 2분 시연영상으로 마무리한다. 강의에서는 화면 제작부터 실제 데이터 연결과 검증까지 단계별로 시연한다.">
  <div class="kicker">TODAY · LECTURE MAP</div>
  <h2>오늘의 강의</h2>
  <ol class="agenda-list" aria-label="강의 주제 목록">
-  <li class="agenda-item"><span class="agenda-step">01</span><strong class="agenda-topic">사용자 흐름과 구현 범위</strong><span class="agenda-detail">대상 사용자 · 해결할 불편 · 시연 장면</span></li>
+  <li class="agenda-item"><span class="agenda-step">01</span><strong class="agenda-topic">사용자 흐름과 구현 범위</strong><span class="agenda-detail">공통 기술 패턴 · 한 장면의 범위 · 검증 기준</span></li>
   <li class="agenda-item"><span class="agenda-step">02</span><strong class="agenda-topic">바이브코딩 작업 방식</strong><span class="agenda-detail">Claude Code · 역할별 협업 · 팀 규칙</span></li>
   <li class="agenda-item"><span class="agenda-step">03</span><strong class="agenda-topic">라이브 데모</strong><span class="agenda-detail">Next.js 앱 · 공공데이터 API · 환경변수 · 로컬 검색</span></li>
   <li class="agenda-item"><span class="agenda-step">04</span><strong class="agenda-topic">근거 있는 AI 답변</strong><span class="agenda-detail">RAG 흐름 · 자료 검색 · 출처 확인</span></li>
@@ -690,6 +715,22 @@ body.light .caret{background:#000}
  <text x="540" y="270" class="opening-svg-note" text-anchor="middle">한 사용자에게 가장 중요한 변화가 일어나는 장면을 먼저 기획합니다.</text></svg></figure>
  <div class="opening-bottom"><strong>한 문장으로</strong><span>“누가 · 어떤 불편 때문에 · 무엇을 입력하고 · 무엇을 확인하는가?”</span></div>
  </section>
+
+<!-- 기술 수요는 익명 패턴으로만 설명한다. 제출 팀명·팀별 아이디어는 공개 강의에서 사용하지 않는다. -->
+<section class="sl ot-slide team-demand" data-toc="공통 기술 패턴 · 구현과 검증" data-notes="제출 기획서에서 반복된 기술 수요를 팀 식별 정보 없이 일반화한 페이지다. 팀명, 팀별 아이디어, 해당 팀 수, 팀과 패턴의 대응 관계는 말하거나 화면에 표시하지 않는다. 다섯 패턴은 근거 기반 AI 응답, 이미지·문서 입력, 대화·음성, 개인정보·안전, 공공데이터·지도다. 강의에서는 기술 이름보다 입력 → 처리 → 검증을 설명한다. AI는 해석·설명에 쓰되 최종 판정은 확인된 데이터와 규칙으로 검증한다. 실제 민감정보는 사용하지 않고 가짜 자료로 시연한다. 오늘의 공공데이터 RAG 데모는 이 원칙을 한 가지 예시로 보여준다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
+ <div class="kicker">PROJECT PATTERNS · 팀 정보 비공개</div>
+ <h2>기술 유형이 달라도 <em>입력 → 처리 → 검증</em>입니다.</h2>
+ <p class="team-intro">여러 프로젝트에서 반복되는 다섯 가지 구현 문제를 익명 패턴으로 정리했습니다.</p>
+ <div class="pattern-head pattern-head-public"><span>패턴</span><span>작게 구현할 흐름</span><span>반드시 확인할 실패</span></div>
+ <div class="team-grid">
+  <div class="pattern-row pattern-row-public"><strong class="pattern-title">근거 있는 AI 응답<br>+ 규칙 검증</strong><span class="pattern-move">자료 검색 → <b>규칙·원문 대조</b> → 설명</span><span class="pattern-team">출처 누락 · 근거 없는 판정 · 모르는 정보</span></div>
+  <div class="pattern-row pattern-row-public"><strong class="pattern-title">이미지·문서 입력</strong><span class="pattern-move">샘플 사진 1장 → <b>값 추출</b> → 사용자 확인</span><span class="pattern-team">오인식 · 빈 입력 · 처리 비용·지연</span></div>
+  <div class="pattern-row pattern-row-public"><strong class="pattern-title">대화·롤플레이·음성</strong><span class="pattern-move">시나리오 1개 → <b>한 차례 응답</b> → 피드백</span><span class="pattern-team">상태 이탈 · 중단 조건 · 음성 인식 오류</span></div>
+  <div class="pattern-row pattern-row-public"><strong class="pattern-title">개인정보·안전장치</strong><span class="pattern-move">가짜 데이터 → <b>마스킹</b> → 안전 분기</span><span class="pattern-team">원본 노출·잔존 · 위기 신호 누락</span></div>
+  <div class="pattern-row pattern-row-public"><strong class="pattern-title">공공데이터·지도</strong><span class="pattern-move">공식 자료 연결 → <b>조건 필터</b> → 원문 표시</span><span class="pattern-team">오래된 자료 · 위치 오류 · 결과 없음</span></div>
+ </div>
+ <div class="team-bottom"><strong>오늘의 데모</strong> · 공공데이터 검색과 RAG를 예로 삼아, 실제 결과·출처·실패 화면을 확인합니다.</div>
+</section>
 
 <section class="sl ot-slide lesson visual-lesson" data-toc="예시 앱 · 오늘 뭐 보지?" data-notes="앞에서 선택한 핵심 아이디어를 ‘오늘 뭐 보지?’라는 예시 앱으로 소개한다. 사용자는 종로구 무료 전시를 찾는다. Next.js 서버가 서울 열린데이터의 실제 행사 자료를 조회하고, AI는 찾은 자료 안의 날짜·요금·장소만 사용해 왜 조건에 맞는지 짧게 설명하며 원문을 붙인다. 근거 없는 예약 가능 여부는 추측하지 않는다. 여기서는 목표 흐름을 보여준다. 실제 AI 연결 여부는 뒤 실습과 검증에서 분리해 보고한다.">
  <div class="kicker">EXAMPLE · 2분 시연의 중심 장면</div><h2>예시 앱: 오늘 뭐 보지?</h2>
@@ -1703,7 +1744,7 @@ disable-model-invocation: true
     <div><b>L</b> 라이트 / 다크 모드 (기억됨)</div>
     <div><b>P</b> 인쇄 → PDF 저장 (현재 모드로)</div>
   </div>
-  <p style="margin-top:30px;font-size:15px;color:var(--ink3);font-family:var(--mono)">발표 본편은 1–41번(60분), 42번부터 기존 강의의 전체 부록과 추가 참고자료입니다. 15–30분 Next.js 화면 제작과 API 검색, 30–40분 RAG·출처 검증, 40–50분 문제 해결과 팀 통합을 다룹니다. O 목차 · N 발표자 노트 · 슬라이드 주소 #번호.</p>
+  <p style="margin-top:30px;font-size:15px;color:var(--ink3);font-family:var(--mono)">발표 본편은 1–42번(60분), 43번부터 기존 강의의 전체 부록과 추가 참고자료입니다. 공통 기술 패턴을 확인한 뒤 Next.js·공공데이터·RAG·협업·2분 시연을 다룹니다. O 목차 · N 발표자 노트 · 슬라이드 주소 #번호.</p>
 </div>
 
 <script>
