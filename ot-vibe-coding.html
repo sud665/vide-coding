@@ -811,19 +811,19 @@ body.light .caret{background:#000}
  <div class="deep-cards"><div class="deep-card"><h3>남길 기준</h3><p>이번 2분 영상에서 사용자가 <strong>실제로 누르는 기능</strong>인가?</p></div><div class="deep-card"><h3>미룰 기준</h3><p>없어도 핵심 결과가 나오면 <strong>이번 범위에서 제외</strong>합니다.</p></div><div class="deep-card"><h3>Claude 요청</h3><p>“검색·원문 확인만 구현하고, 예약·결제는 <strong>추가하지 마</strong>.”</p></div></div>
 </section>
 
-<section class="sl ot-slide team-demand" data-toc="AI 기능별 구현과 검증" data-notes="각자 만들 기능에 가까운 줄 하나를 고르게 한다. 먼저 사용자가 넣을 입력 1개와 화면에 보여줄 결과 1개를 정한다. 다음으로 AI가 해석하거나 생성할 부분과 코드·공식 자료로 확인할 부분을 나눈다. 근거 있는 답변은 검색 결과와 원문 URL을 전달하고 인용 ID를 확인한다. 이미지·문서는 샘플 한 장을 읽은 뒤 사용자가 추출값을 고치게 한다. 대화·음성은 시나리오 한 개와 종료 조건을 정한다. 개인정보·안전은 가짜 이름과 연락처를 입력해 AI 요청·서버 로그에 그대로 남지 않는지, 위기 안내가 표시되는지 점검한다. 공공데이터·지도는 공식 자료의 기준일·위치·빈 결과를 확인한다. 마지막으로 실패 화면 하나를 직접 재현하게 한다. 다음 장에서 유형별 Next.js 구현 위치와 확인 방법을 보여준다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
+<section class="sl ot-slide team-demand" data-toc="핵심 기능 하나부터 완성" data-notes="이 장의 뜻을 먼저 한 문장으로 말한다. 서비스의 모든 기능을 한꺼번에 만들지 말고, 사용자가 가장 중요하게 쓰는 기능 한 가지를 입력부터 결과까지 먼저 작동시키라는 뜻이다. 아래 다섯 줄은 모두 구현할 체크리스트가 아니라 구현 방법을 찾기 위한 예시다. 개인정보·안전은 선택 기능이 아니라 민감한 정보를 다룰 때 다른 기능에도 함께 적용하는 공통 규칙이다. 핵심 기능을 고른 뒤 입력 한 가지, 화면 결과 한 가지, 결과가 없거나 실패할 때의 안내 한 가지를 정한다. 예를 들어 근거 있는 질문 응답을 고르면 질문 입력, 출처가 있는 답변, 자료가 없을 때의 안내까지 확인한다. 다음 장은 선택한 기능에 어떤 처리 방법을 쓸지 안내한다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
  <div class="kicker">IMPLEMENTATION GUIDE · 기능 유형별 시작점</div>
- <h2>AI 기능은 <em>입력 → 처리 → 검증</em>으로 설계합니다.</h2>
- <p class="team-intro">자기 서비스에 가까운 줄 하나를 골라, 입력 1개와 실패 상황 1개부터 만드세요.</p>
- <div class="pattern-head pattern-head-public"><span>기능 유형</span><span>처음 구현할 흐름</span><span>직접 확인할 실패</span></div>
+ <h2>가장 중요한 기능 <em>하나부터 완성</em>합니다.</h2>
+ <p class="team-intro">아래는 모두 만들 목록이 아닙니다. 내 기능과 가까운 예시를 보고, 입력 → 결과 → 실패 안내를 정하세요.</p>
+ <div class="pattern-head pattern-head-public"><span>기능 예시</span><span>처음 만들 한 흐름</span><span>실패하면 보여줄 안내</span></div>
  <div class="team-grid">
   <div class="pattern-row pattern-row-public"><strong class="pattern-title">근거 있는 AI 응답<br>+ 규칙 검증</strong><span class="pattern-move">자료 검색 → <b>규칙·원문 대조</b> → 설명</span><span class="pattern-team">출처 누락 · 근거 없는 판정 · 모르는 정보</span></div>
   <div class="pattern-row pattern-row-public"><strong class="pattern-title">이미지·문서 입력</strong><span class="pattern-move">샘플 사진 1장 → <b>값 추출</b> → 사용자 확인</span><span class="pattern-team">오인식 · 빈 입력 · 처리 비용·지연</span></div>
   <div class="pattern-row pattern-row-public"><strong class="pattern-title">대화·롤플레이·음성</strong><span class="pattern-move">시나리오 1개 → <b>한 차례 응답</b> → 피드백</span><span class="pattern-team">상태 이탈 · 중단 조건 · 음성 인식 오류</span></div>
-  <div class="pattern-row pattern-row-public"><strong class="pattern-title">개인정보·안전장치</strong><span class="pattern-move">가짜 입력 → <b>이름·연락처 제거</b> → 안내 분기</span><span class="pattern-team">AI 요청·로그에 개인정보 포함 · 위기 안내 누락</span></div>
+  <div class="pattern-row pattern-row-public"><strong class="pattern-title">공통 안전장치</strong><span class="pattern-move">민감한 입력이라면 <b>이름·연락처 제거</b></span><span class="pattern-team">AI 요청·로그에 개인정보 포함 · 위기 안내 누락</span></div>
   <div class="pattern-row pattern-row-public"><strong class="pattern-title">공공데이터·지도</strong><span class="pattern-move">공식 자료 연결 → <b>조건 필터</b> → 원문 표시</span><span class="pattern-team">오래된 자료 · 위치 오류 · 결과 없음</span></div>
  </div>
- <div class="team-bottom"><strong>만들기 순서</strong> · 입력·결과를 정한 뒤 AI 작업과 코드 검증을 나누고, 실패 화면까지 확인합니다.</div>
+ <div class="team-bottom"><strong>예: 질문 답변</strong> · 질문 입력 → 출처 있는 답변 → 자료가 없으면 “확인할 자료 없음”. 여기까지가 첫 핵심 흐름입니다.</div>
 </section>
 
 <section class="sl ot-slide team-demand solution-guide" data-toc="기능별 해결 방법 · 기술 선택 가이드" data-notes="바로 앞 페이지의 다섯 기능 유형에 대해 구현 방향만 안내한다. 근거 있는 AI 응답은 공식 자료를 먼저 찾고 선별한 근거만 모델에 전달한다. 출처가 없거나 검색 결과가 0건이면 추측해서 답하지 않는다. 이미지·문서는 OCR 또는 비전 모델로 필요한 항목만 읽고, 불확실한 값은 비운 뒤 사용자가 고치게 한다. 대화·음성은 음성 인식 결과를 텍스트 대화에 넣고 시나리오·차례·종료 조건을 제한한다. 음성 인식이 실패할 때는 텍스트 입력으로 이어간다. 개인정보·안전은 가짜 이름·연락처로 확인한다. 이름·연락처가 AI 요청과 서버 로그에 그대로 남지 않게 하고, 저장이 필요한 값만 목적에 맞게 별도로 보호한다. 위기 표현에는 안내 화면으로 이어지는 흐름을 준비한다. 공공데이터·지도는 공식 자료에서 날짜·지역·원문을 정리하고, 결과 없음과 연결 실패를 구분한다. 이 페이지는 기능별 선택과 점검 기준을 전달하는 강의용 가이드다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
