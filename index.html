@@ -649,12 +649,12 @@ body.light .caret{background:#000}
 
 <div class="prog" id="prog"></div>
 <div class="timer" id="timer">00:00</div>
-<div class="counter" id="counter">1 / 79</div>
+<div class="counter" id="counter">1 / 82</div>
 <div class="hint">?&nbsp;도움말</div>
 
 <div class="stage" id="stage">
 
-<!-- ═══════════ 발표 본편 (1–50 · 60분) ═══════════ -->
+<!-- ═══════════ 발표 본편 (1–53 · 60분) ═══════════ -->
 
 <!-- 1 · TITLE -->
 <section class="sl ot-cover" data-toc="표지 · 바이브코딩으로 RAG MVP 만들기" data-notes="0–1분. 강사 소개 후 오늘의 목표를 설명한다. 서울 문화행사 검색 사례로 범위 설정부터 AI 협업, 근거 기반 응답과 검증까지 살펴본다. 핵심은 2주 안에 한 사용자 흐름을 끝까지 완성하는 것이다. 다음 장에서 60분 강의의 전체 순서를 안내한다.">
@@ -669,8 +669,8 @@ body.light .caret{background:#000}
  <div class="kicker">TODAY · LECTURE MAP</div>
  <h2>오늘의 강의</h2>
  <ol class="agenda-list" aria-label="강의 주제 목록">
-  <li class="agenda-item"><span class="agenda-step">01</span><strong class="agenda-topic">사용자 흐름과 구현 범위</strong><span class="agenda-detail">AI 기능별 시작점 · 한 장면의 범위 · 검증 기준</span></li>
-  <li class="agenda-item"><span class="agenda-step">02</span><strong class="agenda-topic">바이브코딩 작업 방식</strong><span class="agenda-detail">Claude Code · 역할별 협업 · 팀 규칙</span></li>
+  <li class="agenda-item"><span class="agenda-step">01</span><strong class="agenda-topic">사용자 흐름과 구현 범위</strong><span class="agenda-detail">AI 기능별 시작점 · YAGNI · 한 장면의 범위</span></li>
+  <li class="agenda-item"><span class="agenda-step">02</span><strong class="agenda-topic">바이브코딩 작업 방식</strong><span class="agenda-detail">Claude Code · 팀 규칙 · 멱등성·트랜잭션</span></li>
   <li class="agenda-item"><span class="agenda-step">03</span><strong class="agenda-topic">라이브 데모</strong><span class="agenda-detail">Next.js 앱 · 공공데이터 API · 환경변수 · 로컬 검색</span></li>
   <li class="agenda-item"><span class="agenda-step">04</span><strong class="agenda-topic">근거 있는 AI 답변</strong><span class="agenda-detail">RAG 흐름 · 자료 검색 · 출처 확인</span></li>
   <li class="agenda-item"><span class="agenda-step">05</span><strong class="agenda-topic">팀 협업과 시연 준비</strong><span class="agenda-detail">오류 해결 · 팀 코드 통합 · 2주 계획·2분 영상</span></li>
@@ -761,6 +761,19 @@ body.light .caret{background:#000}
  <text x="540" y="270" class="opening-svg-note" text-anchor="middle">한 사용자에게 가장 중요한 변화가 일어나는 장면을 먼저 기획합니다.</text></svg></figure>
  <div class="opening-bottom"><strong>한 문장으로</strong><span>“누가 · 어떤 불편 때문에 · 무엇을 입력하고 · 무엇을 확인하는가?”</span></div>
  </section>
+
+<section class="sl ot-slide deep-slide" data-toc="YAGNI · 2주 MVP에서 만들지 않을 것" data-notes="YAGNI는 You Aren't Gonna Need It의 약자로, 지금 필요하다는 근거가 없는 기능을 미리 만들지 말자는 원칙이다. 앞 장에서 고른 핵심 흐름에 적용한다. 예시 앱의 첫 완성 기준은 사용자가 무료 전시를 검색하고 실제 행사와 공식 원문을 확인하는 것이다. 개인화 추천, 예약, 결제, 커뮤니티는 핵심 흐름을 증명하는 데 아직 필요하지 않으므로 이번 2주 범위에서 제외하고 후속 로드맵에 남긴다. 단, 보안·개인정보 보호·오류 안내처럼 현재 흐름이 안전하게 작동하는 데 필요한 조건은 YAGNI라는 이유로 빼지 않는다. 팀에는 추가하려는 기능마다 '이번 시연에서 사용자가 실제로 쓰는가?', '없으면 핵심 흐름이 실패하는가?'를 묻는다. 둘 다 아니면 다음 단계로 미룬다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
+ <div class="kicker">YAGNI · You Aren't Gonna Need It</div>
+ <h2>지금 쓰지 않을 기능은 <em>지금 만들지 않습니다.</em></h2>
+ <p class="deep-lead">2주 MVP에서는 핵심 사용자 흐름이 끝까지 동작하는 데 필요한 기능만 남깁니다.</p>
+ <figure aria-label="많은 기능 후보에서 핵심 검색과 원문 확인을 이번 범위로 선택하고 나머지를 후속 계획으로 미루는 흐름"><div class="deep-flow">
+  <div class="deep-node"><div class="dn">IDEAS</div><h3>기능 후보</h3><p>검색·원문 확인·개인화·예약·결제·커뮤니티</p></div>
+  <div class="deep-node key"><div class="dn">QUESTION</div><h3>필요성 확인</h3><p>없으면 사용자의 핵심 장면이 실패하나요?</p></div>
+  <div class="deep-node"><div class="dn">NOW</div><h3>이번에 만들기</h3><p>무료 전시 검색 → 실제 행사 → 공식 원문 확인</p></div>
+  <div class="deep-node result"><div class="dn">LATER</div><h3>후속 로드맵</h3><p>개인화·예약·결제는 필요가 확인되면 추가합니다.</p></div>
+ </div><figcaption class="deep-figcaption">YAGNI는 품질을 줄이라는 뜻이 아닙니다. 현재 흐름의 개인정보 보호·오류 처리·근거 확인은 유지합니다.</figcaption></figure>
+ <div class="deep-cards"><div class="deep-card"><h3>남길 기준</h3><p>이번 2분 영상에서 사용자가 <strong>실제로 누르는 기능</strong>인가?</p></div><div class="deep-card"><h3>미룰 기준</h3><p>없어도 핵심 결과가 나오면 <strong>이번 범위에서 제외</strong>합니다.</p></div><div class="deep-card"><h3>Claude 요청</h3><p>“검색·원문 확인만 구현하고, 예약·결제는 <strong>추가하지 마</strong>.”</p></div></div>
+</section>
 
 <section class="sl ot-slide team-demand" data-toc="AI 기능별 구현과 검증" data-notes="각자 만들 기능에 가까운 줄 하나를 고르게 한다. 먼저 사용자가 넣을 입력 1개와 화면에 보여줄 결과 1개를 정한다. 다음으로 AI가 해석하거나 생성할 부분과 코드·공식 자료로 확인할 부분을 나눈다. 근거 있는 답변은 검색 결과와 원문 URL을 전달하고 인용 ID를 확인한다. 이미지·문서는 샘플 한 장을 읽은 뒤 사용자가 추출값을 고치게 한다. 대화·음성은 시나리오 한 개와 종료 조건을 정한다. 개인정보·안전은 가짜 데이터로 마스킹·삭제·위기 분기를 점검한다. 공공데이터·지도는 공식 자료의 기준일·위치·빈 결과를 확인한다. 마지막으로 실패 화면 하나를 직접 재현하게 한다. 다음 장에서 유형별 Next.js 구현 위치와 확인 방법을 보여준다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
  <div class="kicker">IMPLEMENTATION GUIDE · 기능 유형별 시작점</div>
@@ -975,8 +988,8 @@ API: app/api/search/route.ts
  <div class="src"><a href="https://code.claude.com/docs/ko/memory" target="_blank" rel="noopener">Claude Code 공식 문서 · 프로젝트 지침</a></div>
  </section>
 
-<section class="sl ot-slide lesson visual-lesson" data-toc="같은 기능, 기본부터 심화까지" data-notes="10–15분. 기본 경로는 Next.js 화면 파일에 무료 체크박스를 만들고 직접 누른다. 심화 경로는 app/api/search/route.ts에 전달된 freeOnly를 검증하고 기존 지역 검색 회귀를 확인한다. 교재의 해당 단계도 Next.js 기준으로 수정했다."><span class="point-badge" aria-label="강의 가이드 강조 포인트: 수준 차이 대응"><span aria-hidden="true">★</span></span>
- <div class="kicker">10–15 MIN · 기본 3분 + 심화 2분</div><h2>같은 기능, 기본부터 심화까지</h2>
+<section class="sl ot-slide lesson visual-lesson" data-toc="같은 기능, 기본부터 심화까지" data-notes="10–13분. 기본 경로는 Next.js 화면 파일에 무료 체크박스를 만들고 직접 누른다. 심화 경로는 app/api/search/route.ts에 전달된 freeOnly를 검증하고 기존 지역 검색 회귀를 확인한다. 교재의 해당 단계도 Next.js 기준으로 수정했다."><span class="point-badge" aria-label="강의 가이드 강조 포인트: 수준 차이 대응"><span aria-hidden="true">★</span></span>
+ <div class="kicker">10–13 MIN · 기본과 심화</div><h2>같은 기능, 기본부터 심화까지</h2>
  <figure><svg class="lesson-diagram detailed-diagram" viewBox="0 0 1080 270" role="img" aria-labelledby="next-levels"><title id="next-levels">Next.js 무료 필터를 기본에서는 화면으로, 심화에서는 API와 회귀 검증으로 확장한다</title><defs><marker id="n7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="currentColor"/></marker></defs>
  <rect x="10" y="70" width="240" height="130" rx="8" class="diagram-box"/><text x="27" y="105" class="diagram-label">출발 · Next.js 앱</text><text x="27" y="137" class="diagram-sub">“무료 전시만 보기”</text><text x="27" y="169" class="diagram-sub">한 기능만 선택</text>
  <rect x="342" y="10" width="385" height="105" rx="8" class="diagram-box" style="stroke:var(--eng)"/><text x="359" y="44" class="diagram-label">기본 · 화면에서 먼저</text><text x="359" y="75" class="diagram-sub">app/page.tsx에 체크박스</text><text x="359" y="100" class="diagram-sub">ON / OFF를 브라우저에서 확인</text>
@@ -986,6 +999,32 @@ API: app/api/search/route.ts
  <div class="lesson-columns"><div class="lesson-action"><h3>직접 실행</h3><ol><li><b>기본</b> · <a href="live-demo-guide.html" target="_blank" rel="noopener">Next.js 실습 교재</a>의 화면 요청을 확인하고, 앱 생성 후 체크박스를 누릅니다.</li><li><b>심화</b> · Network에서 <code>freeOnly</code> 전달과 지역 검색 유지를 확인합니다.</li></ol></div><div class="prompt lesson-prompt"><div class="prompt-t">두 수준의 요청문</div><div class="copy-body"><b>기본</b> “<code>app/page.tsx</code>에 무료 체크박스를 만들고 ON/OFF가 보이게 해줘.”<br><br><b>심화</b> “<code>app/api/search/route.ts</code>에서 <code>freeOnly</code>를 처리하고, 무료 ON/OFF와 기존 지역 필터를 각각 검증해줘.”</div></div></div>
  <div class="lesson-check"><b>완료 확인</b><span>기본 팀도 직접 누르고, 심화 팀은 요청값과 서버 결과까지 확인한다.</span></div>
  </section>
+
+<section class="sl ot-slide deep-slide" data-toc="멱등성 · 같은 요청을 다시 보내도 한 번만" data-notes="13–14분. 멱등성은 같은 작업 요청을 여러 번 보내도 최종 상태가 한 번 처리한 것과 같게 만드는 성질이다. 예를 들어 예약 버튼을 두 번 누르거나 네트워크가 끊겨 재시도해도 예약이 한 건만 남아야 한다. 생성 요청마다 새 키를 만들면 중복 방지가 안 된다. 하나의 논리적 예약 작업에 고유한 요청 ID를 만들고 재시도할 때 같은 ID를 보낸다. 서버는 ID와 처리 결과를 원자적으로 저장하고, 이미 처리된 ID라면 기존 결과를 돌려준다. 동시에 같은 ID가 들어오는 경우도 중복 실행되지 않게 DB 제약이나 잠금으로 제어해야 한다. 이 원칙은 예약·결제·신청 등 상태를 바꾸는 기능에 중요하다. 단순 행사 조회처럼 읽기만 하는 요청에는 우선순위가 낮다. 라이브 앱에는 예약·결제가 없으므로 개념과 적용 기준만 안내한다.">
+ <div class="kicker">WORKFLOW · Idempotency / 멱등성</div>
+ <h2>두 번 눌러도 결과는 <em>한 번만 남아야 합니다.</em></h2>
+ <p class="deep-lead">멱등성은 같은 작업 요청을 다시 보내도 최종 상태가 한 번 처리한 것과 같게 만드는 성질입니다.</p>
+ <figure aria-label="동일한 요청 ID로 예약 요청을 재시도하면 서버가 처음 만든 한 건의 결과를 다시 돌려주는 흐름"><div class="deep-flow">
+  <div class="deep-node"><div class="dn">ACTION</div><h3>예약 버튼</h3><p>사용자가 누르고 응답을 못 받아 다시 누릅니다.</p></div>
+  <div class="deep-node key"><div class="dn">SAME ID</div><h3>같은 요청 ID</h3><p>두 요청 모두 같은 작업 ID, 예: op-123을 보냅니다.</p></div>
+  <div class="deep-node"><div class="dn">SERVER</div><h3>중복 처리 방지</h3><p>ID와 처리 결과를 함께 저장해 중복 요청을 막습니다.</p></div>
+  <div class="deep-node result"><div class="dn">RESULT</div><h3>예약 1건</h3><p>재요청에는 새 예약 대신 기존 결과를 돌려줍니다.</p></div>
+ </div><figcaption class="deep-figcaption">키만 붙인다고 보장되지는 않습니다. 동시에 온 같은 요청도 한 번만 처리되게 서버·DB에서 강제해야 합니다.</figcaption></figure>
+ <div class="deep-cards"><div class="deep-card"><h3>필요할 때</h3><p>예약·결제·신청처럼 <strong>중복 생성이 문제</strong>인 쓰기 요청.</p></div><div class="deep-card"><h3>구현 기준</h3><p>작업 ID와 처리 결과를 저장하고, 같은 ID에는 <strong>기존 결과를 재사용</strong>합니다.</p></div><div class="deep-card"><h3>검증</h3><p>연속 클릭·재시도·동시 요청에도 <strong>결과가 1건</strong>인지 확인합니다.</p></div></div>
+</section>
+
+<section class="sl ot-slide deep-slide" data-toc="트랜잭션 · 여러 DB 변경을 하나로" data-notes="14–15분. 트랜잭션은 관련된 데이터베이스 변경 여러 개를 한 작업 단위로 묶는 것이다. 예를 들어 좌석 예약에서 예약 기록 생성과 잔여 좌석 차감이 모두 성공해야 한다. 둘째 작업이 실패했다면 첫째도 롤백되어야 한다. BEGIN 후 두 변경을 실행하고 조건이 맞으면 COMMIT, 오류면 ROLLBACK한다. ACID는 원자성 Atomicity 전부 성공 또는 전부 취소, 일관성 Consistency 데이터 제약 유지, 격리성 Isolation 동시 작업 간 간섭 제어, 지속성 Durability 커밋 후 결과 보존을 뜻한다. 트랜잭션은 같은 DB 안의 변경에 적용한다. 외부 결제 API나 이메일 발송까지 자동으로 롤백하지는 못한다. 멱등성은 같은 요청의 재시도 방지, 트랜잭션은 한 요청 안의 여러 DB 변경 묶기다. 둘은 필요하면 함께 쓴다. 읽기 전용 공공데이터 검색에는 일반적으로 이 설계가 우선 과제가 아니다.">
+ <div class="kicker">WORKFLOW · Transaction / ACID</div>
+ <h2>여러 DB 변경은 <em>함께 성공하거나 함께 취소합니다.</em></h2>
+ <p class="deep-lead">트랜잭션은 예약 기록 생성과 잔여 좌석 차감처럼 한 작업의 여러 DB 변경을 묶습니다.</p>
+ <figure aria-label="트랜잭션 시작, 예약 기록 생성, 좌석 차감, 모두 성공하면 확정하고 실패하면 전체 취소하는 흐름"><div class="deep-flow">
+  <div class="deep-node"><div class="dn">BEGIN</div><h3>작업 시작</h3><p>예약 1건을 처리할 DB 작업을 하나로 묶습니다.</p></div>
+  <div class="deep-node key"><div class="dn">WRITE 01</div><h3>예약 기록</h3><p>예약 행을 만들고 필요한 제약을 검사합니다.</p></div>
+  <div class="deep-node"><div class="dn">WRITE 02</div><h3>좌석 차감</h3><p>남은 좌석을 줄입니다. 부족하면 실패시킵니다.</p></div>
+  <div class="deep-node result"><div class="dn">END</div><h3>확정 또는 취소</h3><p>모두 성공하면 COMMIT, 하나라도 실패하면 ROLLBACK.</p></div>
+ </div><figcaption class="deep-figcaption">멱등성은 ‘같은 요청의 재시도’를, 트랜잭션은 ‘한 요청 안의 여러 DB 변경’을 다룹니다.</figcaption></figure>
+ <div class="deep-cards" style="grid-template-columns:repeat(4,minmax(0,1fr))"><div class="deep-card"><h3>A · 원자성</h3><p>전부 성공하거나 <strong>전부 취소</strong>.</p></div><div class="deep-card"><h3>C · 일관성</h3><p>좌석 수 같은 <strong>DB 제약 유지</strong>.</p></div><div class="deep-card"><h3>I · 격리성</h3><p>동시 예약의 <strong>간섭 제어</strong>.</p></div><div class="deep-card"><h3>D · 지속성</h3><p>확정한 결과를 <strong>보존</strong>.</p></div></div>
+</section>
 
 <section class="sl chapter-divider" data-toc="CHAPTER 03 · 라이브 데모" data-chapter-number="03" data-chapter-title="03 · 라이브 데모" data-notes="라이브 데모 챕터 시작. 새 Next.js 앱을 만들고 화면, 공공데이터 검색, 오류 검증을 순서대로 진행한다.">
  <div class="chapter-kicker">CHAPTER 03 / 05</div>
@@ -1901,7 +1940,7 @@ disable-model-invocation: true
     <div><b>L</b> 라이트 / 다크 모드 (기억됨)</div>
     <div><b>P</b> 인쇄 → PDF 저장 (현재 모드로)</div>
   </div>
-  <p style="margin-top:30px;font-size:15px;color:var(--ink3);font-family:var(--mono)">발표 본편은 1–50번(60분), 51번부터 기존 강의의 전체 부록과 추가 참고자료입니다. AI 기능별 구현 방법을 익힌 뒤 Next.js·공공데이터·RAG·협업·2분 시연을 다룹니다. O 목차 · N 발표자 노트 · 슬라이드 주소 #번호.</p>
+  <p style="margin-top:30px;font-size:15px;color:var(--ink3);font-family:var(--mono)">발표 본편은 1–53번(60분), 54번부터 기존 강의의 전체 부록과 추가 참고자료입니다. AI 기능별 구현 방법을 익힌 뒤 Next.js·공공데이터·RAG·협업·2분 시연을 다룹니다. O 목차 · N 발표자 노트 · 슬라이드 주소 #번호.</p>
 </div>
 
 <script>
