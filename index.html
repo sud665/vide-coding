@@ -862,32 +862,32 @@ body.light .caret{background:#000}
  <div class="src"><a href="https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/" target="_blank" rel="noopener">OWASP · 민감정보 노출 위험</a> · <a href="https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener">OWASP · 로그의 민감정보 제외</a></div>
 </section>
 
-<section class="sl ot-slide deep-slide" data-toc="공공데이터·지도 · 원본과 상태 구분" data-notes="공공데이터와 지도는 데이터가 어디서 왔는지, 언제 갱신됐는지, 장소가 정확히 어디인지가 중요하다. 공식 API 또는 공식 공개 자료에서 필요한 필드만 받고 날짜·지역·좌표를 앱에서 쓰는 공통 형식으로 바꾼다. 위치 이름을 좌표로 바꾸는 지오코딩 결과는 후보이므로 원본 주소와 비교한다. 결과에는 제목·기준일·원문 링크를 붙이고 화면에는 0건과 연결 실패를 구분한다. API 키는 서버 쪽 비밀값으로만 사용한다. 이 페이지는 공공데이터·지도 기능을 설계할 때 참고하는 일반 가이드다.">
- <div class="kicker">PUBLIC DATA 05 / 05 · 공공데이터·지도</div>
- <h2>지도에 찍기 전에 <em>원본·날짜·위치</em>를 확인합니다.</h2>
- <p class="deep-lead">공식 API의 원본 응답을 그대로 보여주지 말고, 사용자가 이해할 필드로 정리합니다.</p>
- <figure aria-label="사용자 조건, 공식 데이터 조회, 날짜 지역 좌표 정리, 출처와 상태 표시 흐름"><div class="deep-flow">
-  <div class="deep-node"><div class="dn">FILTER</div><h3>사용자 조건</h3><p>지역·기간·분류를 먼저 정해 불필요한 조회를 줄입니다.</p></div>
-  <div class="deep-node key"><div class="dn">FETCH</div><h3>공식 자료 조회</h3><p>인증키는 서버에서 사용하고 응답 상태를 확인합니다.</p></div>
-  <div class="deep-node"><div class="dn">NORMALIZE</div><h3>형식 통일</h3><p>날짜·주소·좌표를 정리하고 모호한 위치는 확인합니다.</p></div>
-  <div class="deep-node result"><div class="dn">DISPLAY</div><h3>근거와 함께 표시</h3><p>기준일·원문 링크를 붙이고 지도에 결과를 놓습니다.</p></div>
- </div><figcaption class="deep-figcaption">‘결과 없음’은 정상 응답 0건, ‘연결 실패’는 오류입니다. 두 상태를 같은 빈 화면으로 처리하지 않습니다.</figcaption></figure>
- <div class="deep-cards"><div class="deep-card"><h3>데이터 계약</h3><p><strong>제목·지역·날짜·원문 URL</strong>처럼 꼭 필요한 필드부터 정합니다.</p></div><div class="deep-card"><h3>위치 확인</h3><p>주소→좌표 변환은 <strong>후보</strong>입니다. 다른 동명 장소가 아닌지 확인합니다.</p></div><div class="deep-card"><h3>세 가지 상태</h3><p>실제 결과·0건·API 실패를 각각 표시하고 <strong>기준일</strong>을 보여줍니다.</p></div></div>
- <div class="src"><a href="https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do" target="_blank" rel="noopener">서울 열린데이터광장 · 공식 자료 예시</a> · <a href="https://developers.google.com/maps/documentation/geocoding/best-practices/" target="_blank" rel="noopener">Google · 지오코딩 주의점</a></div>
+<section class="sl ot-slide deep-slide" data-toc="공공데이터 · 실제 자료에서 결과 카드까지" data-notes="강의에서는 공공데이터부터 쉬운 말로 설명한다. 공공데이터는 서울시 같은 기관이 공개한 행사 목록이다. API는 그 목록을 앱이 요청해 받을 수 있는 통로다. 예를 들어 사용자가 '종로구 무료 전시'를 입력하면 Next.js 서버가 서울 문화행사 API에서 자료를 가져오고, 지역·무료·전시 조건에 맞는 기록을 골라 제목·날짜·장소·원문 링크가 있는 카드로 보여준다. 이 단계만으로 검색 기능은 완성된다. 지도는 필수가 아니다. 공공데이터가 0건을 돌려준 경우와 API 연결에 실패한 경우를 화면에서 다르게 보여준다. 행사 날짜·요금은 바뀔 수 있으므로 원문 링크를 제공하고 확인한다. API 키는 브라우저에 노출하지 않고 서버에서 쓴다. 강사는 실제 자료 한 건을 예로 들어 입력, 자료 조회, 결과 카드, 원문 확인 순으로 설명한다.">
+ <div class="kicker">PUBLIC DATA 05 / 05 · 공공데이터부터 이해하기</div>
+ <h2>공공데이터는 <em>실제 행사 목록</em>을 앱에 가져오는 것입니다.</h2>
+ <p class="deep-lead">예: 서울시가 공개한 행사 정보에서 “종로구 무료 전시”에 맞는 기록을 찾아 카드로 보여줍니다.</p>
+ <figure aria-label="사용자 질문을 받아 서울시 행사 자료를 가져오고 조건에 맞는 기록을 골라 결과 카드와 원문 링크를 보여주는 흐름"><div class="deep-flow">
+  <div class="deep-node"><div class="dn">QUESTION</div><h3>사용자 입력</h3><p>“종로구 무료 전시”를 검색합니다.</p></div>
+  <div class="deep-node key"><div class="dn">OPEN API</div><h3>서울시 자료 받기</h3><p>앱 서버가 공개된 행사 목록을 요청합니다.</p></div>
+  <div class="deep-node"><div class="dn">FILTER</div><h3>조건에 맞게 고르기</h3><p>지역·무료 여부·제목을 확인합니다.</p></div>
+  <div class="deep-node result"><div class="dn">RESULT</div><h3>결과 카드</h3><p>행사명·날짜·장소와 공식 원문 링크를 보여줍니다.</p></div>
+ </div><figcaption class="deep-figcaption">여기까지는 지도가 없어도 완성됩니다. 장소를 지도에서 확인해야 할 때만 다음 장의 단계를 추가합니다.</figcaption></figure>
+ <div class="deep-cards"><div class="deep-card"><h3>API가 뭐죠?</h3><p>앱이 기관의 공개 자료를 <strong>요청해서 받는 통로</strong>입니다.</p></div><div class="deep-card"><h3>원문은 왜 필요하죠?</h3><p>날짜·요금은 바뀔 수 있어 <strong>공식 안내를 다시 확인</strong>해야 합니다.</p></div><div class="deep-card"><h3>결과가 안 나오면?</h3><p><strong>일치하는 행사 0건</strong>과 <strong>API 연결 실패</strong>를 다르게 안내합니다.</p></div></div>
+ <div class="src"><a href="https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do" target="_blank" rel="noopener">서울 열린데이터광장 · 서울시 문화행사 정보</a></div>
 </section>
 
-<section class="sl ot-slide deep-slide" data-toc="기술 용어 · 마스킹, NER, 지오코딩, 클러스터링" data-notes="네 용어를 같은 기술처럼 나열하지 않고 각각의 역할을 구분한다. 개인정보 마스킹은 이름·전화번호처럼 식별 가능한 값을 외부 전송이나 로그 기록 전에 가리는 것이다. 예를 들어 김민수와 010-1234-5678을 김**와 010-****-5678로 바꾼다. 다만 화면에서 가리기만 하면 서버·로그의 원본이 남을 수 있으므로 데이터 경로 전체를 확인한다. NER은 Named Entity Recognition, 개체명 인식의 약자로 문장 속 사람·장소·기관 이름을 찾아 표시한다. 예시 문장 '서울숲 근처 무료 전시'에서 서울숲을 장소 후보로 찾는다. 지오코딩은 서울숲 같은 지명이나 주소를 위도·경도 좌표 후보로 바꾼다. 동명이거나 모호한 주소라면 원본 주소와 대조한다. 지도 UI는 좌표를 마커와 카드로 사용자에게 보여주는 화면이다. 임베딩은 텍스트의 의미를 숫자 벡터로 표현하고, 클러스터링은 비슷한 벡터를 묶는 것이다. 비슷한 문의를 주제별로 분류하는 데 쓸 수 있지만 이 지도 흐름이나 작은 MVP에 필수는 아니다. 공공데이터가 이미 장소명과 좌표를 제공한다면 NER과 지오코딩을 건너뛴다. 이 장은 기술 선택 설명이며 라이브 시연이 아니다.">
- <div class="kicker">TERMS · 어떤 문제에 쓰는 기술인가?</div>
- <h2>이름을 찾고, 좌표로 바꿔, <em>지도에 보여줍니다.</em></h2>
- <p class="deep-lead">예: “서울숲 근처 무료 전시”에서 장소를 찾아 지도에 표시할 때의 흐름입니다.</p>
- <figure aria-label="사용자 문장에서 장소 이름을 찾고 좌표로 바꾼 후 지도에 표시하는 흐름"><div class="deep-flow">
-  <div class="deep-node"><div class="dn">TEXT</div><h3>입력 문장</h3><p>“서울숲 근처 무료 전시”처럼 사용자가 쓴 글</p></div>
-  <div class="deep-node key"><div class="dn">NER · 개체명 인식</div><h3>장소 이름 찾기</h3><p>문장 속 ‘서울숲’을 장소 후보로 뽑습니다.</p></div>
-  <div class="deep-node"><div class="dn">GEOCODING</div><h3>지오코딩</h3><p>‘서울숲’을 지도에서 쓸 위도·경도 좌표 후보로 바꿉니다.</p></div>
-  <div class="deep-node result"><div class="dn">MAP UI</div><h3>지도 화면</h3><p>좌표에 표시를 찍고 행사 정보와 원문 링크를 보여줍니다.</p></div>
- </div><figcaption class="deep-figcaption">공공데이터에 장소명과 좌표가 이미 있다면 NER·지오코딩은 생략할 수 있습니다.</figcaption></figure>
- <div class="deep-cards"><div class="deep-card"><h3>개인정보 마스킹</h3><p>이름·전화번호를 <strong>김**·010-****-5678</strong>처럼 가립니다. 외부 전송·로그 기록 전 확인합니다.</p></div><div class="deep-card"><h3>임베딩 클러스터링</h3><p>글의 의미를 숫자로 표현한 뒤 <strong>비슷한 글끼리 묶는 방법</strong>. 문의 주제 정리에 쓰는 선택 기능입니다.</p></div><div class="deep-card"><h3>지도 UI</h3><p>좌표를 <strong>마커·목록</strong>으로 보여주는 화면입니다. 장소가 맞는지는 원본 주소와 대조합니다.</p></div></div>
- <div class="src"><a href="https://cloud.google.com/natural-language/docs/analyzing-entities" target="_blank" rel="noopener">Google · 개체명 인식</a> · <a href="https://developers.google.com/maps/documentation/geocoding/overview" target="_blank" rel="noopener">Google · 지오코딩</a> · <a href="https://developers.google.com/machine-learning/clustering/overview" target="_blank" rel="noopener">Google · 클러스터링</a></div>
+<section class="sl ot-slide deep-slide" data-toc="지도 · 장소 이름에서 지도 표시까지" data-notes="앞 장의 행사 카드에서 장소를 지도에 표시하고 싶을 때만 이 단계를 추가한다고 설명한다. 예를 들어 행사 자료의 장소 칸에 '서울숲'이 있다고 하자. 장소 칸이 분리되어 있으면 그 값을 바로 사용한다. 사용자가 쓴 긴 문장 속에 장소가 섞여 있을 때만 NER(개체명 인식)으로 '서울숲' 같은 장소 후보를 찾는다. 지오코딩은 장소 이름이나 주소를 지도에서 쓰는 위도·경도 좌표 후보로 바꾸는 과정이다. 같은 이름의 다른 장소일 수 있으므로 원본 장소·주소와 비교한다. 지도 UI는 확인한 좌표에 마커를 찍고 행사 카드나 목록과 연결하는 화면이다. 공공데이터가 정확한 좌표를 이미 주면 지오코딩을 건너뛰고, 장소가 모호하거나 좌표를 확인할 수 없으면 억지로 마커를 찍지 말고 장소명을 목록에만 표시한다. 개인정보 마스킹은 이름·전화번호를 가리는 일이고, 임베딩 클러스터링은 의미가 비슷한 글을 묶는 일로 이 지도 흐름과 별개의 선택 기술이라고 짚는다. 이 장은 지도 구현 순서의 안내이며 라이브 시연 장이 아니다.">
+ <div class="kicker">MAP · 장소를 지도에 표시하려면?</div>
+ <h2>지도는 <em>장소가 맞는지 확인한 뒤</em> 붙입니다.</h2>
+ <p class="deep-lead">행사 카드에 ‘장소: 서울숲’이 있다면, 그 장소를 지도 위의 한 점으로 바꾸는 과정입니다.</p>
+ <figure aria-label="행사 자료의 장소명에서 장소 후보를 찾고 좌표로 바꾼 뒤 확인한 위치에 지도 마커를 표시하는 흐름"><div class="deep-flow">
+  <div class="deep-node"><div class="dn">DATA</div><h3>행사 자료</h3><p>장소 칸에 ‘서울숲’이 적혀 있습니다.</p></div>
+  <div class="deep-node key"><div class="dn">PLACE</div><h3>장소 이름 확인</h3><p>장소 칸은 그대로 쓰고, 긴 문장에 섞여 있을 때만 NER로 찾습니다.</p></div>
+  <div class="deep-node"><div class="dn">COORDINATE</div><h3>좌표로 바꾸기</h3><p>지오코딩으로 위도·경도 후보를 얻고 장소를 대조합니다.</p></div>
+  <div class="deep-node result"><div class="dn">MAP UI</div><h3>지도에 표시</h3><p>확인한 위치에 점을 찍고 행사 카드와 연결합니다.</p></div>
+ </div><figcaption class="deep-figcaption">자료에 정확한 좌표가 있으면 변환을 생략합니다. 위치가 애매하면 잘못된 점을 찍지 않고 장소명만 보여줍니다.</figcaption></figure>
+ <div class="deep-cards"><div class="deep-card"><h3>NER · 이름 찾기</h3><p>긴 글에서 <strong>장소 이름만 뽑는 기술</strong>. 장소 칸이 있으면 생략합니다.</p></div><div class="deep-card"><h3>지오코딩 · 좌표 찾기</h3><p>장소명·주소를 <strong>위도·경도 후보</strong>로 바꿉니다. 같은 이름의 다른 장소인지 확인합니다.</p></div><div class="deep-card"><h3>지도와 별개의 기술</h3><p>마스킹은 <strong>김민수 → 김**</strong>, 임베딩 클러스터링은 <strong>비슷한 문의 묶기</strong>입니다.</p></div></div>
+ <div class="src"><a href="https://cloud.google.com/natural-language/docs/analyzing-entities" target="_blank" rel="noopener">Google · 개체명 인식</a> · <a href="https://developers.google.com/maps/documentation/geocoding/overview" target="_blank" rel="noopener">Google · 지오코딩</a></div>
 </section>
 
 <section class="sl ot-slide deep-slide" data-toc="Jev · 정해진 선택지를 판단하는 모델" data-notes="TypeSafe AI의 Jev를 선택 기술로 소개한다. Jev는 Claude Code를 대체하는 코딩 도구도, 사용자에게 긴 설명을 생성하는 챗봇도 아니다. 입력 상태와 타입이 정해진 질문을 보내면 Choice는 지정한 선택지 중 하나와 분포·confidence, Score는 정의한 단계 사이의 점수와 분포·confidence, Noul은 예일 확률을 반환한다. 예로 문의 문장을 받아 행사·정책·기타 중 하나로 분류할 수 있다. 선택지는 가능한 경우 기타·판단 불가를 포함한다. 앱 코드가 그 결과를 보고 안내 화면, 추가 질문, 사람 검토 중 하나로 분기한다. 확률이나 confidence는 정답 보증이 아니다. 한국어 사례와 애매한 입력을 따로 시험하고, 위험도가 높은 결론이나 자격 판정은 공식 자료·고정 규칙·사람 확인으로 다룬다. 글로 된 답변이 필요하면 생성형 모델을 별도로 사용한다. 핵심 기능에 필요할 때만 추가하며 이 장에서는 개념과 적용 범위만 안내한다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
