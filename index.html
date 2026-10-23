@@ -569,9 +569,9 @@ body.light .caret{background:#000}
 .pattern-move b{color:var(--vibe)}
 .pattern-head-public,.pattern-row-public{grid-template-columns:250px 1fr 300px}
 .pattern-row-public .pattern-team{font-size:16px}
-.solution-guide .pattern-head,.solution-guide .pattern-row{grid-template-columns:190px 270px 335px 1fr;gap:14px}
+.solution-guide .pattern-head,.solution-guide .pattern-row{grid-template-columns:190px 300px 350px 1fr;gap:14px}
 .solution-guide .pattern-title{font-size:19px}
-.solution-guide .solution-code{font:600 15px/1.35 var(--mono);color:var(--eng)}
+.solution-guide .solution-method{font-size:16px;line-height:1.35;color:var(--eng);font-weight:650}
 .solution-guide .solution-action{font-size:16px;line-height:1.35;color:var(--ink)}
 .solution-guide .solution-test{font-size:15.5px;line-height:1.35;color:var(--ink2)}
 .solution-guide .solution-test b{color:var(--vibe)}
@@ -737,19 +737,19 @@ body.light .caret{background:#000}
  <div class="team-bottom"><strong>만들기 순서</strong> · 입력·결과를 정한 뒤 AI 작업과 코드 검증을 나누고, 실패 화면까지 확인합니다.</div>
 </section>
 
-<section class="sl ot-slide team-demand solution-guide" data-toc="기능별 해결 방법 · Next.js 실행 가이드" data-notes="바로 앞 페이지의 다섯 유형을 실제 작업으로 옮긴다. 파일 경로는 Next.js App Router 기준 예시이며 모든 기능을 만들라는 뜻이 아니다. 각자 해당하는 유형 한 줄을 고른다. 근거 있는 AI 응답은 서버의 /api/answer에서 검색 결과와 원문 주소를 Gemini 같은 모델에 전달하고, 반환한 출처 ID가 실제 결과 안에 있는지 검사한다. 자료가 0건이면 AI를 호출하지 않는다. 이미지·문서는 파일 입력과 /api/parse를 만들고 샘플 한 장의 추출값을 사용자가 고칠 수 있게 한다. 대화·음성은 /api/chat에 시나리오 ID와 현재 차례를 전달하고 차례 제한과 종료 조건을 코드로 둔다. 음성 인식이 실패하면 텍스트 입력으로 계속할 수 있게 한다. 개인정보는 가짜 데이터를 기준으로 설명하고 모델 호출 전 마스킹, 원본 저장·로그 남기지 않기, 위기 표현에서 안내 화면으로 전환을 검증 항목으로 제시한다. 공공데이터·지도는 서버의 /api/search에서 비밀키로 공식 API를 호출하고 앱 필드로 정규화한다. 키 누락·결과 0건·오래된 자료를 각각 확인한다. 각 유형의 기술 선택지와 점검 기준만 안내하고, 수강생이 자기 기능에 해당하는 한 줄을 이후 개발에 적용하도록 한다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
- <div class="kicker">HOW TO BUILD · Next.js App Router 예시</div>
- <h2>해당 기능은 <em>이 순서로 한 줄씩</em> 구현하세요.</h2>
- <p class="team-intro">자기 기능에 맞는 줄에서 화면·서버 작업과 점검 기준을 찾아보세요.</p>
- <div class="pattern-head"><span>기능</span><span>① 화면·서버 위치</span><span>② Claude에게 맡길 작업</span><span>③ 완료 점검 기준</span></div>
+<section class="sl ot-slide team-demand solution-guide" data-toc="기능별 해결 방법 · 기술 선택 가이드" data-notes="바로 앞 페이지의 다섯 기능 유형에 대해 구현 방향만 안내한다. 근거 있는 AI 응답은 공식 자료를 먼저 찾고 선별한 근거만 모델에 전달한다. 출처가 없거나 검색 결과가 0건이면 추측해서 답하지 않는다. 이미지·문서는 OCR 또는 비전 모델로 필요한 항목만 읽고, 불확실한 값은 비운 뒤 사용자가 고치게 한다. 대화·음성은 음성 인식 결과를 텍스트 대화에 넣고 시나리오·차례·종료 조건을 제한한다. 음성 인식이 실패할 때는 텍스트 입력으로 이어간다. 개인정보·안전은 가짜 자료를 기준으로 설명하고, 모델에 전달하기 전에 민감값을 가리며 원본을 저장하거나 로그에 남기지 않는다. 위기 표현에는 안내 흐름을 준비한다. 공공데이터·지도는 공식 자료에서 날짜·지역·원문을 정리하고, 결과 없음과 연결 실패를 구분한다. 이 페이지는 기능별 선택과 점검 기준을 전달하는 강의용 가이드다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
+ <div class="kicker">FUNCTION GUIDE · 기술 유형별 적용 방법</div>
+ <h2>기능별 해결 방법은 <em>이렇게 정합니다.</em></h2>
+ <p class="team-intro">필요한 기능의 처리 방식과 Claude 요청, 확인 기준을 참고하세요.</p>
+ <div class="pattern-head"><span>기능</span><span>① 해결 방식</span><span>② Claude 요청 예시</span><span>③ 확인 기준</span></div>
  <div class="team-grid">
-  <div class="pattern-row"><strong class="pattern-title">근거 있는 AI 응답</strong><span class="solution-code">app/api/answer/route.ts</span><span class="solution-action">검색 자료 3건·원문 주소만 전달 → 출처 ID 검사</span><span class="solution-test"><b>0건:</b> AI 호출 없이 “자료 없음” 표시</span></div>
-  <div class="pattern-row"><strong class="pattern-title">이미지·문서 입력</strong><span class="solution-code">파일 입력 + app/api/parse/route.ts</span><span class="solution-action">OCR·비전으로 값 추출 → 사용자 수정 화면</span><span class="solution-test"><b>오인식:</b> 수정 후에만 결과 확정</span></div>
-  <div class="pattern-row"><strong class="pattern-title">대화·음성</strong><span class="solution-code">app/api/chat/route.ts + 대화 상태</span><span class="solution-action">음성→텍스트·차례 전달 → 종료 조건 적용</span><span class="solution-test"><b>음성 실패:</b> 텍스트 입력으로 계속</span></div>
-  <div class="pattern-row"><strong class="pattern-title">개인정보·안전</strong><span class="solution-code">서버 전처리 + 안전 분기</span><span class="solution-action">가짜 자료로 실습 → AI 호출 전 마스킹</span><span class="solution-test"><b>위기 표현:</b> 중단·안내 / 원본 기록 없음</span></div>
-  <div class="pattern-row"><strong class="pattern-title">공공데이터·지도</strong><span class="solution-code">app/api/search/route.ts + .env.local</span><span class="solution-action">공식 API 조회 → 날짜·지역·원문 정리</span><span class="solution-test"><b>키 누락·0건:</b> 구분된 화면 표시</span></div>
+  <div class="pattern-row"><strong class="pattern-title">근거 있는 AI 응답</strong><span class="solution-method">공식 자료 검색 → 관련 근거만 AI에 전달</span><span class="solution-action">“자료 밖 내용은 추측하지 말고 출처를 붙여줘”</span><span class="solution-test"><b>0건:</b> 답변 생성 없이 자료 없음 표시</span></div>
+  <div class="pattern-row"><strong class="pattern-title">이미지·문서 입력</strong><span class="solution-method">OCR·비전으로 필요한 값만 읽고 사람에게 확인</span><span class="solution-action">“불확실한 값은 비우고 사용자가 고치게 해줘”</span><span class="solution-test"><b>오인식:</b> 수정 전에는 결과 확정 안 함</span></div>
+  <div class="pattern-row"><strong class="pattern-title">대화·음성</strong><span class="solution-method">음성 인식 → 상태 있는 대화 → 필요할 때 음성 출력</span><span class="solution-action">“시나리오 범위와 종료 조건을 지켜줘”</span><span class="solution-test"><b>인식 실패:</b> 텍스트 입력으로 계속</span></div>
+  <div class="pattern-row"><strong class="pattern-title">개인정보·안전</strong><span class="solution-method">가짜 자료 사용·민감값 마스킹·원본 최소화</span><span class="solution-action">“원본은 기록하지 말고 위기 표현은 안내로 전환해줘”</span><span class="solution-test"><b>위기 표현:</b> 안내 / 원본 기록 없음</span></div>
+  <div class="pattern-row"><strong class="pattern-title">공공데이터·지도</strong><span class="solution-method">공식 자료 연결 → 날짜·지역·원문 정리</span><span class="solution-action">“결과 없음과 연결 실패를 구분해줘”</span><span class="solution-test"><b>0건·오류:</b> 서로 다른 안내 표시</span></div>
  </div>
- <div class="team-bottom"><strong>Claude 요청</strong> · “선택한 기능 한 줄만 만들고, 정상 1건·실패 1건을 직접 확인해 줘.”</div>
+ <div class="team-bottom"><strong>적용 원칙</strong> · AI가 해석한 내용과 공식 자료·규칙으로 확인할 내용을 구분합니다.</div>
 </section>
 
 <section class="sl ot-slide lesson visual-lesson" data-toc="예시 앱 · 오늘 뭐 보지?" data-notes="앞에서 선택한 핵심 아이디어를 ‘오늘 뭐 보지?’라는 예시 앱으로 소개한다. 사용자는 종로구 무료 전시를 찾는다. Next.js 서버가 서울 열린데이터의 실제 행사 자료를 조회하고, AI는 찾은 자료 안의 날짜·요금·장소만 사용해 왜 조건에 맞는지 짧게 설명하며 원문을 붙인다. 근거 없는 예약 가능 여부는 추측하지 않는다. 여기서는 목표 흐름을 보여준다. 실제 AI 연결 여부는 뒤 실습과 검증에서 분리해 보고한다.">
