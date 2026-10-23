@@ -960,17 +960,17 @@ body.light .caret{background:#000}
  <div class="lesson-check"><b>완료 확인</b><span>우리 팀 예시를 “사용자 행동 1개 → 동작하는 결과 1개 → 확인 방법 1개”로 말할 수 있다.</span></div>
 </section>
 
-<section class="sl ot-slide lesson visual-lesson" data-toc="기획·디자인·개발의 역할별 협업" data-notes="8–9분. 세 역할은 서로 다른 앱을 만드는 것이 아니라 같은 사용자 시나리오를 나눠 완성한다. 기획 담당은 대표 사용자, 핵심 장면, 성공 기준을 한 문장으로 정한다. 디자인 담당은 입력·결과·0건·오류 상태와 문구를 design.md로 정리한다. 개발 담당은 Next.js 화면·서버 API·실제 데이터·출처 검증을 구현한다. 각자 Claude Code에 다른 작업을 요청할 수 있지만 결과는 사람이 검토한다. 화면과 API의 필드명, 파일 담당, 완료 기준을 함께 합의하고 브라우저에서 끝까지 클릭해 본다. 실제 팀에 디자이너가 없으면 화면 담당이 디자인 산출물을 맡아도 된다."><span class="point-badge" aria-label="강의 가이드 강조 포인트: 역할별 협업"><span aria-hidden="true">★</span></span>
+<section class="sl ot-slide lesson visual-lesson" data-toc="기획·디자인·개발의 역할별 협업" data-notes="8–9분. 세 역할은 서로 다른 앱을 만드는 것이 아니라 같은 사용자 시나리오를 나눠 완성한다. 기획 담당은 대표 사용자·핵심 장면·제외 범위·성공 기준을 기획안.html로 만들고, 파일이나 공유 링크를 팀원에게 전달한다. 팀원 모두 브라우저에서 같은 버전을 열어 확인한 뒤 수정 사항을 반영한다. 디자인 담당은 입력·결과·0건·오류 상태와 문구를 design.md로 정리한다. 개발 담당은 Next.js 화면·서버 API·실제 데이터·출처 검증을 구현한다. 각자 Claude Code에 다른 작업을 요청할 수 있지만 결과는 사람이 검토한다. 화면과 API의 필드명, 파일 담당, 완료 기준을 함께 합의하고 브라우저에서 끝까지 클릭해 본다. 실제 팀에 디자이너가 없으면 화면 담당이 디자인 산출물을 맡아도 된다."><span class="point-badge" aria-label="강의 가이드 강조 포인트: 역할별 협업"><span aria-hidden="true">★</span></span>
  <div class="kicker">08–09 MIN · 역할별 협업</div><h2>기획·디자인·개발, <em>같은 흐름을 나눠 만듭니다</em></h2>
  <figure><svg class="lesson-diagram detailed-diagram" viewBox="0 0 1080 270" role="img" aria-labelledby="role-collaboration"><title id="role-collaboration">한 사용자 시나리오를 기준으로 기획자는 성공 기준, 디자이너는 화면 상태, 개발자는 Next.js 구현을 맡고 결과를 함께 통합 검증한다</title><defs><marker id="role-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--eng)"/></marker></defs>
- <rect x="10" y="15" width="330" height="175" rx="9" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="28" y="50" class="diagram-label">① 기획 담당</text><text x="28" y="83" class="diagram-sub">사용자 · 해결할 불편</text><text x="28" y="113" class="diagram-sub">핵심 시나리오 한 문장</text><text x="28" y="153" class="diagram-sub" style="fill:var(--eng)">전달: 성공·제외 기준</text>
+ <rect x="10" y="15" width="330" height="175" rx="9" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="28" y="50" class="diagram-label">① 기획 담당</text><text x="28" y="83" class="diagram-sub">사용자 · 해결할 불편</text><text x="28" y="113" class="diagram-sub">기획안.html로 정리</text><text x="28" y="153" class="diagram-sub" style="fill:var(--eng)">전달: HTML 파일·공유 링크</text>
  <rect x="375" y="15" width="330" height="175" rx="9" fill="var(--surface)" stroke="var(--eng)" stroke-width="1.5"/><text x="393" y="50" class="diagram-label">② 디자인 담당</text><text x="393" y="83" class="diagram-sub">검색 · 결과 · 0건 · 오류</text><text x="393" y="113" class="diagram-sub">화면 시안 · 문구 · design.md</text><text x="393" y="153" class="diagram-sub" style="fill:var(--eng)">전달: 상태별 화면</text>
  <rect x="740" y="15" width="330" height="175" rx="9" fill="var(--surface)" stroke="var(--vibe)" stroke-width="1.5"/><text x="758" y="50" class="diagram-label">③ 개발 담당</text><text x="758" y="83" class="diagram-sub">Next.js 화면 · 서버 API</text><text x="758" y="113" class="diagram-sub">실제 자료 · 출처 · 테스트</text><text x="758" y="153" class="diagram-sub" style="fill:var(--eng)">전달: 실행되는 앱</text>
  <path d="M175 190V214M540 190V214M905 190V214" fill="none" stroke="var(--eng)" stroke-width="2" marker-end="url(#role-arrow)"/>
- <rect x="10" y="220" width="1060" height="43" rx="8" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="540" y="247" text-anchor="middle" style="font-size:18px;fill:var(--ink);font-weight:600">함께 합의 · 같은 필드명 · 파일 담당 · 완료 기준 → 한 흐름을 브라우저에서 검증</text>
+ <rect x="10" y="220" width="1060" height="43" rx="8" fill="var(--surface)" stroke="var(--line-strong)" stroke-width="1.5"/><text x="540" y="247" text-anchor="middle" style="font-size:18px;fill:var(--ink);font-weight:600">공유한 HTML 기획안을 함께 열고 범위·필드명·완료 기준을 합의 → 앱에서 검증</text>
  </svg></figure>
- <div class="lesson-columns"><div class="lesson-action"><h3>실제 작업 순서</h3><ol><li>기획자가 “누가 무엇을 입력해 무엇을 확인하는가?”를 정하고 세 역할이 같은 기준을 봅니다.</li><li>디자인 시안과 API 필드명을 맞춘 뒤 개발하고, 합친 화면을 함께 눌러 봅니다.</li></ol></div><div class="prompt lesson-prompt"><div class="prompt-t">Claude Code에 역할별로 요청</div><div class="copy-body"><b>기획</b> · “대표 사용자와 한 장면으로 범위를 줄여줘.”<br><b>디자인</b> · “검색·0건·오류 화면을 design.md로 정리해줘.”<br><b>개발</b> · “합의한 화면·필드명으로 Next.js 앱을 구현하고 검증해줘.”</div></div></div>
- <div class="lesson-check"><b>완료 확인</b><span>각자 만든 결과가 같은 시나리오와 필드명으로 이어지고, 실제 화면에서 끝까지 동작한다.</span></div>
+ <div class="lesson-columns"><div class="lesson-action"><h3>실제 작업 순서</h3><ol><li>기획자는 대표 사용자·한 장면·제외 범위·완료 기준을 <b>HTML 문서</b>로 만듭니다.</li><li>파일이나 링크를 팀원에게 공유하고 함께 열어 본 뒤 디자인·개발에 반영합니다.</li></ol></div><div class="prompt lesson-prompt"><div class="prompt-t">Claude Code에 역할별로 요청</div><div class="copy-body"><b>기획</b> · “합의한 범위를 <code>기획안.html</code>로 만들어 팀이 브라우저에서 보게 해줘.”<br><b>디자인</b> · “기획안을 기준으로 화면 상태를 design.md에 정리해줘.”<br><b>개발</b> · “합의한 화면·필드명으로 Next.js 앱을 구현해줘.”</div></div></div>
+ <div class="lesson-check"><b>필수 공유</b><span>기획 문서는 반드시 <code>.html</code>로 저장해 파일 또는 링크로 공유합니다. 팀원 모두 같은 버전을 열어 확인합니다.</span></div>
 </section>
 
 <section class="sl ot-slide lesson visual-lesson" data-toc="팀 약속은 CLAUDE.md에 남긴다" data-notes="9–10분. Claude Code로 협업한다면 프로젝트 루트의 CLAUDE.md에 매번 반복할 팀 지침을 남긴다. 목표, 파일 담당, 검색 요청·응답의 이름, 검증 기준을 함께 적고 Git으로 공유한다. 화면 담당은 app/page.tsx, 서버 담당은 app/api/search/route.ts를 수정한다. CLAUDE.md는 AI에게 주는 지침이며, 실제 입력·응답의 유효성은 TypeScript 타입과 서버 검사, 브라우저 재현으로 확인해야 한다.">
@@ -1332,13 +1332,13 @@ ORG_LINK → sourceUrl       원문</pre></div></div></div>
   <div class="src">완료 기준: 한 사용자가 핵심 흐름을 끝까지 실행하고, 결과와 근거를 확인할 수 있다.</div>
 </section>
 
-<section class="sl" data-toc="부록 · 기획서를 개발 명세로" data-notes="2주 프로젝트의 첫 단계에서 기획을 새로 늘리지 않는다. 이미 준비한 문제정의·서비스 기획·핵심 시나리오를 Claude가 바로 구현할 수 있는 개발 명세로 변환한다. PLAN.md에는 선택한 기능의 구현 순서와 완료 기준만 정리하고, CLAUDE.md에는 팀의 작업 규칙을 기록한다.">
+<section class="sl" data-toc="부록 · 기획서를 개발 명세로" data-notes="2주 프로젝트의 첫 단계에서 기획을 새로 늘리지 않는다. 공유한 HTML 기획안의 문제정의·핵심 시나리오를 Claude가 바로 구현할 수 있는 개발 명세로 변환한다. HTML은 팀이 읽고 합의하는 기획 문서이며 PLAN.md는 개발 순서와 완료 기준을 적는 실행 문서다. PLAN.md에는 선택한 기능의 구현 순서와 완료 기준만 정리하고, CLAUDE.md에는 팀의 작업 규칙을 기록한다.">
   <div class="kicker">APPENDIX · 1주차 · 기획을 명세로</div>
   <h2>기획 초안 — <em>개발 명세로 변환</em></h2>
   <div class="grow">
     <div class="prompt" style="margin-top:8px">
       <div class="prompt-t">PROMPT · 1주차 초반에 빈칸을 채워 전송</div>
-      <div class="pblock"><span class="pn">①</span><div><b>자료 전달</b> — 첨부한 시장조사·서비스 기획서와 확정된 <span class="ph">핵심 시나리오</span>를 읽어줘.</div></div>
+      <div class="pblock"><span class="pn">①</span><div><b>자료 전달</b> — 팀이 공유한 <span class="ph">HTML 기획안</span>과 확정된 핵심 시나리오를 읽어줘.</div></div>
       <div class="pblock"><span class="pn">②</span><div><b>PLAN.md로 변환</b> — 합의한 범위를 기준으로 구현 순서대로 저장<span class="psub">화면 목록 · 기능별 입력/결과/유지 조건 · 직접 눌러볼 검증 절차</span></div></div>
       <div class="pblock"><span class="pn">③</span><div><b>CLAUDE.md도 생성</b> — 팀 규칙<span class="psub">항상 한국어로 답하기 · git 저장소 만들고 검증한 작은 작업마다 커밋 · 새 의존성은 이유를 먼저 설명하기</span></div></div>
     </div>
