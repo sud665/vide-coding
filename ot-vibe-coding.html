@@ -605,6 +605,15 @@ body.light .caret{background:#000}
 .privacy-practice .deep-flow{min-height:188px}
 .privacy-practice .deep-node{padding:16px 15px}
 .privacy-practice .deep-node p{font-size:15px}
+.privacy-diagram{margin:0 0 10px!important;flex:none}
+.privacy-diagram svg{display:block;width:100%;height:116px}
+.privacy-diagram .pd-box{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.5}
+.privacy-diagram .pd-box.gate{stroke:var(--eng)}
+.privacy-diagram .pd-box.ai{stroke:var(--vibe)}
+.privacy-diagram .pd-tag{font:700 12px var(--mono);fill:var(--eng)}
+.privacy-diagram .pd-title{font:700 18px var(--sans);fill:var(--ink)}
+.privacy-diagram .pd-detail{font:14px var(--sans);fill:var(--ink2)}
+.privacy-diagram .pd-arrow{fill:none;stroke:var(--eng);stroke-width:2}
 .privacy-steps{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:9px}
 .privacy-step{border:1px solid var(--line-strong);border-radius:9px;background:var(--surface);padding:17px 20px;min-width:0}
 .privacy-step h3{font-size:18px;color:var(--eng);margin:0 0 9px}
@@ -891,6 +900,15 @@ body.light .caret{background:#000}
  <div class="kicker">SAFETY · NEXT.JS IMPLEMENTATION</div>
  <h2>Next.js에서는 <em>서버 API에서 한 번 더 걸러야</em> 합니다.</h2>
  <p class="deep-lead">예시: 이용자가 “김가상 010-0000-0000, 지원 정보를 알려줘”라고 입력합니다.</p>
+ <figure class="privacy-diagram" aria-label="이용자 입력에서 프런트엔드가 식별정보를 제거해 전송하고, Next.js 서버가 다시 검사한 뒤 가린 문장만 AI에 보내는 흐름"><svg viewBox="0 0 1148 116" role="img" aria-labelledby="privacy-diagram-title"><title id="privacy-diagram-title">입력 → ① FE 제거 → 네트워크에 가린 값 전송 → ② BE 재검사 → AI에 가린 문장만 전달</title><defs><marker id="privacy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="var(--eng)"/></marker></defs>
+ <rect class="pd-box" x="1" y="8" width="254" height="92" rx="9"/><text class="pd-tag" x="17" y="30">① FE · 브라우저</text><text class="pd-title" x="17" y="57">이름·전화번호 제거</text><text class="pd-detail" x="17" y="82">불확실하면 전송 중단</text>
+ <path class="pd-arrow" d="M261 54H289" marker-end="url(#privacy-arrow)"/>
+ <rect class="pd-box" x="295" y="8" width="254" height="92" rx="9"/><text class="pd-tag" x="311" y="30">POST /api/ask</text><text class="pd-title" x="311" y="57">가린 질문만 전송</text><text class="pd-detail" x="311" y="82">Network에서 확인</text>
+ <path class="pd-arrow" d="M555 54H583" marker-end="url(#privacy-arrow)"/>
+ <rect class="pd-box gate" x="589" y="8" width="254" height="92" rx="9"/><text class="pd-tag" x="605" y="30">② BE · Next.js 서버</text><text class="pd-title" x="605" y="57">허용 필드·식별자 재검사</text><text class="pd-detail" x="605" y="82">실패하면 AI 호출 안 함</text>
+ <path class="pd-arrow" d="M849 54H877" marker-end="url(#privacy-arrow)"/>
+ <rect class="pd-box ai" x="883" y="8" width="254" height="92" rx="9"/><text class="pd-tag" x="899" y="30">AI · 외부 서비스</text><text class="pd-title" x="899" y="57">가린 문장만 전달</text><text class="pd-detail" x="899" y="82">이름·전화번호 제외</text>
+ </svg></figure>
  <div class="privacy-steps">
   <div class="privacy-step"><h3>① FE · 보내기 전에 줄이기</h3><p>필요 없는 입력칸을 없앱니다. 자유 문장도 전송 전 탐지·제거하고, 확신이 없으면 확인을 요청합니다.</p><pre class="privacy-code">// 흐름 예시: redactPII는 별도 구현·검증
 const local = redactPII(question);
