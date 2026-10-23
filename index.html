@@ -819,16 +819,16 @@ body.light .caret{background:#000}
  <div class="src"><a href="https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation" target="_blank" rel="noopener">Microsoft Foundry · RAG의 검색·근거·생성</a></div>
 </section>
 
-<section class="sl ot-slide deep-slide" data-toc="이미지·문서 · 인식과 사용자 확인" data-notes="사진·PDF는 올리는 순간 정답 데이터가 되는 것이 아니다. 먼저 파일 형식·크기와 페이지 수를 제한하고, OCR은 글자를 읽으며 비전 모델은 문맥 속 항목을 해석한다고 설명한다. 필요한 필드만 이름 있는 값으로 추출한다. 예를 들어 날짜·금액·기관명이며, 값을 찾지 못했으면 빈 값으로 둔다. 낮은 신뢰도나 흐린 사진은 사용자 확인으로 보낸다. 확인 전에는 판단이나 저장으로 넘어가지 않는다. 실제 개인정보가 담긴 자료 대신 가짜 샘플로 설계한다. 인식 실패, 잘못된 값, 큰 파일과 처리 지연의 사용자 화면을 따로 준비한다.">
+<section class="sl ot-slide deep-slide" data-toc="이미지·문서 · OCR와 사용자 확인" data-notes="OCR은 Optical Character Recognition의 약자로 광학 문자 인식이다. 사진이나 스캔 PDF 속 글자 모양을 컴퓨터가 다룰 수 있는 텍스트로 바꾼다. 예를 들어 샘플 문서 사진에 적힌 '접수일 11/06'을 OCR이 텍스트로 읽고, 다음 단계에서 접수일이라는 항목과 값 11/06을 추출한다. OCR은 글자를 읽는 단계이지 내용이 사실인지 검증하거나 자격을 판단하는 단계가 아니다. 비전 모델은 문서의 배치와 문맥을 함께 해석할 수 있지만 역시 틀릴 수 있다. 먼저 파일 형식·크기와 페이지 수를 제한하고, 필요한 날짜·금액·기관명 같은 필드만 추출한다. 찾지 못한 값은 비우고 원본과 추출값을 사용자가 나란히 확인·수정하게 한다. 확인 전에는 판단이나 저장으로 넘어가지 않는다. 실제 개인정보 대신 가짜 샘플을 사용한다. 인식 실패, 잘못된 값, 큰 파일과 처리 지연의 사용자 화면을 따로 준비한다.">
  <div class="kicker">DOCUMENT 03 / 05 · 이미지·문서 입력</div>
  <h2>읽어낸 글자를 <em>바로 사실로 취급하지 않습니다.</em></h2>
- <p class="deep-lead">OCR은 문자를 읽고, 비전 모델은 맥락을 해석합니다. 둘 다 틀릴 수 있으므로 확인 단계를 둡니다.</p>
+ <p class="deep-lead">OCR(Optical Character Recognition, 광학 문자 인식)은 사진·스캔 문서 속 글자를 <strong>텍스트로 바꾸는 기술</strong>입니다.</p>
  <figure aria-label="샘플 파일 업로드, OCR 또는 비전 판독, 필요한 항목 추출, 사람의 수정 확인 흐름"><div class="deep-flow">
-  <div class="deep-node"><div class="dn">INPUT</div><h3>샘플 1장</h3><p>허용 형식·크기를 정하고 흐린 파일은 다시 요청합니다.</p></div>
-  <div class="deep-node key"><div class="dn">READ</div><h3>OCR · 비전</h3><p>글자 인식과 항목 해석을 분리해 수행합니다.</p></div>
-  <div class="deep-node"><div class="dn">EXTRACT</div><h3>필요한 값만</h3><p>날짜·금액 등 지정 필드로 정리. 불확실하면 비웁니다.</p></div>
+  <div class="deep-node"><div class="dn">INPUT</div><h3>문서 사진</h3><p>가짜 샘플에 적힌 ‘접수일 11/06’을 입력합니다.</p></div>
+  <div class="deep-node key"><div class="dn">OCR · READ</div><h3>글자 → 텍스트</h3><p>사진 속 글자를 ‘접수일 11/06’이라는 텍스트로 읽습니다.</p></div>
+  <div class="deep-node"><div class="dn">EXTRACT</div><h3>항목 → 값</h3><p>‘접수일 = 11/06’으로 정리. 불확실하면 비웁니다.</p></div>
   <div class="deep-node result"><div class="dn">REVIEW</div><h3>사용자가 확인</h3><p>원본과 추출값을 나란히 보고 수정 후 확정합니다.</p></div>
- </div><figcaption class="deep-figcaption">확인 전에는 자동 판정으로 넘기지 않습니다. 원본 파일은 필요 이상 저장하지 않습니다.</figcaption></figure>
+ </div><figcaption class="deep-figcaption">OCR은 글자를 읽을 뿐 사실 여부를 보증하지 않습니다. 비전 모델도 문맥을 잘못 해석할 수 있어 사람이 확인합니다.</figcaption></figure>
  <div class="deep-cards"><div class="deep-card"><h3>처음 범위</h3><p>문서 <strong>한 종류·필드 세 개</strong>만 선택합니다. 모든 양식을 한 번에 처리하지 않습니다.</p></div><div class="deep-card"><h3>수정 화면</h3><p>모델이 추출한 값과 <strong>원본 위치</strong>를 보여주고 사용자가 고칠 수 있게 합니다.</p></div><div class="deep-card"><h3>실패 기준</h3><p>흐린 사진·값 누락·잘못된 형식·긴 지연을 별도 안내합니다.</p></div></div>
  <div class="src"><a href="https://docs.cloud.google.com/document-ai/docs/custom-extractor-overview" target="_blank" rel="noopener">Google Document AI · 추출 신뢰도와 수동 검토</a></div>
 </section>
