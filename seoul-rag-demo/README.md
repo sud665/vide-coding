@@ -17,7 +17,7 @@ test -f .env.local || cp .env.example .env.local
 npm run dev
 ```
 
-브라우저에서 `http://localhost:3000`을 엽니다. 서울 키가 없으면 상단에 **서울 API 키 설정 전**이 표시됩니다. Gemini 키가 없으면 검색 카드만 표시되므로, 그 상태를 RAG 완료로 소개하지 않습니다.
+브라우저에서 `http://127.0.0.1:3000`을 엽니다. 개발 서버는 127.0.0.1에만 바인딩되므로, 같은 포트를 쓰는 다른 앱이 떠 있으면 `localhost`가 그쪽으로 연결될 수 있습니다. 서울 키가 없으면 상단에 **서울 API 키 설정 전**이 표시됩니다. Gemini 키가 없으면 검색 카드만 표시되므로, 그 상태를 RAG 완료로 소개하지 않습니다.
 
 이 컴퓨터의 `.env.local`에는 서울 API 키가 이미 설정되어 있을 수 있습니다. 기존 파일을 덮어쓰거나 화면에 띄우지 마세요. Gemini 키는 [Google AI Studio API Keys](https://aistudio.google.com/api-keys)에서 발급받아 **본인이 직접** 추가합니다. `.env.local`은 Git에서 제외됩니다. `GET /api/status`는 두 키의 **설정 여부만** 알려주며 값을 반환하지 않습니다.
 
@@ -34,8 +34,9 @@ npm run dev
 
 ## 참고 앱의 구성
 
-- `app/page.tsx`: 검색어·자치구·무료/지난 행사 조건, 로딩·0건·오류, 결과 카드와 공식 원문 링크.
-- `app/api/search/route.ts`: 입력 검증 후 서버에서만 서울 API를 호출. 키 누락, 외부 실패, 빈 결과를 구분.
+- `app/page.tsx`: 검색어·자치구·무료/지난 행사 조건, 로딩·0건·오류, 결과 카드와 공식 원문 링크. 검색 근거를 먼저 받아 카드를 보여준 뒤(`answer: false`), 같은 조건으로 AI 요약을 이어서 요청.
+- `app/components/ResultLoading.tsx`: 검색 중 카드 골격과 AI 요약 생성 중 표시.
+- `app/api/search/route.ts`: 입력 검증 후 서버에서만 서울 API를 호출. 키 누락, 외부 실패, 빈 결과를 구분. 요청의 `answer`가 `false`면 AI 요약을 생략.
 - `app/api/status/route.ts`: 키 설정 여부만 제공.
 - `lib/search.ts`: API 원본 필드를 앱 필드로 바꾸고 조건·키워드로 최대 6건 검색.
 - `lib/service.ts`: 최대 3,000건 조회와 5분 서버 캐시. 선택적으로 찾은 자료만 Gemini에 전달하고 `sourceIds`가 실제 결과에 있는지 검사. AI 오류 때는 검색 카드 유지.
@@ -56,5 +57,7 @@ npm run check:rag
 ```
 
 `check:live`는 실제 서울 API 조회 건수만 출력합니다. `check:rag`는 Gemini 키가 없으면 실패하고, 키가 있으면 **실제 AI 답변·출처 연결 성공 시에만 `RAG_OK`**를 출력합니다. 이 검사는 출처 ID가 검색 결과에 있는지 확인하지만 답변의 모든 문장을 사실 검증하지는 않으므로, 강의 전 공식 원문을 직접 읽어야 합니다. `GEMINI_MODEL` 기본값은 `gemini-3.6-flash`이며 계정에서 사용할 수 있는 모델인지 확인하세요.
+
+AI 요약이 실패하면 검색 카드는 그대로 두고 화면 상태 문구에 사유를 표시하며, 개발 서버 터미널에는 `[AI 요약 실패] <종류> · model=<모델> · <상세>` 한 줄을 남깁니다. 종류는 `quota`(사용 한도 초과), `unavailable`(AI 서버 혼잡), `timeout`(20초 초과), `network`(연결 실패), `http`(키·모델 오류), `invalid`(출처 검증 실패)입니다. Gemini 무료 등급은 **모델당 하루 요청 수**가 제한됩니다(2026-10 기준 `gemini-3.6-flash` 20회, 태평양 자정에 초기화). 한도를 넘으면 `GEMINI_MODEL`을 `gemini-3.5-flash-lite` 같은 다른 모델로 바꾸거나 AI Studio에서 결제를 연결합니다. 현재 사용량은 [AI Studio 사용량 화면](https://aistudio.google.com/rate-limit)에서 확인합니다. 리허설과 본 강의를 합치면 20회는 부족하므로 강의 전에 확인하세요.
 
 참고: [Next.js 환경변수](https://nextjs.org/docs/app/guides/environment-variables), [서울시 문화행사 정보](https://data.seoul.go.kr/dataList/OA-15486/S/1/datasetView.do), [Gemini API 키 안내](https://ai.google.dev/gemini-api/docs/api-key), [Gemini 모델](https://ai.google.dev/gemini-api/docs/models).

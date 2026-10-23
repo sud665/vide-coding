@@ -6,11 +6,13 @@
 
 ## 파일 역할
 - `app/page.tsx`: 검색 입력, 결과 카드, 0건·오류 화면.
+- `app/components/ResultLoading.tsx`: 검색 중 카드 골격과 AI 요약 생성 중 표시.
 - `app/api/search/route.ts`: 입력 검사, 서울 API 조회, 결과 반환. `SEOUL_API_KEY`는 서버에서만 읽는다.
 - 같은 파일을 여러 팀원이 동시에 수정하기 전에 담당자를 정한다.
 
 ## 화면과 API의 약속
-- 요청: `query`(검색어), `district`(지역), `freeOnly`(무료만 보기).
+- 요청: `query`(검색어), `district`(지역), `freeOnly`(무료만 보기), `answer`(선택. `false`면 AI 요약을 생략하고 검색 근거만 돌려준다).
+- 화면은 먼저 `answer: false`로 검색 근거를 받아 카드를 보여주고, 이어서 같은 조건으로 한 번 더 요청해 AI 요약을 받는다. 그 사이에는 AI 요약 자리에 로딩 표시를 둔다.
 - 성공: `records` 배열. 각 행사에는 `title`과 `sourceUrl`을 포함한다.
 - 실패: `error` 메시지. 0건은 오류가 아닌 빈 `records` 배열이다.
 - 필드명이나 형식을 바꾸면 화면과 API를 함께 수정하고 팀에 알린다.

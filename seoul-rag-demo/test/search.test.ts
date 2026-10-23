@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalize, retrieve, validateAnswer, DATASET } from '../lib/search';
-import { search, synthesize } from '../lib/service';
+import { AiError, describeAiFailure, search, synthesize } from '../lib/service';
 
 const rows = [
   normalize({ TITLE: '어린이 미술 전시', GUNAME: '종로구', IS_FREE: '무료', END_DATE: '2099-12-31', ORG_LINK: 'https://culture.seoul.go.kr' }, 0),
@@ -62,7 +62,8 @@ test('empty result is not sent to AI', async () => {
   assert.equal(called, false);
 });
 
-test('AI failure keeps verified search cards', async () => {
+test('AI failure keeps verified search cards', async (t) => {
+  t.mock.method(console, 'error', () => {});
   const response = await search({ query: '전시' }, { loadEvents: fakeData, synthesize: async () => { throw new Error('upstream failure'); } });
   assert.equal(response.status, 200);
   assert.ok('records' in response.body);
@@ -109,4 +110,62 @@ test('a structured answer with valid source IDs is accepted', async () => {
     assert.equal(answer.answer, '전시가 있습니다.');
     assert.deepEqual(answer.sourceIds, ['1']);
   } finally { if (previous === undefined) delete process.env.GEMINI_API_KEY; else process.env.GEMINI_API_KEY = previous; }
+});
+
+test('quota, timeout, server, and citation failures are told apart', async () => {
+  const previous = process.env.GEMINI_API_KEY;
+  process.env.GEMINI_API_KEY = 'unit-test-only';
+  try {
+    const found = retrieve(rows, { query: '전시' });
+    await assert.rejects(
+      synthesize('전시', found, async () => ({ ok: false, status: 429, json: async () => ({ error: { status: 'RESOURCE_EXHAUSTED', message: 'secret upstream details', details: [{ '@type': 'type.googleapis.com/google.rpc.RetryInfo', retryDelay: '7122s' }] } }) }) as Response),
+      (error: unknown) => error instanceof AiError && error.kind === 'quota' && error.retryAfterSeconds === 7122 && !error.message.includes('secret'),
+    );
+    await assert.rejects(
+      synthesize('전시', found, async () => { throw Object.assign(new Error('aborted'), { name: 'TimeoutError' }); }),
+      (error: unknown) => error instanceof AiError && error.kind === 'timeout',
+    );
+    await assert.rejects(
+      synthesize('전시', found, async () => ({ ok: false, status: 503, json: async () => ({ error: { status: 'UNAVAILABLE' } }) }) as Response),
+      (error: unknown) => error instanceof AiError && error.kind === 'unavailable',
+    );
+    await assert.rejects(
+      synthesize('전시', found, async () => ({ ok: true, json: async () => ({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text: JSON.stringify({ answer: '근거 없는 인용', sourceIds: ['999'] }) }] } }] }) }) as Response),
+      (error: unknown) => error instanceof AiError && error.kind === 'invalid' && /INVALID_CITATIONS/.test(error.message),
+    );
+  } finally { if (previous === undefined) delete process.env.GEMINI_API_KEY; else process.env.GEMINI_API_KEY = previous; }
+});
+
+test('the status note names the AI failure reason and keeps the cards', async (t) => {
+  t.mock.method(console, 'error', () => {});
+  const failing = (error: Error) => search({ query: '전시' }, { loadEvents: fakeData, synthesize: async () => { throw error; } });
+  const quota = await failing(new AiError('quota', 'AI 연결 실패: HTTP 429 (RESOURCE_EXHAUSTED)', 7122));
+  assert.ok('records' in quota.body);
+  if (!('records' in quota.body)) throw new Error('Expected search records');
+  assert.equal(quota.body.mode, 'search');
+  assert.ok(quota.body.records.length > 0);
+  assert.match(quota.body.note, /한도.*약 2시간 후/);
+  const timeout = await failing(new AiError('timeout', 'AI 응답이 20초 안에 오지 않았습니다.'));
+  if (!('records' in timeout.body)) throw new Error('Expected search records');
+  assert.match(timeout.body.note, /지연/);
+  assert.equal(describeAiFailure(new Error('upstream failure')).kind, 'unknown');
+  assert.match(describeAiFailure(new AiError('http', 'AI 연결 실패: HTTP 404 (NOT_FOUND)')).note, /HTTP 404/);
+});
+
+test('answer:false returns the evidence without calling the AI', async () => {
+  let called = false;
+  const synthesizeSpy = async () => { called = true; return { answer: '호출되면 안 됨', sourceIds: ['1'] }; };
+  const response = await search({ query: '전시', answer: false }, { loadEvents: fakeData, synthesize: synthesizeSpy });
+  assert.equal(response.status, 200);
+  if (!('records' in response.body)) throw new Error('Expected search records');
+  assert.equal(response.body.mode, 'search');
+  assert.equal(response.body.answer, null);
+  assert.ok(response.body.records.length > 0);
+  assert.match(response.body.note, /이어서 요청/);
+  assert.equal(called, false);
+  const followUp = await search({ query: '전시' }, { loadEvents: fakeData, synthesize: synthesizeSpy });
+  if (!('records' in followUp.body)) throw new Error('Expected search records');
+  assert.equal(followUp.body.mode, 'ai');
+  assert.equal(called, true);
+  assert.equal((await search({ query: '전시', answer: 'no' }, { loadEvents: fakeData })).status, 400);
 });
