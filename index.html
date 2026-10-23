@@ -493,6 +493,10 @@ body.light .caret{background:#000}
 .visual-lesson .lesson-check{margin-top:10px;padding-top:10px;font-size:16px;line-height:1.4}
 .visual-lesson .src{left:66px;bottom:14px;font-size:11px}
 .visual-lesson .copy-btn{font-size:12px;top:6px;padding:5px 10px}
+.rag-definition{font-size:19px;line-height:1.35;color:var(--ink2);margin:8px 0 0}
+.rag-concept figure{margin-top:6px}
+.rag-concept .detailed-diagram{height:210px}
+.rag-concept .lesson-columns{flex:none}
 @media print{.visual-lesson{padding:30px 66px 40px}.sl{transition:none!important}}
 
 /* Opening title slide */
@@ -862,7 +866,7 @@ body.light .caret{background:#000}
 <section class="sl ot-slide deep-slide" data-toc="근거 있는 AI 응답 · RAG와 규칙 분리" data-notes="RAG의 실무 핵심은 질문을 받고 신뢰할 수 있는 자료를 먼저 찾은 뒤, 찾은 내용만 모델에 전달하고 답변과 출처를 다시 검증하는 것이다. 이 페이지에서는 키워드·조건 검색으로 시작하고 문서가 많아 표현 차이를 찾아야 할 때 벡터 검색을 고려한다고 설명한다. 검색 결과가 0건이면 모델을 호출하지 않는다. AI는 문장을 설명할 수 있지만 자격·금액·날짜 판정은 확인된 원문 필드와 별도 규칙으로 처리한다. 답변에 포함된 sourceId가 실제 검색 결과에 있는지 검사하고 사용자가 공식 원문을 열 수 있게 한다. 기존 RAG 개념 장과 연결해 구현 판단을 안내한다.">
  <div class="kicker">AI ANSWER 02 / 05 · 근거 기반 응답</div>
  <h2>AI는 설명하고, <em>판정은 자료·규칙으로</em> 확인합니다.</h2>
- <p class="deep-lead">검색 앱에서 RAG로 넘어가는 지점은 찾은 자료를 AI에 넣고, 그 답의 출처를 다시 검사하는 단계입니다.</p>
+ <p class="deep-lead">RAG는 AI가 답하기 전에 관련 자료를 먼저 찾아 읽게 하는 방식입니다. 찾은 자료를 AI에 전달하고, 답의 출처를 다시 검사합니다.</p>
  <figure aria-label="질문, 자료 검색, AI 설명, 출처와 규칙 검증으로 이어지는 근거 응답 흐름"><div class="deep-flow">
   <div class="deep-node"><div class="dn">INPUT</div><h3>사용자 질문</h3><p>지역·기간·대상 등 <strong>정확한 조건</strong>을 분리합니다.</p></div>
   <div class="deep-node key"><div class="dn">RETRIEVE</div><h3>자료 찾기</h3><p>공식 데이터에서 관련 기록을 고르고 원문 URL을 보존합니다.</p></div>
@@ -999,8 +1003,9 @@ await ai.generate({ text: safeText.value });</pre><p>검사가 애매하면 <str
  <div class="lesson-check"><b>다음 장</b><span>다음 장에서 RAG의 뜻을 먼저 풀고, 이후 ‘무료 행사만 보기’부터 만들기 시작합니다.</span></div>
  </section>
 
-<section class="sl ot-slide lesson visual-lesson" data-toc="RAG는 검색 방식이 아니라 검색+생성" data-notes="RAG는 Retrieval-Augmented Generation의 줄임말로, 질문 시점에 외부 자료를 찾고 그 자료를 AI에 전달해 답을 만드는 구조다. 원 논문은 밀집 벡터 인덱스를 사용했지만, 실제 앱의 검색 단계에는 조건·키워드 검색, 벡터 유사도 검색 또는 둘을 합친 검색을 사용할 수 있다. 현재 seoul-rag-demo는 서울 API에서 최대 3,000건을 조회하고 지역·무료 필터와 단어 일치로 최대 6건을 고른다. 벡터 DB·임베딩은 없다. GEMINI_API_KEY가 설정된 경우에만 고른 기록을 Gemini에 보내고 출처 ID를 검증한다. 키가 없으면 공공데이터 검색 앱으로만 동작하며, 실제 AI 답변까지 검증했다고 말하지 않는다. 정책 문서·PDF가 많고 표현이 달라도 비슷한 의미를 찾아야 할 때 문서 분할·임베딩·벡터 인덱스가 유용하지만, 정확한 지역·무료 조건은 메타데이터 필터로 따로 지킨다.">
+<section class="sl ot-slide lesson visual-lesson rag-concept" data-toc="RAG는 검색 방식이 아니라 검색+생성" data-notes="RAG는 AI가 답하기 전에 관련 자료를 먼저 찾아 읽게 하는 방식입니다. Retrieval-Augmented Generation의 줄임말로, 질문 시점에 외부 자료를 찾고 그 자료를 AI에 전달해 답을 만드는 구조다. 원 논문은 밀집 벡터 인덱스를 사용했지만, 실제 앱의 검색 단계에는 조건·키워드 검색, 벡터 유사도 검색 또는 둘을 합친 검색을 사용할 수 있다. 현재 seoul-rag-demo는 서울 API에서 최대 3,000건을 조회하고 지역·무료 필터와 단어 일치로 최대 6건을 고른다. 벡터 DB·임베딩은 없다. GEMINI_API_KEY가 설정된 경우에만 고른 기록을 Gemini에 보내고 출처 ID를 검증한다. 키가 없으면 공공데이터 검색 앱으로만 동작하며, 실제 AI 답변까지 검증했다고 말하지 않는다. 정책 문서·PDF가 많고 표현이 달라도 비슷한 의미를 찾아야 할 때 문서 분할·임베딩·벡터 인덱스가 유용하지만, 정확한 지역·무료 조건은 메타데이터 필터로 따로 지킨다.">
  <div class="kicker">RAG 개념 · 검색 방식은 선택, AI 생성은 필수</div><h2>RAG = 자료를 <em>찾아서</em> AI가 답하게 하기</h2>
+ <p class="rag-definition">RAG는 AI가 답하기 전에 관련 자료를 먼저 찾아 읽게 하는 방식입니다.</p>
  <figure><svg class="lesson-diagram detailed-diagram" viewBox="0 0 1080 270" role="img" aria-labelledby="rag-variants"><title id="rag-variants">하나의 질문에서 검색 단계가 현재 데모의 조건·키워드 검색 또는 확장형 벡터 유사도 검색으로 갈라진 뒤, 찾은 자료만 AI에 전달해 답과 출처를 확인하는 RAG 구조</title><defs><marker id="rag-variants-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="currentColor"/></marker></defs>
  <rect x="10" y="72" width="205" height="130" rx="8" class="diagram-box"/><text x="26" y="105" class="diagram-label">① 질문</text><text x="26" y="144" class="diagram-sub">“종로구 무료 전시?”</text><text x="26" y="177" class="diagram-sub">사용자 입력</text>
  <rect x="270" y="12" width="370" height="108" rx="8" class="diagram-box" style="stroke:var(--eng)"/><text x="286" y="44" class="diagram-label" style="font-size:20px;fill:var(--eng)">② A · 현재 데모의 검색</text><text x="286" y="77" class="diagram-sub">서울 API → 지역·무료 필터</text><text x="286" y="103" class="diagram-sub">제목 등 단어 일치 → 최대 6건</text>
