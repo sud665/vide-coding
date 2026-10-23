@@ -737,11 +737,11 @@ body.light .caret{background:#000}
  <div class="team-bottom"><strong>만들기 순서</strong> · 입력·결과를 정한 뒤 AI 작업과 코드 검증을 나누고, 실패 화면까지 확인합니다.</div>
 </section>
 
-<section class="sl ot-slide team-demand solution-guide" data-toc="기능별 해결 방법 · Next.js 실행 가이드" data-notes="바로 앞 페이지의 다섯 유형을 실제 작업으로 옮긴다. 파일 경로는 Next.js App Router 기준 예시이며 모든 기능을 만들라는 뜻이 아니다. 각자 해당하는 유형 한 줄을 고른다. 근거 있는 AI 응답은 서버의 /api/answer에서 검색 결과와 원문 주소를 Gemini 같은 모델에 전달하고, 반환한 출처 ID가 실제 결과 안에 있는지 검사한다. 자료가 0건이면 AI를 호출하지 않는다. 이미지·문서는 파일 입력과 /api/parse를 만들고 샘플 한 장의 추출값을 사용자가 고칠 수 있게 한다. 대화·음성은 /api/chat에 시나리오 ID와 현재 차례를 전달하고 차례 제한과 종료 조건을 코드로 둔다. 음성 인식이 실패하면 텍스트 입력으로 계속할 수 있게 한다. 개인정보는 가짜 데이터로 시연하고 모델 호출 전 마스킹, 원본 저장·로그 남기지 않기, 위기 표현에서 안내 화면으로 전환을 검증한다. 공공데이터·지도는 서버의 /api/search에서 비밀키로 공식 API를 호출하고 앱 필드로 정규화한다. 키 누락·결과 0건·오래된 자료를 각각 확인한다. 설명 후 오늘 데모에서는 공공데이터와 근거 있는 AI 응답 두 줄을 실제로 보여준다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
+<section class="sl ot-slide team-demand solution-guide" data-toc="기능별 해결 방법 · Next.js 실행 가이드" data-notes="바로 앞 페이지의 다섯 유형을 실제 작업으로 옮긴다. 파일 경로는 Next.js App Router 기준 예시이며 모든 기능을 만들라는 뜻이 아니다. 각자 해당하는 유형 한 줄을 고른다. 근거 있는 AI 응답은 서버의 /api/answer에서 검색 결과와 원문 주소를 Gemini 같은 모델에 전달하고, 반환한 출처 ID가 실제 결과 안에 있는지 검사한다. 자료가 0건이면 AI를 호출하지 않는다. 이미지·문서는 파일 입력과 /api/parse를 만들고 샘플 한 장의 추출값을 사용자가 고칠 수 있게 한다. 대화·음성은 /api/chat에 시나리오 ID와 현재 차례를 전달하고 차례 제한과 종료 조건을 코드로 둔다. 음성 인식이 실패하면 텍스트 입력으로 계속할 수 있게 한다. 개인정보는 가짜 데이터를 기준으로 설명하고 모델 호출 전 마스킹, 원본 저장·로그 남기지 않기, 위기 표현에서 안내 화면으로 전환을 검증 항목으로 제시한다. 공공데이터·지도는 서버의 /api/search에서 비밀키로 공식 API를 호출하고 앱 필드로 정규화한다. 키 누락·결과 0건·오래된 자료를 각각 확인한다. 각 유형의 기술 선택지와 점검 기준만 안내하고, 수강생이 자기 기능에 해당하는 한 줄을 이후 개발에 적용하도록 한다."><span class="point-badge" aria-label="강의 가이드 강조 포인트"><span aria-hidden="true">★</span></span>
  <div class="kicker">HOW TO BUILD · Next.js App Router 예시</div>
  <h2>해당 기능은 <em>이 순서로 한 줄씩</em> 구현하세요.</h2>
- <p class="team-intro">기능 하나를 골라 화면 → 서버 처리 → 실패 재현까지 끝내면 첫 시연이 됩니다.</p>
- <div class="pattern-head"><span>기능</span><span>① 화면·서버 위치</span><span>② Claude에게 맡길 작업</span><span>③ 직접 확인할 결과</span></div>
+ <p class="team-intro">자기 기능에 맞는 줄에서 화면·서버 작업과 점검 기준을 찾아보세요.</p>
+ <div class="pattern-head"><span>기능</span><span>① 화면·서버 위치</span><span>② Claude에게 맡길 작업</span><span>③ 완료 점검 기준</span></div>
  <div class="team-grid">
   <div class="pattern-row"><strong class="pattern-title">근거 있는 AI 응답</strong><span class="solution-code">app/api/answer/route.ts</span><span class="solution-action">검색 자료 3건·원문 주소만 전달 → 출처 ID 검사</span><span class="solution-test"><b>0건:</b> AI 호출 없이 “자료 없음” 표시</span></div>
   <div class="pattern-row"><strong class="pattern-title">이미지·문서 입력</strong><span class="solution-code">파일 입력 + app/api/parse/route.ts</span><span class="solution-action">OCR·비전으로 값 추출 → 사용자 수정 화면</span><span class="solution-test"><b>오인식:</b> 수정 후에만 결과 확정</span></div>
